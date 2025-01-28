@@ -1,24 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import {Header} from "./components/header/header";
+import {Footer} from "./components/footer/footer";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {Error} from "./components/error/error";
+import {Main} from "./components/main/main";
+import {FinancialReportsPage} from "./pages/financial-reports";
+import {ImportantInfoPage} from "./pages/important-info";
+import {ClientInfoPage} from "./pages/client-info";
 
 function App() {
+
+    const text = 'eleneaaefjgwoiejgwoie'
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to relrthedfrhgerhgrthoad.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <BrowserRouter >
+            <Header text={text}/>
+
+            <Routes>
+                <Route path={'/'} element={<Main/>}/>
+                <Route path={'/financial-reports'} element={<FinancialReportsPage/>}/>
+                <Route path={'/important-info'} element={<ImportantInfoPage/>}/>
+                <Route path={'client-info'} element={<ClientInfoPage/>}/>
+                <Route path={'*'} element={<Error/>}/>
+            </Routes>
+
+      <Footer text={text}/>
+        </BrowserRouter>
     </div>
   );
 }
