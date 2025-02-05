@@ -16,8 +16,8 @@ export function Header() {
         {
             category: 'Для клиентов',
             items: [
+                { path: '/important-info', label: 'Важная информация' },
                 { path: '/client-info', label: 'Информация для клиентов' },
-                { path: '/contacts', label: 'Контакты' },
                 { path: '/fraud-prevention', label: 'Профилактика мошеннических действий' },
             ],
         },
@@ -25,7 +25,8 @@ export function Header() {
             category: 'О компании',
             items: [
                 { path: '/financial-reports', label: 'Бухгалтерская отчетность' },
-                { path: '/important-info', label: 'Важная информация' },
+                { path: '/contacts', label: 'Контакты' },
+                { path: '/procurement-info', label: 'Информация о закупках' },
                 { path: '/disclosure-info', label: 'Раскрытие информации' },
                 { path: '/business-scope', label: 'Сфера деятельности' },
                 { path: '/partners', label: 'Партнеры' },
@@ -34,7 +35,6 @@ export function Header() {
         {
             category: 'Услуги',
             items: [
-                { path: '/procurement-info', label: 'Информация о закупках' },
                 { path: '/tariffs', label: 'Тарифы' },
                 { path: '/technical-connection', label: 'Технологическое присоединение к ТС и ГВС' },
             ],
@@ -51,17 +51,18 @@ export function Header() {
         <header className={styles.headerWrapper}>
             <div className={styles.headerContainer}>
                 <div className={styles.logoWrapper}>
-                    <p className={`${styles.logoText} ${activePage === '/' ? styles.activeLink : ''}`} onClick={() => handleNavigation('/')}>ООО "УК "ТЕПЛОКОМПЛЕКС"</p>
+                    <p className={`${styles.logoText} ${activePage === '/' ? styles.activeLink : ''}`}
+                       onClick={() => handleNavigation('/')}>ООО "УК "ТЕПЛОКОМПЛЕКС"</p>
                     <p className={styles.logoSubtitle}>Мы несем тепло в ваши дома</p>
                 </div>
 
                 <div className={styles.contactWrapper}>
+                    <a href={'tel:+73439379828'} className={styles.contactPhone}>+7 (343) 937-98-28</a>
                     <i className="phoneIcon fas fa-phone-alt"></i>
-                    <p className={styles.contactPhone}>+7 (123) 456-78-90</p>
                 </div>
 
                 <div className={styles.loginWrapper}>
-                <button className={styles.loginButton} onClick={() => handleNavigation('/login')}>Войти</button>
+                    <button className={styles.loginButton} onClick={() => handleNavigation('/login')}>Войти</button>
                 </div>
             </div>
 
@@ -85,6 +86,9 @@ export function Header() {
                     </div>
                 ))}
             </nav>
+            <div className={styles.imageBanner}>
+                <img src="/images/img.png" alt="О компании"/>
+            </div>
         </header>
     );
 }

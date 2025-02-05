@@ -1,4 +1,4 @@
-import {ImportantInfo} from "../../features/important-info";
+import {ImportantInfo} from "../../widgets/important-info";
 
 
 export function ImportantInfoPage() {

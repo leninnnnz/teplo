@@ -10,11 +10,10 @@ import {ClientInfoPage} from "./pages/client-info";
 
 function App() {
 
-    const text = 'eleneaaefjgwoiejgwoie'
   return (
     <div className="App">
         <BrowserRouter >
-            <Header text={text}/>
+            <Header/>
 
             <Routes>
                 <Route path={'/'} element={<Main/>}/>
@@ -24,7 +23,7 @@ function App() {
                 <Route path={'*'} element={<Error/>}/>
             </Routes>
 
-      <Footer text={text}/>
+      <Footer/>
         </BrowserRouter>
     </div>
   );

@@ -1,10 +1,10 @@
-import {ImportantInfo} from "../../features/important-info";
+import {ImportantInformation} from "../../features/important-info";
 
 
-export function importantInfo() {
+export function ImportantInfo() {
     return (
         <div>
-            <ImportantInfo/>
+            <ImportantInformation/>
         </div>
     )
 }

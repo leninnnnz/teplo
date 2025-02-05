@@ -1,8 +1,70 @@
-import style from './index.module.scss'
+import style from './index.module.scss';
 
-export function ImportantInfo() {
+export function ImportantInformation() {
     return (
-        <div className={style.infoBox}>
-            wrgjierggfftgfgog</div>
-    )
+        <div className={style.wrapper}>
+            <h1 className={style.title}>Важная информация</h1>
+            <div className={style.content}>
+                <p className={style.intro}>Уважаемые абоненты!</p>
+
+                <p className={style.mainText}>
+                    В связи с угрозой распространения на территории Свердловской области новой коронавирусной инфекции,
+                    в соответствии с Указом Губернатора Свердловской области от 18 марта 2020 года №100-УГ «О введении
+                    на территории Свердловской области режима повышенной готовности и принятии дополнительных мер по
+                    защите населения….» ИНФОРМИРУЕМ, ЧТО ОЧНЫЙ ПРИЕМ ГРАЖДАН В ООО «УК «ТЕПЛОКОМПЛЕКС» И
+                    ПРЕДСТАВИТЕЛЬСТВАХ АО «РАСЧЕТНЫЙ ЦЕНТР УРАЛА» ВРЕМЕННО ПРЕКРАЩЕН. О ВОЗОБНОВЛЕНИИ ОЧНОГО ПРИЕМА
+                    ГРАЖДАН БУДЕТ СООБЩЕНО ДОПОЛНИТЕЛЬНО.
+                </p>
+
+                <div className={style.paymentInfo}>
+                    <p>Оплату по платежным документам ООО «УК «ТЕПЛОКОМПЛЕКС» можно провести:</p>
+                    <ul className={style.paymentMethods}>
+                        <li>
+                            <a href="http://www.rcurala.ru" target="_blank" rel="noopener noreferrer">
+                                в личном кабинете на сайте www.rcurala.ru
+                            </a>
+                        </li>
+                        <li>через сайт www.rcurala.ru без регистрации в личном кабинете,</li>
+                        <li>через мобильное приложение «РЦ Урала онлайн»,</li>
+                        <li>в кассу АО «РЦ Урала»,</li>
+                        <li>через отделения ФГУП «Почта России», Банки (взимается комиссия)</li>
+                    </ul>
+                </div>
+
+                <div className={style.contactInfo}>
+                    <p>
+                        Показания индивидуальных приборов учета, заявления о разноске оплат,
+                        порядке начисления платы и т.д. Вы можете направить на электронную
+                        почту представительства{' '}
+                        <a href="mailto:kamensk-info@rcurala.ru" className={style.emailLink}>
+                            kamensk-info@rcurala.ru
+                        </a>{' '}
+                        или{' '}
+                        <a href="mailto:call-center@rcurala.ru" className={style.emailLink}>
+                            call-center@rcurala.ru
+                        </a>
+                        , а также{' '}
+                        <a href="mailto:info@uk-teplo.ru" className={style.emailLink}>
+                            info@uk-teplo.ru
+                        </a>.
+                    </p>
+                </div>
+
+                <div className={style.phoneNumbers}>
+                    <p>Телефоны для обращения физических лиц:</p>
+                    <a href="tel:83439354530">8 (343) 9-35-45-30</a>
+                    <br />
+                    <a href="tel:83439355176">8 (343) 9-35-51-76</a>
+                    <br />
+                    <a href="tel:88003029990">8 (800) 302-99-90</a> — АО «РЦ Урала»
+                </div>
+
+                <p className={style.closing}>
+                    Приносим извинения за временные неудобства,
+                    <br/> с уважением, ООО «УК
+                    «ТЕПЛОКОМПЛЕКС»
+                </p>
+            </div>
+        </div>
+    );
 }
