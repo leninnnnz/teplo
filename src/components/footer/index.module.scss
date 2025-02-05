@@ -1,11 +1,11 @@
 .footer {
-  background-color: rgb(255, 97, 40); /* Оранжевый фон */
+  background-color: rgb(255, 97, 40);
   color: white;
-  padding: 60px 20px 20px; /* Увеличим padding для солидности */
+  padding: 60px 20px 20px;
   text-align: center;
-  margin-top: -50px; /* Двигаем вверх */
+  margin-top: -50px;
   position: relative;
-  z-index: 1; /* Оставляем под контентом */
+  z-index: 1;
 }
 
 .footerContainer {
@@ -28,17 +28,18 @@
 
 .footerLink {
   text-decoration: none;
-  color: white; /* Белые ссылки */
+  color: white;
   font-size: 14px;
   transition: color 0.3s;
 }
 
 .footerLink:hover {
-  color: #ffe5d0; /* Светлее при наведении */
+  color: #ffe5d0;
+  text-decoration: underline;
 }
 
 .footerBottom {
-  background-color: rgba(0, 0, 0, 0.1); /* Чуть затемнённая полоса */
+  background-color: rgba(0, 0, 0, 0.1);
   padding: 10px 0;
   margin-top: 20px;
   border-radius: 20px;

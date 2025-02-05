@@ -7,7 +7,6 @@
   position: relative;
   z-index: 3;
 
-  // Улучшенная, более выразительная тень
   box-shadow: 0 12px 30px rgba(255, 97, 40, 0.7),
   0 8px 20px rgba(255, 97, 40, 0.5),
   0 4px 12px rgba(255, 97, 40, 0.3);
@@ -110,12 +109,12 @@
 }
 
 .emailLink {
-  color: black; // Черный цвет по умолчанию
-  text-decoration: none; // Убираем подчеркивание
-  transition: color 0.3s ease; // Плавное изменение цвета
+  color: black;
+  text-decoration: none;
+  transition: color 0.3s ease;
 
   &:hover {
-    color: orange; // Оранжевый при наведении
+    color: orange;
   }
 }
 
