@@ -33,14 +33,25 @@
 }
 
 .subtitle {
-  font-size: 24px;
-  font-weight: 500;
-  color: #444;
-  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 30px;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 2px;
+    background-color: rgb(255, 97, 40);
+    bottom: -6px;
+    left: 0;
+  }
 }
 
 .section {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .content {
@@ -54,10 +65,11 @@
   list-style-type: none;
   padding: 0;
 
+
   .legislationItem {
     margin-bottom: 10px;
-    font-size: 16px;
-    color: #555;
+    font-size: 18px;
+    color: #333;
     line-height: 24px;
 
     .bullet {

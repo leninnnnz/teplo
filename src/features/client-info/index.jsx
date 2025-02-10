@@ -20,12 +20,12 @@ export function ClientInformation() {
         const term = e.target.value.toLowerCase();
         setSearchTerm(term);
 
-
         const filtered = contracts.filter(contract =>
-            contract.toLowerCase().includes(term)
+            contract.name.toLowerCase().includes(term) // Исправлено: применяем toLowerCase() к contract.name
         );
         setFilteredContracts(filtered);
     };
+
 
     return (
         <div className={style.wrapper}>

@@ -30,26 +30,29 @@ export function ReadyReports() {
     return (
         <div className={style.wrapper}>
             <h1 className={style.title}>Бухгалтерская отчетность</h1>
-            <input
-                type="text"
-                placeholder="Поиск по годам..."
-                value={searchTerm}
-                onChange={handleSearch}
-                className={style.searchInput}
-            />
-            <ul className={style.reportsList}>
-                {filteredReports.length > 0 ? (
-                    filteredReports.map((report, index) => (
-                        <li key={index}>
-                            <a href={report.link} className={style.reportLink}>
-                                {report.name}
-                            </a>
-                        </li>
-                    ))
-                ) : (
-                    <li className={style.noResults}>Ничего не найдено</li>
-                )}
-            </ul>
+            <div className={style.content}>
+                <input
+                    type="text"
+                    placeholder="Поиск по годам..."
+                    value={searchTerm}
+                    onChange={handleSearch}
+                    className={style.searchInput}
+                />
+                <ul className={style.reportsList}>
+                    {filteredReports.length > 0 ? (
+                        filteredReports.map((report, index) => (
+                            <li key={index}>
+                                <a href={report.link} className={style.reportLink}>
+                                    {report.name}
+                                </a>
+                            </li>
+                        ))
+                    ) : (
+                        <li className={style.noResults}>Ничего не найдено</li>
+                    )}
+                </ul>
+            </div>
         </div>
+
     );
 }

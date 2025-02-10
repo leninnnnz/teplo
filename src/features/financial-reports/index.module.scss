@@ -31,6 +31,12 @@
     left: 0;
   }
 }
+.content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
 
 .searchInput {
   width: 100%;
@@ -38,9 +44,14 @@
   font-size: 16px;
   border: 2px solid #ddd;
   border-radius: 25px;
+  margin-top: 15px;
   margin-bottom: 20px;
   outline: none;
   transition: border-color 0.3s ease;
+
+  &:hover {
+    border-color: rgb(255, 97, 40);
+  }
 
   &:focus {
     border-color: rgb(255, 97, 40);
