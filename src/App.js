@@ -8,6 +8,7 @@ import {FinancialReportsPage} from "./pages/financial-reports";
 import {ImportantInfoPage} from "./pages/important-info";
 import {ClientInfoPage} from "./pages/client-info";
 import {ContactsInfoPage} from "./pages/contacts";
+import {FraudPreventionPage} from "./pages/fraud-prevention";
 
 function App() {
 
@@ -22,6 +23,8 @@ function App() {
                 <Route path={'/important-info'} element={<ImportantInfoPage/>}/>
                 <Route path={'/client-info'} element={<ClientInfoPage/>}/>
                 <Route path={'/contacts'} element={<ContactsInfoPage/>}/>
+                <Route path={'/fraud-prevention'} element={<FraudPreventionPage/>}/>
+
                 <Route path={'*'} element={<Error/>}/>
             </Routes>
 
