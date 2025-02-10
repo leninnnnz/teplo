@@ -7,6 +7,7 @@ import {Main} from "./components/main/main";
 import {FinancialReportsPage} from "./pages/financial-reports";
 import {ImportantInfoPage} from "./pages/important-info";
 import {ClientInfoPage} from "./pages/client-info";
+import {ContactsInfoPage} from "./pages/contacts";
 
 function App() {
 
@@ -19,7 +20,8 @@ function App() {
                 <Route path={'/'} element={<Main/>}/>
                 <Route path={'/financial-reports'} element={<FinancialReportsPage/>}/>
                 <Route path={'/important-info'} element={<ImportantInfoPage/>}/>
-                <Route path={'client-info'} element={<ClientInfoPage/>}/>
+                <Route path={'/client-info'} element={<ClientInfoPage/>}/>
+                <Route path={'/contacts'} element={<ContactsInfoPage/>}/>
                 <Route path={'*'} element={<Error/>}/>
             </Routes>
 
