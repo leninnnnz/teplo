@@ -11,6 +11,11 @@ import {ContactsInfoPage} from "./pages/contacts";
 import {FraudPreventionPage} from "./pages/fraud-prevention";
 import {ProcurementInfoPage} from "./pages/procurement-info";
 import {DisclosureInfoPage} from "./pages/disclosure-info";
+import {BusinessScopePage} from "./pages/business-scope";
+import {PartnersInfoPage} from "./pages/partners";
+import {TariffsInfoPage} from "./pages/tariffs";
+import {TechnoConnectionPage} from "./pages/technical-connection";
+import {OccupationalSafetyPage} from "./pages/occupational-safety";
 
 function App() {
 
@@ -28,6 +33,11 @@ function App() {
                 <Route path={'/fraud-prevention'} element={<FraudPreventionPage/>}/>
                 <Route path={'/procurement-info'} element={<ProcurementInfoPage/>}/>
                 <Route path={'/disclosure-info'} element={<DisclosureInfoPage/>}/>
+                <Route path={'/business-scope'} element={<BusinessScopePage/>}/>
+                <Route path={'/partners'} element={<PartnersInfoPage/>}/>
+                <Route path={'/tariffs'} element={<TariffsInfoPage/>}/>
+                <Route path={'/technical-connection'} element={<TechnoConnectionPage/>}/>
+                <Route path={'/occupational-safety'} element={<OccupationalSafetyPage/>}/>
 
                 <Route path={'*'} element={<Error/>}/>
             </Routes>
