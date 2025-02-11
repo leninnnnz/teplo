@@ -10,6 +10,7 @@ import {ClientInfoPage} from "./pages/client-info";
 import {ContactsInfoPage} from "./pages/contacts";
 import {FraudPreventionPage} from "./pages/fraud-prevention";
 import {ProcurementInfoPage} from "./pages/procurement-info";
+import {DisclosureInfoPage} from "./pages/disclosure-info";
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
                 <Route path={'/contacts'} element={<ContactsInfoPage/>}/>
                 <Route path={'/fraud-prevention'} element={<FraudPreventionPage/>}/>
                 <Route path={'/procurement-info'} element={<ProcurementInfoPage/>}/>
+                <Route path={'/disclosure-info'} element={<DisclosureInfoPage/>}/>
 
                 <Route path={'*'} element={<Error/>}/>
             </Routes>
