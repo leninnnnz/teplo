@@ -1,0 +1,152 @@
+.wrapper {
+  max-width: 1000px;
+  margin: 0 30px;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  position: relative;
+  z-index: 3;
+  box-shadow: 0 12px 30px rgba(255, 97, 40, 0.7), 0 8px 20px rgba(255, 97, 40, 0.5), 0 4px 12px rgba(255, 97, 40, 0.3);
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 600;
+  color: #333;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 3px;
+    background-color: rgb(255, 97, 40);
+    bottom: -10px;
+    left: 0;
+  }
+}
+
+.content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.searchWrapper {
+  width: 100%;
+}
+
+.searchInput {
+  width: 100%;
+  margin: 15px 0 20px;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 25px;
+  outline: none;
+  transition: border-color 0.3s ease;
+
+  &:hover,
+  &:focus {
+    border-color: rgb(255, 97, 40);
+  }
+
+  &::placeholder {
+    color: #bbb;
+  }
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  flex-wrap: nowrap;
+}
+
+.selectWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 220px;
+}
+
+.select {
+  width: 100%;
+  padding: 15px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 25px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  appearance: none;
+
+  &:hover {
+    border-color: rgb(255, 97, 40);
+  }
+
+  &:focus {
+    border-color: rgb(255, 97, 40);
+    box-shadow: 0 0 8px rgba(255, 97, 40, 0.5);
+    outline: none;
+  }
+}
+
+.selectWrapper::after {
+  content: "▼";
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #888;
+  pointer-events: none;
+}
+
+.select:focus + .selectWrapper::after {
+  color: rgb(255, 97, 40);
+}
+
+.documentList {
+  font-size: 18px;
+  color: #333;
+  text-decoration: none;
+  display: block;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+
+  &:hover {
+    color: rgb(255, 97, 40);
+  }
+}
+
+
+.tariffItem {
+  padding: 10px;
+  background: #fff;
+
+  span {
+    padding: 10px;
+    font-size: 18px;
+    color: #333;
+    font-weight: 600;
+    text-decoration: none;
+    display: block;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: rgb(255, 97, 40);
+      border-bottom: 2px solid rgb(255, 97, 40);
+    }
+  }
+}
+
+.noResults {
+  font-size: 18px;
+  color: #333;
+  text-align: left;
+  margin-top: 20px;
+}
