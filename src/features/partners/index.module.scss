@@ -41,7 +41,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px; /* Добавлен промежуток вместо margin */
+  gap: 20px;
 }
 
 .partner {
@@ -54,8 +54,17 @@
   color: #333;
   margin-bottom: 30px;
   position: relative;
+  padding-left: 12px;
 
-
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background-color: rgb(255, 97, 40);
+  }
 }
 
 .link, .addressLink, .phone {

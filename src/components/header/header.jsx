@@ -1,4 +1,4 @@
-import styles from './index.module.scss';
+import style from './index.module.scss';
 import { useState } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -48,34 +48,34 @@ export function Header() {
     ];
 
     return (
-        <header className={styles.headerWrapper}>
-            <div className={styles.headerContainer}>
-                <div className={styles.logoWrapper}>
-                    <p className={`${styles.logoText} ${activePage === '/' ? styles.activeLink : ''}`}
+        <header className={style.headerWrapper}>
+            <div className={style.headerContainer}>
+                <div className={style.logoWrapper}>
+                    <p className={`${style.logoText} ${activePage === '/' ? style.activeLink : ''}`}
                        onClick={() => handleNavigation('/')}>ООО "УК "ТЕПЛОКОМПЛЕКС"</p>
-                    <p className={styles.logoSubtitle}>Мы несем тепло в ваши дома</p>
+                    <p className={style.logoSubtitle}>Мы несем тепло в ваши дома</p>
                 </div>
 
-                <div className={styles.contactWrapper}>
-                    <a href={'tel:+73439379828'} className={styles.contactPhone}>+7 (343) 937-98-28</a>
+                <div className={style.contactWrapper}>
+                    <a href={'tel:+73439379828'} className={style.contactPhone}>+7 (343) 937-98-28</a>
                     <i className="phoneIcon fas fa-phone-alt"></i>
                 </div>
 
-                <div className={styles.loginWrapper}>
-                    <button className={styles.loginButton} onClick={() => handleNavigation('/login')}>Войти</button>
+                <div className={style.loginWrapper}>
+                    <button className={style.loginButton} onClick={() => handleNavigation('/login')}>Войти</button>
                 </div>
             </div>
 
-            <nav className={styles.navigationMenu}>
+            <nav className={style.navigationMenu}>
                 {navLinks.map((section, index) => (
-                    <div key={index} className={styles.navigationCategory}>
-                        <p className={styles.categoryTitle}>{section.category}</p>
+                    <div key={index} className={style.navigationCategory}>
+                        <p className={style.categoryTitle}>{section.category}</p>
                         <ul>
                             {section.items.map((item, idx) => (
                                 <li
                                     key={idx}
-                                    className={`${styles.navigationItem} ${
-                                        location.pathname === item.path ? styles.activeLink : ''
+                                    className={`${style.navigationItem} ${
+                                        location.pathname === item.path ? style.activeLink : ''
                                     }`}
                                     onClick={() => handleNavigation(item.path)}
                                 >
@@ -86,7 +86,7 @@ export function Header() {
                     </div>
                 ))}
             </nav>
-            <div className={styles.imageBanner}>
+            <div className={style.imageBanner}>
                 <img src="/images/img.png" alt="О компании"/>
             </div>
         </header>

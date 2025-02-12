@@ -46,17 +46,18 @@
   font-size: 20px;
   font-weight: 600;
   color: #333;
-  margin-bottom: 12px;
+  margin-bottom: 30px;
   position: relative;
+  padding-left: 12px;
 
-  &::after {
+  &::before {
     content: '';
     position: absolute;
-    width: 40px;
-    height: 2px;
-    background-color: rgb(255, 97, 40);
-    bottom: -6px;
     left: 0;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background-color: rgb(255, 97, 40);
   }
 }
 
@@ -86,14 +87,14 @@ p {
 }
 
 a {
-  color: #333;
+  color: rgb(255, 97, 40);
   text-decoration: none;
   font-weight: 600;
   transition: color 0.3s ease;
 
   &:hover {
     text-decoration: underline;
-    color: rgb(255, 97, 40);
+    color: #333;
   }
 }
 
@@ -103,23 +104,23 @@ a {
 }
 
 .emailLink {
-  color: #333;
+  color: rgb(255, 97, 40);
   text-decoration: none;
   transition: color 0.3s ease;
 
   &:hover {
-    color: rgb(255, 97, 40);
+    color: #333;
   }
 }
 .mapLink {
-  color: #333;
+  color: rgb(255, 97, 40);
   text-decoration: none;
   font-weight: 600;
   transition: color 0.3s ease;
 
   &:hover {
     text-decoration: underline;
-    color: rgb(255, 97, 40);
+    color: #333;
   }
 }
 

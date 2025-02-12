@@ -86,6 +86,10 @@
     color: rgb(255, 97, 40);
     text-decoration: none;
     font-weight: 600;
+
+    &:hover {
+      color: #333;
+    }
   }
 }
 
@@ -109,29 +113,29 @@
 }
 
 .emailLink {
-  color: black;
+  color: rgb(255, 97, 40);
   text-decoration: none;
   transition: color 0.3s ease;
 
   &:hover {
-    color: rgb(255, 97, 40);
+    color: #333;
   }
 }
 
 .phoneNumbers {
-  font-size: 20px;
+  font-size: 18px;
   color: #333;
   line-height: 1.7;
   margin-bottom: 35px;
 
   a {
-    color: #333;
+    color: rgb(255, 97, 40) ;
     text-decoration: none;
     transition: color 0.3s ease;
     font-weight: 600;
 
     &:hover {
-      color: rgb(255, 97, 40);
+      color: #333;
     }
   }
 }

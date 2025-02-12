@@ -43,15 +43,16 @@
   color: #333;
   margin-bottom: 30px;
   position: relative;
+  padding-left: 12px;
 
-  &::after {
+  &::before {
     content: '';
     position: absolute;
-    width: 40px;
-    height: 2px;
-    background-color: rgb(255, 97, 40);
-    bottom: -6px;
     left: 0;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background-color: rgb(255, 97, 40);
   }
 }
 
@@ -78,18 +79,23 @@ p, ul {
   margin-bottom: 20px;
   color: #333;
   transition: background 0.3s ease;
+
+  &:hover {
+    color: rgb(255, 97, 40);
+    text-decoration: underline;
+  }
 }
 
 .addressLink {
   display: inline-block;
   margin-bottom: 20px;
-  color: #333;
+  color: rgb(255, 97, 40);
   text-decoration: none;
   font-weight: bold;
   transition: color 0.3s ease;
 
   &:hover {
-    color: rgb(255, 97, 40);
+    color: #333;
     text-decoration: underline;
   }
 }
