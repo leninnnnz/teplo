@@ -41,7 +41,7 @@
 
 .searchInput {
   width: 100%;
-  margin: 15px 0 20px;
+  margin-bottom: 20px;
   padding: 10px;
   font-size: 16px;
   border: 2px solid #ddd;
@@ -129,13 +129,14 @@
   background: #fff;
 
   span {
-    padding: 10px;
+    margin-bottom: 10px;
     font-size: 18px;
     color: #333;
     font-weight: 600;
     text-decoration: none;
     display: block;
     transition: color 0.3s ease;
+    border-bottom: 2px solid transparent;
 
     &:hover {
       color: rgb(255, 97, 40);
