@@ -13,7 +13,7 @@ export function ContactsInformation() {
 
                 <section className={style.section}>
                     <h2 className={style.subtitle}>Телефоны</h2>
-                    <p><span className={style.boldText}>Единый многоканальный номер:</span> <a href="tel:+73439379828">+7 (3439) 37-98-28</a></p>
+                    <p><span className={style.boldText}>Единый многоканальный номер:</span> <a href="tel:+73439379828">+7 (343) 937-98-28</a></p>
                     <ul className={style.phoneList}>
                         <li><span className={style.boldText}>Факс:</span> 0</li>
                         <li><span className={style.boldText}>Оперативная диспетчерская служба:</span> 1</li>

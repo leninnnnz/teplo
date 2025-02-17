@@ -52,9 +52,9 @@ export function ImportantInformation() {
 
                 <div className={style.phoneNumbers}>
                     <p>Телефоны для обращения физических лиц:</p>
-                    <a href="tel:83439354530">8 (343) 9-35-45-30</a>
+                    <a href="tel:83439354530">8 (343) 935-45-30</a>
                     <br />
-                    <a href="tel:83439355176">8 (343) 9-35-51-76</a>
+                    <a href="tel:83439355176">8 (343) 935-51-76</a>
                     <br />
                     <a href="tel:88003029990">8 (800) 302-99-90</a> — АО «РЦ Урала»
                 </div>

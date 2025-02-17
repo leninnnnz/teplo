@@ -34,7 +34,7 @@ export function PartnersInformation() {
                                 <a href="tel:+73432788344" className={style.phone}>+7 (343) 278-83-44</a>
                             </li>
                             <li>
-                                <a href="tel:+79122467603" className={style.phone}>+7 912 24 67 603</a>
+                                <a href="tel:+79122467603" className={style.phone}>+7 (912) 246-76-03</a>
                             </li>
                         </ul>
                     </section>

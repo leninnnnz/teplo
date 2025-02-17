@@ -12,7 +12,7 @@ export function TechnologicalConnection() {
                 <div className={style.section}>
                     <p>Протяженность тепловых сетей ООО «УК «ТЕПЛОКОМПЛЕКС» составляет <strong>645 км</strong>.</p>
                     <p>По вопросам подключения, присоединения к сетям, обращайтесь по телефону:
-                        <strong> 8 (3439) 37-98-28</strong>
+                        <a href="tel:+73439379828" className={style.phone}>+7 (343) 937-98-28</a>
                     </p>
                 </div>
                 <div className={style.section}>
@@ -25,8 +25,8 @@ export function TechnologicalConnection() {
                 </div>
                 <div className={style.section}>
                     <h2 className={style.subtitle}>Комиссия по подключению</h2>
-                    <p>Создана комиссия по подключению (технологическому присоединению) к сетям: <strong>Комиссия по
-                        технологическому подключению</strong></p>
+                    <p>Создана комиссия по подключению (технологическому присоединению) к сетям: Комиссия по
+                        технологическому подключению</p>
                 </div>
                 <div className={style.section}>
                     <h2 className={style.subtitle}>Нормативные документы</h2>
