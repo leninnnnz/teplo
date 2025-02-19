@@ -187,7 +187,7 @@
 }
 
 .navigationList {
-    display: none;
+    display: block;
     position: absolute;
     top: 100%;
     left: 0;
@@ -199,9 +199,10 @@
     list-style: none;
     min-width: 180px;
     z-index: 10;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    visibility: hidden;
+}
+
+.navigationList.active {
+    display: block;
 }
 
 .navigationItem {
@@ -221,12 +222,6 @@
     background-color: rgb(255, 97, 40);
     color: #fff;
     text-decoration: underline;
-}
-
-.navigationCategory:hover .navigationList {
-    display: block;
-    opacity: 1;
-    visibility: visible;
 }
 
 .imageBanner {
@@ -257,4 +252,8 @@
     height: auto;
     border-radius: 5px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.activeCategory {
+    z-index: 1000;
 }
