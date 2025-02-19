@@ -1,0 +1,19 @@
+
+.title {
+  font-size: 32px;
+  font-weight: 600;
+  color: #333;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 3px;
+    background-color: rgb(255, 97, 40);
+    bottom: -10px;
+    left: 0;
+  }
+}

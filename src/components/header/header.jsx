@@ -58,7 +58,6 @@ export function Header() {
 
                 <div className={style.contactWrapper}>
                     <a href={'tel:+73439379828'} className={style.contactPhone}>+7 (343) 937-98-28</a>
-                    <i className="phoneIcon fas fa-phone-alt"></i>
                 </div>
 
                 <div className={style.loginWrapper}>
@@ -70,7 +69,7 @@ export function Header() {
                 {navLinks.map((section, index) => (
                     <div key={index} className={style.navigationCategory}>
                         <p className={style.categoryTitle}>{section.category}</p>
-                        <ul>
+                        <ul className={style.navigationList}>
                             {section.items.map((item, idx) => (
                                 <li
                                     key={idx}
@@ -79,7 +78,7 @@ export function Header() {
                                     }`}
                                     onClick={() => handleNavigation(item.path)}
                                 >
-                                    {item.label}
+                                    <a className={style.navigationLink}>{item.label}</a>
                                 </li>
                             ))}
                         </ul>

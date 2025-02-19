@@ -5,7 +5,5 @@ export function Main() {
         <div>
             main
         </div>
-
-
     )
 }
