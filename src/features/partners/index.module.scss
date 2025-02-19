@@ -1,14 +1,22 @@
 .wrapper {
-  max-width: 1000px;
-  margin: 0 30px;
+  max-width: 940px;
+  flex-grow: 1;
   padding: 30px;
   background-color: #f9f9f9;
   border-radius: 10px;
   position: relative;
   z-index: 3;
+
   box-shadow: 0 12px 30px rgba(255, 97, 40, 0.7),
   0 8px 20px rgba(255, 97, 40, 0.5),
   0 4px 12px rgba(255, 97, 40, 0.3);
+}
+
+.content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .title {
@@ -30,24 +38,6 @@
   }
 }
 
-.content {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.partnerInfo {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.partner {
-  flex: 1;
-}
-
 .subtitle {
   font-size: 20px;
   font-weight: 600;
@@ -67,6 +57,19 @@
   }
 }
 
+.text{
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.partnerInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
 .link, .addressLink, .phone {
   color: rgb(255, 97, 40);
   text-decoration: none;
@@ -77,22 +80,6 @@
     color: #333;
     text-decoration: underline;
   }
-}
-
-.address {
-  font-size: 18px;
-  line-height: 1.6;
-}
-
-.phoneList {
-  list-style: none;
-  padding: 0;
-}
-
-.phone {
-  display: block;
-  font-size: 18px;
-  margin-bottom: 15px;
 }
 
 .logoContainer {

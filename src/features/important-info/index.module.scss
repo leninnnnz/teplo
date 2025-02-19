@@ -1,6 +1,6 @@
 .wrapper {
-  max-width: 1000px;
-  margin: 0 30px;
+  max-width: 940px;
+  flex-grow: 1;
   padding: 30px;
   background-color: #f9f9f9;
   border-radius: 10px;
@@ -56,51 +56,54 @@
 }
 
 .paymentInfo {
+  margin-bottom: 20px;
+
+}
+.paymentInfoText{
+  margin-bottom: 20px;
   font-size: 20px;
   color: #333;
   line-height: 1.7;
-  margin-bottom: 20px;
   font-weight: 400;
 }
 
 .paymentMethods {
   list-style-type: none;
   padding-left: 20px;
-  font-size: 18px;
+  font-size: 20px;
   color: #444;
+}
+.paymentMethod {
+  margin-bottom: 15px;
+  position: relative;
 
-
-  li {
-    margin-bottom: 15px;
-    position: relative;
-
-    &::before {
-      content: '-';
-      margin-right: 8px;
-      color: #444;
-    }
-  }
-
-  li:first-child a {
-    color: rgb(255, 97, 40);
-    text-decoration: none;
-    font-weight: 600;
-
-    &:hover {
-      color: #333;
-    }
+  &::before {
+    content: '-';
+    margin-right: 8px;
+    color: #444;
   }
 }
 
-.paymentMethods li a:hover {
-  text-decoration: underline;
+.paymentLink {
+  color: rgb(255, 97, 40);
+  text-decoration: none;
+  font-weight: 600;
+
+  &:hover {
+    color: #333;
+    text-decoration: underline;
+  }
 }
 
 .contactInfo {
+  margin-bottom: 20px;
+}
+
+.contactText{
+  margin-bottom: 20px;
   font-size: 20px;
   color: #333;
   line-height: 1.7;
-  margin-bottom: 20px;
 }
 
 .closing {
@@ -122,40 +125,26 @@
 }
 
 .phoneNumbers {
-  font-size: 18px;
+  margin-bottom: 35px;
+}
+
+.phoneText{
+  margin-bottom: 20px;
+  font-size: 20px;
   color: #333;
   line-height: 1.7;
-  margin-bottom: 35px;
+}
+.phoneLink {
+  display: inline-block;
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: rgb(255, 97, 40) ;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-weight: 600;
 
-  a {
-    display: inline-block;
-    margin-bottom: 15px;
-    color: rgb(255, 97, 40) ;
-    text-decoration: none;
-    transition: color 0.3s ease;
-    font-weight: 600;
-
-    &:hover {
+  &:hover {
       color: #333;
-    }
   }
 }
 
-@media (max-width: 768px) {
-  .title {
-    font-size: 28px;
-    margin-bottom: 20px;
-  }
-
-  .content {
-    padding: 15px;
-  }
-
-  .intro,
-  .mainText,
-  .paymentInfo,
-  .contactInfo,
-  .closing {
-    font-size: 18px;
-  }
-}

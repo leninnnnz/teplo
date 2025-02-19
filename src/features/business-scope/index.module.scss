@@ -1,11 +1,12 @@
 .wrapper {
-  max-width: 1000px;
-  margin: 0 30px;
+  max-width: 940px;
+  flex-grow: 1;
   padding: 30px;
   background-color: #f9f9f9;
   border-radius: 10px;
   position: relative;
   z-index: 3;
+
   box-shadow: 0 12px 30px rgba(255, 97, 40, 0.7),
   0 8px 20px rgba(255, 97, 40, 0.5),
   0 4px 12px rgba(255, 97, 40, 0.3);
@@ -29,9 +30,7 @@
     left: 0;
   }
 }
-.section{
-  margin-bottom: 30px;
-}
+
 .content {
   background-color: #fff;
   padding: 20px;
@@ -39,11 +38,15 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
+.section {
+  margin-bottom: 30px;
+}
+
 .subtitle {
   font-size: 20px;
   font-weight: 600;
   color: #333;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   position: relative;
   padding-left: 12px;
 
@@ -58,10 +61,22 @@
   }
 }
 
-p, ul {
+.text {
   font-size: 18px;
+  color: #333;
+  margin-bottom: 12px;
 }
 
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.listItem {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+}
 
 .link {
   color: #333;
@@ -78,7 +93,6 @@ p, ul {
 .docLink {
   display: inline-block;
   font-size: 18px;
-  margin-bottom: 20px;
   color: #333;
   transition: background 0.3s ease;
 
@@ -90,7 +104,6 @@ p, ul {
 
 .addressLink {
   display: inline-block;
-  margin-bottom: 20px;
   color: rgb(255, 97, 40);
   text-decoration: none;
   font-weight: bold;
