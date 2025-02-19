@@ -1,8 +1,5 @@
-import {PartnersInfo} from "../../widgets/partners";
-
+import { PartnersInfo } from '../../widgets/partners';
 
 export function PartnersInfoPage() {
-    return (
-        <PartnersInfo/>
-    )
+    return <PartnersInfo />;
 }

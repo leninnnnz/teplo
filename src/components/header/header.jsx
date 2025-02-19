@@ -1,6 +1,6 @@
 import style from './index.module.scss';
 import { useState } from 'react';
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export function Header() {
     const [activePage, setActivePage] = useState(window.location.pathname);
@@ -41,9 +41,7 @@ export function Header() {
         },
         {
             category: 'Безопасность',
-            items: [
-                { path: '/occupational-safety', label: 'Охрана труда' },
-            ],
+            items: [{ path: '/occupational-safety', label: 'Охрана труда' }],
         },
     ];
 
@@ -51,17 +49,22 @@ export function Header() {
         <header className={style.headerWrapper}>
             <div className={style.headerContainer}>
                 <div className={style.logoWrapper}>
-                    <p className={`${style.logoText} ${activePage === '/' ? style.activeLink : ''}`}
-                       onClick={() => handleNavigation('/')}>ООО "УК "ТЕПЛОКОМПЛЕКС"</p>
+                    <p className={`${style.logoText} ${activePage === '/' ? style.activeLink : ''}`} onClick={() => handleNavigation('/')}>
+                        ООО "УК "ТЕПЛОКОМПЛЕКС"
+                    </p>
                     <p className={style.logoSubtitle}>Мы несем тепло в ваши дома</p>
                 </div>
 
                 <div className={style.contactWrapper}>
-                    <a href={'tel:+73439379828'} className={style.contactPhone}>+7 (343) 937-98-28</a>
+                    <a href={'tel:+73439379828'} className={style.contactPhone}>
+                        +7 (343) 937-98-28
+                    </a>
                 </div>
 
                 <div className={style.loginWrapper}>
-                    <button className={style.loginButton} onClick={() => handleNavigation('/login')}>Войти</button>
+                    <button className={style.loginButton} onClick={() => handleNavigation('/login')}>
+                        Войти
+                    </button>
                 </div>
             </div>
 
@@ -73,9 +76,7 @@ export function Header() {
                             {section.items.map((item, idx) => (
                                 <li
                                     key={idx}
-                                    className={`${style.navigationItem} ${
-                                        location.pathname === item.path ? style.activeLink : ''
-                                    }`}
+                                    className={`${style.navigationItem} ${location.pathname === item.path ? style.activeLink : ''}`}
                                     onClick={() => handleNavigation(item.path)}
                                 >
                                     <a className={style.navigationLink}>{item.label}</a>
@@ -86,7 +87,7 @@ export function Header() {
                 ))}
             </nav>
             <div className={style.imageBanner}>
-                <img src="/images/img.png" alt="О компании"/>
+                <img src="/images/img.png" alt="О компании" />
             </div>
         </header>
     );

@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import style from './index.module.scss';
+import { useState } from "react";
+import style from "./index.module.scss";
+import { TitlePage, Wrapper } from "../../shared/UI";
 
 export function ClientInformation() {
-
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchTerm, setSearchTerm] = useState("");
     const [contracts] = useState([
         { name: "Договор горячего водоснабжения (муниципальный контракт)", link: "#" },
         { name: "Договор горячего водоснабжения прочие", link: "#" },
@@ -20,22 +20,20 @@ export function ClientInformation() {
         const term = e.target.value.toLowerCase();
         setSearchTerm(term);
 
-        const filtered = contracts.filter(contract =>
-            contract.name.toLowerCase().includes(term) // Исправлено: применяем toLowerCase() к contract.name
+        const filtered = contracts.filter(
+            (contract) => contract.name.toLowerCase().includes(term), // Исправлено: применяем toLowerCase() к contract.name
         );
         setFilteredContracts(filtered);
     };
 
-
     return (
-        <div className={style.wrapper}>
-            <h1 className={style.title}>Информация для клиентов</h1>
-
+        <Wrapper>
+            <TitlePage title={"Информация для клиентов"} />
             <div className={style.content}>
                 <section className={style.section}>
                     <h2 className={style.subtitle}>
-                        Законодательство в части присоединения к системам теплоснабжения и (или)
-                        горячего водоснабжения, системам холодного водоснабжения и водоотведения:
+                        Законодательство в части присоединения к системам теплоснабжения и (или) горячего водоснабжения, системам холодного
+                        водоснабжения и водоотведения:
                     </h2>
                     <ul className={style.legislationList}>
                         {[
@@ -81,8 +79,6 @@ export function ClientInformation() {
                     </ul>
                 </section>
             </div>
-
-
-        </div>
+        </Wrapper>
     );
 }

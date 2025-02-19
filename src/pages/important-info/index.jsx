@@ -1,8 +1,5 @@
-import {ImportantInfo} from "../../widgets/important-info";
-
+import { ImportantInfo } from '../../widgets/important-info';
 
 export function ImportantInfoPage() {
-    return (
-        <ImportantInfo/>
-    )
+    return <ImportantInfo />;
 }

@@ -1,8 +1,5 @@
-import {Safety} from "../../widgets/occupational-safety";
-
+import { Safety } from '../../widgets/occupational-safety';
 
 export function OccupationalSafetyPage() {
-    return (
-        <Safety/>
-    )
+    return <Safety />;
 }

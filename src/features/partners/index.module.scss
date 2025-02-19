@@ -1,98 +1,67 @@
-.wrapper {
-  max-width: 940px;
-  flex-grow: 1;
-  padding: 30px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  position: relative;
-  z-index: 3;
-
-  box-shadow: 0 12px 30px rgba(255, 97, 40, 0.7),
-  0 8px 20px rgba(255, 97, 40, 0.5),
-  0 4px 12px rgba(255, 97, 40, 0.3);
-}
-
 .content {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.title {
-  font-size: 32px;
-  font-weight: 600;
-  color: #333;
-  text-transform: uppercase;
-  margin-bottom: 20px;
-  position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    width: 50px;
-    height: 3px;
-    background-color: rgb(255, 97, 40);
-    bottom: -10px;
-    left: 0;
-  }
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .subtitle {
-  font-size: 20px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 30px;
-  position: relative;
-  padding-left: 12px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 30px;
+    position: relative;
+    padding-left: 12px;
 
-  &::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 3px;
-    background-color: rgb(255, 97, 40);
-  }
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 3px;
+        background-color: rgb(255, 97, 40);
+    }
 }
 
-.text{
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 20px;
+.text {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
 .partnerInfo {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
 }
 
-.link, .addressLink, .phone {
-  color: rgb(255, 97, 40);
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s ease;
+.link,
+.addressLink,
+.phone {
+    color: rgb(255, 97, 40);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
 
-  &:hover {
-    color: #333;
-    text-decoration: underline;
-  }
+    &:hover {
+        color: #333;
+        text-decoration: underline;
+    }
 }
 
 .logoContainer {
-  flex-shrink: 0;
-  width: 400px;
-  max-height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    flex-shrink: 0;
+    width: 400px;
+    max-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .logo {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
 }

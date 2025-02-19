@@ -1,35 +1,32 @@
-import style from './index.module.scss';
-import React, { useState } from 'react';
+import style from "./index.module.scss";
+import React, { useState } from "react";
+import { TitlePage, Wrapper } from "../../shared/UI";
 
 export function ReadyReports() {
     const reports = [
-        { name: 'Бухгалтерская отчетность за 2015 год', link: '#' },
-        { name: 'Бухгалтерская отчетность за 2016 год', link: '#' },
-        { name: 'Бухгалтерская отчетность за 2017 год', link: '#' },
-        { name: 'Бухгалтерская отчетность за 2018 год', link: '#' },
-        { name: 'Бухгалтерская отчетность за 2019 год', link: '#' },
-        { name: 'Бухгалтерская отчетность за 2020 год', link: '#' },
-        { name: 'Бухгалтерская отчетность за 2021 год', link: '#' },
-        { name: 'Бухгалтерская отчетность за 2022 год', link: '#' },
-        { name: 'Бухгалтерская отчетность за 2023 год', link: '#' },
+        { name: "Бухгалтерская отчетность за 2015 год", link: "#" },
+        { name: "Бухгалтерская отчетность за 2016 год", link: "#" },
+        { name: "Бухгалтерская отчетность за 2017 год", link: "#" },
+        { name: "Бухгалтерская отчетность за 2018 год", link: "#" },
+        { name: "Бухгалтерская отчетность за 2019 год", link: "#" },
+        { name: "Бухгалтерская отчетность за 2020 год", link: "#" },
+        { name: "Бухгалтерская отчетность за 2021 год", link: "#" },
+        { name: "Бухгалтерская отчетность за 2022 год", link: "#" },
+        { name: "Бухгалтерская отчетность за 2023 год", link: "#" },
     ];
 
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchTerm, setSearchTerm] = useState("");
     const [filteredReports, setFilteredReports] = useState(reports);
 
     const handleSearch = (e) => {
         const term = e.target.value.toLowerCase();
         setSearchTerm(term);
-        setFilteredReports(
-            reports.filter((report) =>
-                report.name.toLowerCase().includes(term)
-            )
-        );
+        setFilteredReports(reports.filter((report) => report.name.toLowerCase().includes(term)));
     };
 
     return (
-        <div className={style.wrapper}>
-            <h1 className={style.title}>Бухгалтерская отчетность</h1>
+        <Wrapper>
+            <TitlePage title={"Бухгалтерская отчетность"} />
             <div className={style.content}>
                 <input
                     type="text"
@@ -52,7 +49,6 @@ export function ReadyReports() {
                     )}
                 </ul>
             </div>
-        </div>
-
+        </Wrapper>
     );
 }

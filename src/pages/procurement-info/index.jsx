@@ -1,8 +1,5 @@
-import {ProcurementInfo} from "../../widgets/procurement-info";
-
+import { ProcurementInfo } from '../../widgets/procurement-info';
 
 export function ProcurementInfoPage() {
-    return (
-        <ProcurementInfo/>
-    )
+    return <ProcurementInfo />;
 }

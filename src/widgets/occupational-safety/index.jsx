@@ -1,10 +1,5 @@
-import {OccupationalSafety} from "../../features/occupational-safety";
-
+import { OccupationalSafety } from "../../features/occupational-safety";
 
 export function Safety() {
-    return (
-        <div>
-            <OccupationalSafety/>
-        </div>
-    )
+    return <OccupationalSafety />;
 }

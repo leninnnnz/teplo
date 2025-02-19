@@ -1,8 +1,5 @@
-import {Fraudsters} from "../../widgets/fraud-prevention";
+import { Fraudsters } from '../../widgets/fraud-prevention';
 
-
-export function  FraudPreventionPage() {
-    return (
-        <Fraudsters/>
-    )
+export function FraudPreventionPage() {
+    return <Fraudsters />;
 }

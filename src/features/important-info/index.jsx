@@ -1,19 +1,19 @@
-import style from './index.module.scss';
+import style from "./index.module.scss";
+import { TitlePage, Wrapper } from "../../shared/UI";
 
 export function ImportantInformation() {
     return (
-        <div className={style.wrapper}>
-            <h1 className={style.title}>Важная информация</h1>
+        <Wrapper>
+            <TitlePage title={"Важная информация"} />
             <div className={style.content}>
                 <p className={style.intro}>Уважаемые абоненты!</p>
 
                 <p className={style.mainText}>
-                    В связи с угрозой распространения на территории Свердловской области новой коронавирусной инфекции,
-                    в соответствии с Указом Губернатора Свердловской области от 18 марта 2020 года №100-УГ «О введении
-                    на территории Свердловской области режима повышенной готовности и принятии дополнительных мер по
-                    защите населения….» ИНФОРМИРУЕМ, ЧТО ОЧНЫЙ ПРИЕМ ГРАЖДАН В ООО «УК «ТЕПЛОКОМПЛЕКС» И
-                    ПРЕДСТАВИТЕЛЬСТВАХ АО «РАСЧЕТНЫЙ ЦЕНТР УРАЛА» ВРЕМЕННО ПРЕКРАЩЕН. О ВОЗОБНОВЛЕНИИ ОЧНОГО ПРИЕМА
-                    ГРАЖДАН БУДЕТ СООБЩЕНО ДОПОЛНИТЕЛЬНО.
+                    В связи с угрозой распространения на территории Свердловской области новой коронавирусной инфекции, в соответствии с
+                    Указом Губернатора Свердловской области от 18 марта 2020 года №100-УГ «О введении на территории Свердловской области
+                    режима повышенной готовности и принятии дополнительных мер по защите населения….» ИНФОРМИРУЕМ, ЧТО ОЧНЫЙ ПРИЕМ ГРАЖДАН В
+                    ООО «УК «ТЕПЛОКОМПЛЕКС» И ПРЕДСТАВИТЕЛЬСТВАХ АО «РАСЧЕТНЫЙ ЦЕНТР УРАЛА» ВРЕМЕННО ПРЕКРАЩЕН. О ВОЗОБНОВЛЕНИИ ОЧНОГО
+                    ПРИЕМА ГРАЖДАН БУДЕТ СООБЩЕНО ДОПОЛНИТЕЛЬНО.
                 </p>
 
                 <div className={style.paymentInfo}>
@@ -33,38 +33,44 @@ export function ImportantInformation() {
 
                 <div className={style.contactInfo}>
                     <p className={style.contactText}>
-                        Показания индивидуальных приборов учета, заявления о разноске оплат,
-                        порядке начисления платы и т.д. Вы можете направить на электронную
-                        почту представительства{' '}
+                        Показания индивидуальных приборов учета, заявления о разноске оплат, порядке начисления платы и т.д. Вы можете
+                        направить на электронную почту представительства{" "}
                         <a href="mailto:kamensk-info@rcurala.ru" className={style.emailLink}>
                             kamensk-info@rcurala.ru
-                        </a>{' '}
-                        или{' '}
+                        </a>{" "}
+                        или{" "}
                         <a href="mailto:call-center@rcurala.ru" className={style.emailLink}>
                             call-center@rcurala.ru
                         </a>
-                        , а также{' '}
+                        , а также{" "}
                         <a href="mailto:info@uk-teplo.ru" className={style.emailLink}>
                             info@uk-teplo.ru
-                        </a>.
+                        </a>
+                        .
                     </p>
                 </div>
 
                 <div className={style.phoneNumbers}>
                     <p className={style.phoneText}>Телефоны для обращения физических лиц:</p>
-                    <a href="tel:83439354530" className={style.phoneLink}>8 (343) 935-45-30</a>
+                    <a href="tel:83439354530" className={style.phoneLink}>
+                        8 (343) 935-45-30
+                    </a>
                     <br />
-                    <a href="tel:83439355176" className={style.phoneLink}>8 (343) 935-51-76</a>
+                    <a href="tel:83439355176" className={style.phoneLink}>
+                        8 (343) 935-51-76
+                    </a>
                     <br />
-                    <a href="tel:88003029990" className={style.phoneLink}>8 (800) 302-99-90</a> — АО «РЦ Урала»
+                    <a href="tel:88003029990" className={style.phoneLink}>
+                        8 (800) 302-99-90
+                    </a>{" "}
+                    — АО «РЦ Урала»
                 </div>
 
                 <p className={style.closing}>
                     Приносим извинения за временные неудобства,
-                    <br/> с уважением, ООО «УК
-                    «ТЕПЛОКОМПЛЕКС»
+                    <br /> с уважением, ООО «УК «ТЕПЛОКОМПЛЕКС»
                 </p>
             </div>
-        </div>
+        </Wrapper>
     );
 }

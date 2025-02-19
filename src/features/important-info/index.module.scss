@@ -1,150 +1,115 @@
-.wrapper {
-  max-width: 940px;
-  flex-grow: 1;
-  padding: 30px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  position: relative;
-  z-index: 3;
-
-  box-shadow: 0 12px 30px rgba(255, 97, 40, 0.7),
-  0 8px 20px rgba(255, 97, 40, 0.5),
-  0 4px 12px rgba(255, 97, 40, 0.3);
-}
-
-.title {
-  font-size: 32px;
-  font-weight: 600;
-  color: #333;
-  text-transform: uppercase;
-  margin-bottom: 20px;
-  position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    width: 50px;
-    height: 3px;
-    background-color: rgb(255, 97, 40);
-    bottom: -10px;
-    left: 0;
-  }
-}
-
 .content {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .intro {
-  font-size: 20px;
-  color: #333;
-  line-height: 1.7;
-  margin-bottom: 20px;
-  text-align: center;
-  font-weight: normal;
+    font-size: 20px;
+    color: #333;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: normal;
 }
 
 .mainText {
-  font-size: 20px;
-  color: #333;
-  line-height: 1.7;
-  margin-bottom: 20px;
-  font-weight: bold;
+    font-size: 20px;
+    color: #333;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-weight: bold;
 }
 
 .paymentInfo {
-  margin-bottom: 20px;
-
+    margin-bottom: 20px;
 }
-.paymentInfoText{
-  margin-bottom: 20px;
-  font-size: 20px;
-  color: #333;
-  line-height: 1.7;
-  font-weight: 400;
+.paymentInfoText {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #333;
+    line-height: 1.7;
+    font-weight: 400;
 }
 
 .paymentMethods {
-  list-style-type: none;
-  padding-left: 20px;
-  font-size: 20px;
-  color: #444;
+    list-style-type: none;
+    padding-left: 20px;
+    font-size: 20px;
+    color: #444;
 }
 .paymentMethod {
-  margin-bottom: 15px;
-  position: relative;
+    margin-bottom: 15px;
+    position: relative;
 
-  &::before {
-    content: '-';
-    margin-right: 8px;
-    color: #444;
-  }
+    &::before {
+        content: '-';
+        margin-right: 8px;
+        color: #444;
+    }
 }
 
 .paymentLink {
-  color: rgb(255, 97, 40);
-  text-decoration: none;
-  font-weight: 600;
+    color: rgb(255, 97, 40);
+    text-decoration: none;
+    font-weight: 600;
 
-  &:hover {
-    color: #333;
-    text-decoration: underline;
-  }
+    &:hover {
+        color: #333;
+        text-decoration: underline;
+    }
 }
 
 .contactInfo {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
-.contactText{
-  margin-bottom: 20px;
-  font-size: 20px;
-  color: #333;
-  line-height: 1.7;
+.contactText {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #333;
+    line-height: 1.7;
 }
 
 .closing {
-  font-size: 20px;
-  color: #333;
-  line-height: 1.7;
-  margin-bottom: 20px;
-  text-align: right;
+    font-size: 20px;
+    color: #333;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    text-align: right;
 }
 
 .emailLink {
-  color: rgb(255, 97, 40);
-  text-decoration: none;
-  transition: color 0.3s ease;
+    color: rgb(255, 97, 40);
+    text-decoration: none;
+    transition: color 0.3s ease;
 
-  &:hover {
-    color: #333;
-  }
+    &:hover {
+        color: #333;
+    }
 }
 
 .phoneNumbers {
-  margin-bottom: 35px;
+    margin-bottom: 35px;
 }
 
-.phoneText{
-  margin-bottom: 20px;
-  font-size: 20px;
-  color: #333;
-  line-height: 1.7;
+.phoneText {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #333;
+    line-height: 1.7;
 }
 .phoneLink {
-  display: inline-block;
-  margin-bottom: 15px;
-  font-size: 20px;
-  color: rgb(255, 97, 40) ;
-  text-decoration: none;
-  transition: color 0.3s ease;
-  font-weight: 600;
+    display: inline-block;
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: rgb(255, 97, 40);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 600;
 
-  &:hover {
-      color: #333;
-  }
+    &:hover {
+        color: #333;
+    }
 }
-

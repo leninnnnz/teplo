@@ -1,7 +1,3 @@
-
-
 export function Error() {
-    return (
-        <div>error</div>
-    )
+    return <div>error</div>;
 }

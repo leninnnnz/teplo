@@ -1,8 +1,5 @@
-import {TariffsInfo} from "../../widgets/tariffs";
-
+import { TariffsInfo } from '../../widgets/tariffs';
 
 export function TariffsInfoPage() {
-    return (
-        <TariffsInfo/>
-    )
+    return <TariffsInfo />;
 }

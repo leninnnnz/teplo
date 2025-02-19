@@ -1,4 +1,5 @@
-import style from './index.module.scss';
+import style from "./index.module.scss";
+import { TitlePage, Wrapper } from "../../shared/UI";
 
 const purchases = [
     { name: "Закупка люков 18.09.2018", link: "#" },
@@ -10,8 +11,8 @@ const purchases = [
 
 export function ProcurementInformation() {
     return (
-        <div className={style.wrapper}>
-            <h1 className={style.title}>Информация о закупках</h1>
+        <Wrapper>
+            <TitlePage title={"Информация о закупках"} />
             <div className={style.content}>
                 <ul className={style.purchaseList}>
                     {purchases.map((item, index) => (
@@ -23,6 +24,6 @@ export function ProcurementInformation() {
                     ))}
                 </ul>
             </div>
-        </div>
+        </Wrapper>
     );
 }

@@ -1,8 +1,5 @@
-import {TechnoConnection} from "../../widgets/technical-connection";
-
+import { TechnoConnection } from '../../widgets/technical-connection';
 
 export function TechnoConnectionPage() {
-    return (
-        <TechnoConnection/>
-    )
+    return <TechnoConnection />;
 }

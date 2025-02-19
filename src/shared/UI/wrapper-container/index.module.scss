@@ -1,13 +1,14 @@
 .wrapper {
-  max-width: 940px;
-  flex-grow: 1;
-  padding: 30px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  position: relative;
-  z-index: 3;
+    max-width: 940px;
+    flex-grow: 1;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    position: relative;
+    z-index: 3;
 
-  box-shadow: 0 12px 30px rgba(255, 97, 40, 0.7),
-  0 8px 20px rgba(255, 97, 40, 0.5),
-  0 4px 12px rgba(255, 97, 40, 0.3);
+    box-shadow:
+        0 12px 30px rgba(255, 97, 40, 0.7),
+        0 8px 20px rgba(255, 97, 40, 0.5),
+        0 4px 12px rgba(255, 97, 40, 0.3);
 }

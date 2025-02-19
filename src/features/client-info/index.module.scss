@@ -1,134 +1,101 @@
-.wrapper {
-  max-width: 940px;
-  flex-grow: 1;
-  padding: 30px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  position: relative;
-  z-index: 3;
-
-  box-shadow: 0 12px 30px rgba(255, 97, 40, 0.7),
-  0 8px 20px rgba(255, 97, 40, 0.5),
-  0 4px 12px rgba(255, 97, 40, 0.3);
-}
-.title {
-  font-size: 32px;
-  font-weight: 600;
-  color: #333;
-  text-transform: uppercase;
-  margin-bottom: 20px;
-  position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    width: 50px;
-    height: 3px;
-    background-color: rgb(255, 97, 40);
-    bottom: -10px;
-    left: 0;
-  }
-}
-
 .subtitle {
-  font-size: 20px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 30px;
-  position: relative;
-  padding-left: 12px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 30px;
+    position: relative;
+    padding-left: 12px;
 
-  &::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 3px;
-    background-color: rgb(255, 97, 40);
-  }
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 3px;
+        background-color: rgb(255, 97, 40);
+    }
 }
 
 .section {
-  margin-bottom: 30px;
+    margin-bottom: 30px;
 }
 
 .content {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .legislationList {
-  list-style-type: none;
-  padding: 0;
+    list-style-type: none;
+    padding: 0;
 
+    .legislationItem {
+        margin-bottom: 10px;
+        font-size: 18px;
+        color: #333;
+        line-height: 24px;
 
-  .legislationItem {
-    margin-bottom: 10px;
-    font-size: 18px;
-    color: #333;
-    line-height: 24px;
-
-    .bullet {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      background-color: rgb(255, 97, 40);
-      border-radius: 50%;
-      margin-right: 10px;
-      vertical-align: middle;
+        .bullet {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: rgb(255, 97, 40);
+            border-radius: 50%;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
     }
-  }
 }
 
 .searchInput {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: 2px solid #ddd;
-  border-radius: 25px;
-  margin-bottom: 20px;
-  outline: none;
-  transition: border-color 0.3s ease;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    margin-bottom: 20px;
+    outline: none;
+    transition: border-color 0.3s ease;
 
-  &:hover {
-    border-color: rgb(255, 97, 40);
-  }
+    &:hover {
+        border-color: rgb(255, 97, 40);
+    }
 
-  &:focus {
-    border-color: rgb(255, 97, 40);
-  }
+    &:focus {
+        border-color: rgb(255, 97, 40);
+    }
 
-  ::placeholder {
-    color: #bbb;
-  }
+    ::placeholder {
+        color: #bbb;
+    }
 }
 
 .contractList {
-  list-style-type: none;
-  padding: 0;
+    list-style-type: none;
+    padding: 0;
 
-  .contractLink {
-    font-size: 18px;
-    color: #333;
-    text-decoration: none;
-    padding: 10px;
-    display: block;
-    transition: color 0.3s ease;
-    position: relative;
-    border-bottom: 2px solid transparent;
+    .contractLink {
+        font-size: 18px;
+        color: #333;
+        text-decoration: none;
+        padding: 10px;
+        display: block;
+        transition: color 0.3s ease;
+        position: relative;
+        border-bottom: 2px solid transparent;
 
-    &:hover {
-      color: rgb(255, 97, 40);
-      border-bottom: 2px solid rgb(255, 97, 40);
+        &:hover {
+            color: rgb(255, 97, 40);
+            border-bottom: 2px solid rgb(255, 97, 40);
+        }
     }
-  }
 }
 
 .noResults {
-  font-size: 16px;
-  color: #999;
-  font-style: italic;
+    font-size: 16px;
+    color: #999;
+    font-style: italic;
 }

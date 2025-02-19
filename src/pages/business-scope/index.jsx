@@ -1,8 +1,5 @@
-import {BusScope} from "../../widgets/business-scope";
-
+import { BusScope } from '../../widgets/business-scope';
 
 export function BusinessScopePage() {
-    return (
-        <BusScope/>
-    )
+    return <BusScope />;
 }

@@ -1,51 +1,51 @@
 .footer {
-  background-color: rgb(255, 97, 40);
-  color: white;
-  padding: 60px 20px 20px;
-  text-align: center;
-  margin-top: -50px;
-  position: relative;
-  z-index: 1;
+    background-color: rgb(255, 97, 40);
+    color: white;
+    padding: 60px 20px 20px;
+    text-align: center;
+    margin-top: -50px;
+    position: relative;
+    z-index: 1;
 }
 
 .footerContainer {
-  max-width: 1200px;
-  margin: 0 auto;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .footerList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .footerItem {
-  margin: 10px 15px;
+    margin: 10px 15px;
 }
 
 .footerLink {
-  text-decoration: none;
-  color: white;
-  font-size: 14px;
-  transition: color 0.3s;
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    transition: color 0.3s;
 }
 
 .footerLink:hover {
-  color: #ffe5d0;
-  text-decoration: underline;
+    color: #ffe5d0;
+    text-decoration: underline;
 }
 
 .footerBottom {
-  background-color: rgba(0, 0, 0, 0.1);
-  padding: 10px 0;
-  margin-top: 20px;
-  border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+    margin-top: 20px;
+    border-radius: 20px;
 }
 
 .footerText {
-  font-size: 12px;
-  color: #fff;
+    font-size: 12px;
+    color: #fff;
 }

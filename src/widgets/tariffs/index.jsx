@@ -1,10 +1,5 @@
-import {TariffsInformation} from "../../features/tariffs";
-
+import { TariffsInformation } from "../../features/tariffs";
 
 export function TariffsInfo() {
-    return (
-        <div>
-            <TariffsInformation/>
-        </div>
-    )
+    return <TariffsInformation />;
 }

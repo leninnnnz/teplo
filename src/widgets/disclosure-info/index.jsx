@@ -1,10 +1,5 @@
-import {DisclosureInformation} from "../../features/disclosure-info";
-
+import { DisclosureInformation } from "../../features/disclosure-info";
 
 export function DisclosureInfo() {
-    return (
-        <div>
-            <DisclosureInformation/>
-        </div>
-    )
+    return <DisclosureInformation />;
 }
