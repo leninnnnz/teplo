@@ -145,11 +145,11 @@ export function TariffsInformation() {
                 </div>
 
                 {/* Список тарифов */}
-                <ul className={style.tariffList}>
+                <ul>
                     {filteredTariffs.length > 0 ? (
                         filteredTariffs.map((tariff, index) => (
                             <li key={index} className={style.tariffItem}>
-                                <span>{tariff.name}</span>
+                                <p className={style.tariffLink}>{tariff.name}</p>
                             </li>
                         ))
                     ) : (

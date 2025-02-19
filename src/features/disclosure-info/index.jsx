@@ -1,5 +1,6 @@
 import { useState } from "react";
 import style from "./index.module.scss";
+import {TitlePage, Wrapper} from "../../shared/UI";
 
 
 const documents = [
@@ -202,8 +203,8 @@ export function DisclosureInformation() {
     });
 
     return (
-        <div className={style.wrapper}>
-            <h1 className={style.title}>Раскрытие информации</h1>
+        <Wrapper>
+            <TitlePage title={'Раскрытие информации'}/>
             <div className={style.content}>
 
                 <div className={style.searchWrapper}>
@@ -228,7 +229,7 @@ export function DisclosureInformation() {
                                 <option key={quarter} value={quarter}>
                                     {`${quarter} квартал`}
                                 </option>
-                            ))}
+                            ))} 
                         </select>
                     </div>
 
@@ -263,8 +264,8 @@ export function DisclosureInformation() {
                 <ul className={style.documentList}>
                     {filteredDocuments.length > 0 ? (
                         filteredDocuments.map((doc, index) => (
-                            <li key={index}>
-                                <a href={doc.file} download>
+                            <li key={index} className={style.documentItem}>
+                                <a href={doc.file} download className={style.documentLink}>
                                     {`${doc.name}`}
                                 </a>
                             </li>
@@ -274,6 +275,6 @@ export function DisclosureInformation() {
                     )}
                 </ul>
             </div>
-        </div>
+        </Wrapper>
     );
 }

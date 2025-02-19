@@ -15,8 +15,8 @@ export function ProcurementInformation() {
             <div className={style.content}>
                 <ul className={style.purchaseList}>
                     {purchases.map((item, index) => (
-                        <li key={index}>
-                            <a href={item.link} download>
+                        <li key={index} className={style.purchaseItem}>
+                            <a href={item.link} download className={style.purchaseLink}>
                                 {item.name}
                             </a>
                         </li>

@@ -17,22 +17,22 @@ export function ImportantInformation() {
                 </p>
 
                 <div className={style.paymentInfo}>
-                    <p>Оплату по платежным документам ООО «УК «ТЕПЛОКОМПЛЕКС» можно провести:</p>
+                    <p className={style.paymentInfoText}>Оплату по платежным документам ООО «УК «ТЕПЛОКОМПЛЕКС» можно провести:</p>
                     <ul className={style.paymentMethods}>
-                        <li>
-                            <a href="http://www.rcurala.ru" target="_blank" rel="noopener noreferrer">
+                        <li className={style.paymentMethod}>
+                            <a href="http://www.rcurala.ru" target="_blank" rel="noopener noreferrer" className={style.paymentLink}>
                                 в личном кабинете на сайте www.rcurala.ru
                             </a>
                         </li>
-                        <li>через сайт www.rcurala.ru без регистрации в личном кабинете,</li>
-                        <li>через мобильное приложение «РЦ Урала онлайн»,</li>
-                        <li>в кассу АО «РЦ Урала»,</li>
-                        <li>через отделения ФГУП «Почта России», Банки (взимается комиссия)</li>
+                        <li className={style.paymentMethod}>через сайт www.rcurala.ru без регистрации в личном кабинете,</li>
+                        <li className={style.paymentMethod}>через мобильное приложение «РЦ Урала онлайн»,</li>
+                        <li className={style.paymentMethod}>в кассу АО «РЦ Урала»,</li>
+                        <li className={style.paymentMethod}>через отделения ФГУП «Почта России», Банки (взимается комиссия)</li>
                     </ul>
                 </div>
 
                 <div className={style.contactInfo}>
-                    <p>
+                    <p className={style.contactText}>
                         Показания индивидуальных приборов учета, заявления о разноске оплат,
                         порядке начисления платы и т.д. Вы можете направить на электронную
                         почту представительства{' '}
@@ -51,12 +51,12 @@ export function ImportantInformation() {
                 </div>
 
                 <div className={style.phoneNumbers}>
-                    <p>Телефоны для обращения физических лиц:</p>
-                    <a href="tel:83439354530">8 (343) 935-45-30</a>
+                    <p className={style.phoneText}>Телефоны для обращения физических лиц:</p>
+                    <a href="tel:83439354530" className={style.phoneLink}>8 (343) 935-45-30</a>
                     <br />
-                    <a href="tel:83439355176">8 (343) 935-51-76</a>
+                    <a href="tel:83439355176" className={style.phoneLink}>8 (343) 935-51-76</a>
                     <br />
-                    <a href="tel:88003029990">8 (800) 302-99-90</a> — АО «РЦ Урала»
+                    <a href="tel:88003029990" className={style.phoneLink}>8 (800) 302-99-90</a> — АО «РЦ Урала»
                 </div>
 
                 <p className={style.closing}>
