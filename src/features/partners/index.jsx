@@ -1,5 +1,5 @@
 import style from './index.module.scss';
-import {Content, TitlePage, Wrapper} from '../../shared/UI';
+import {Content, SubtitlePage, TitlePage, Wrapper} from '../../shared/UI';
 
 export function PartnersInformation() {
     return (
@@ -7,17 +7,22 @@ export function PartnersInformation() {
             <TitlePage title={'Партнеры'} />
             <Content>
                 <div className={style.partnerInfo}>
-                    <section className={style.partner}>
-                        <h2 className={style.subtitle}>Канова и партнёры</h2>
-                        <p className={style.text}>
-                            Адрес в сети:{' '}
-                            <a href="http://www.kanova.ru/" className={style.link} target="_blank" rel="noopener noreferrer">
+                    <div>
+                        <SubtitlePage subtitle={'Канова и партнёры'}/>
+                        <section className={style.section}>
+                            <p className={style.text}>
+                                Адрес в сети:
+                            </p>
+                            <a href="http://www.kanova.ru/" className={style.siteLink} target="_blank"
+                               rel="noopener noreferrer">
                                 www.kanova.ru
                             </a>
-                        </p>
+                        </section>
 
-                        <p className={style.text}>
-                            Адрес:{' '}
+                        <section className={style.section}>
+                            <p className={style.text}>
+                                Адрес:
+                            </p>
                             <a
                                 href="https://www.google.com/maps/search/?api=1&query=Екатеринбург,+ул.+Белинского+83,+офис+512"
                                 target="_blank"
@@ -26,26 +31,32 @@ export function PartnersInformation() {
                             >
                                 Екатеринбург, ул. Белинского 83, офис 512
                             </a>
-                        </p>
 
-                        <p className={style.text}>
-                            Телефон:
+                        </section>
+
+                        <section className={style.section}>
+                            <p className={style.text}>
+                                Телефон:
+                            </p>
                             <ul className={style.phoneList}>
                                 <li>
-                                    <a href="tel:+73432788344" className={style.phone}>
+                                    <a href="tel:+73432788344" className={style.phoneLink}>
                                         +7 (343) 278-83-44
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="tel:+79122467603" className={style.phone}>
+                                    <a href="tel:+79122467603" className={style.phoneLink}>
                                         +7 (912) 246-76-03
                                     </a>
                                 </li>
                             </ul>
-                        </p>
-                    </section>
+                        </section>
+
+
+                    </div>
+
                     <div className={style.logoContainer}>
-                        <img src="/images/partners.png" alt="Логотип Канова и партнёры" className={style.logo} />
+                        <img src="/images/partners.png" alt="Логотип Канова и партнёры" className={style.logo}/>
                     </div>
                 </div>
             </Content>

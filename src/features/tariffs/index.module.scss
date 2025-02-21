@@ -90,18 +90,19 @@
     }
 }
 
-.tariffItem {
-    padding: 10px;
-    background: #fff;
+.tariffList {
+    list-style-type: none;
+    padding: 0;
 
     .tariffLink {
-        margin-bottom: 10px;
         font-size: 18px;
+        line-height: 1.5;
         color: #333;
-        font-weight: 600;
         text-decoration: none;
+        padding: 10px;
         display: block;
         transition: color 0.3s ease;
+        position: relative;
         border-bottom: 2px solid transparent;
 
         &:hover {

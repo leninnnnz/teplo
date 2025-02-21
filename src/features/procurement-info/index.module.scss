@@ -1,34 +1,21 @@
 .purchaseList {
-    font-size: 18px;
-    color: #333;
-    text-decoration: none;
-    display: block;
-    transition:
-        color 0.3s ease,
-        border-bottom 0.3s ease;
+    list-style-type: none;
+    padding: 0;
 
-    &:hover {
-        color: rgb(255, 97, 40);
-    }
-
-    .purchaseItem {
+    .purchaseLink {
+        font-size: 18px;
+        color: #333;
+        text-decoration: none;
         padding: 10px;
-        background: #fff;
+        display: block;
+        transition: color 0.3s ease;
+        position: relative;
+        border-bottom: 2px solid transparent;
 
-        .purchaseLink {
-            margin-bottom: 10px;
-            font-size: 18px;
-            color: #333;
-            font-weight: 600;
-            text-decoration: none;
-            display: block;
-            transition: color 0.3s ease;
-            border-bottom: 2px solid transparent;
-
-            &:hover {
-                color: rgb(255, 97, 40);
-                border-bottom: 2px solid rgb(255, 97, 40);
-            }
+        &:hover {
+            color: rgb(255, 97, 40);
+            border-bottom: 2px solid rgb(255, 97, 40);
         }
     }
 }
+

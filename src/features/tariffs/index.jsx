@@ -331,15 +331,11 @@ const tariffs = [
     },
 ];
 
-// Функция определения категории
-
-// Компонент с информацией о тарифах
 export function TariffsInformation() {
     const [search, setSearch] = useState('');
     const [selectedYear, setSelectedYear] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
 
-    // Получаем список всех лет из тарифов
     const years = useMemo(() => {
         const uniqueYears = new Set();
         tariffs.forEach((tariff) => {
@@ -352,12 +348,10 @@ export function TariffsInformation() {
         return Array.from(uniqueYears).sort();
     }, [tariffs]);
 
-    // Получаем список всех категорий
     const categories = useMemo(() => {
         return Array.from(new Set(tariffs.map((tariff) => tariff.category)));
     }, [tariffs]);
 
-    // Фильтрация тарифов
     const filteredTariffs = tariffs.filter((tariff) => {
         const matchesSearch = tariff.name.toLowerCase().includes(search.toLowerCase());
         const matchesYear = selectedYear
@@ -409,11 +403,11 @@ export function TariffsInformation() {
                     </div>
                 </div>
 
-                {/* Список тарифов */}
-                <ul>
+
+                <ul className={style.tariffList}>
                     {filteredTariffs.length > 0 ? (
                         filteredTariffs.map((tariff, index) => (
-                            <li key={index} className={style.tariffItem}>
+                            <li key={index}>
                                 <p className={style.tariffLink}>{tariff.name}</p>
                             </li>
                         ))

@@ -1,5 +1,5 @@
 import style from './index.module.scss';
-import {Content, TitlePage, Wrapper} from '../../shared/UI';
+import {Content, SubtitlePage, TitlePage, Wrapper} from '../../shared/UI';
 
 export function ContactsInformation() {
     return (
@@ -7,7 +7,7 @@ export function ContactsInformation() {
             <TitlePage title={'Контактная информация'} />
             <Content>
                 <section className={style.section}>
-                    <h2 className={style.subtitle}>Руководство</h2>
+                    <SubtitlePage subtitle={'Руководство'} />
                     <p className={style.text}>
                         <span className={style.boldText}>Директор:</span> Виноградов Геннадий Николаевич
                     </p>
@@ -17,7 +17,7 @@ export function ContactsInformation() {
                 </section>
 
                 <section className={style.section}>
-                    <h2 className={style.subtitle}>Телефоны</h2>
+                    <SubtitlePage subtitle={'Телефоны'} />
                     <p className={style.text}>
                         <span className={style.boldText}>Единый многоканальный номер:</span>{' '}
                         <a className={style.phoneNumber} href="tel:+73439379828">
@@ -62,7 +62,7 @@ export function ContactsInformation() {
                 </section>
 
                 <section className={style.section}>
-                    <h2 className={style.subtitle}>Электронная почта</h2>
+                    <SubtitlePage subtitle={'Электронная почта'} />
                     <p className={style.text}>
                         <a className={style.emailLink} href="mailto:info@uk-teplo.ru">
                             info@uk-teplo.ru
@@ -71,7 +71,7 @@ export function ContactsInformation() {
                 </section>
 
                 <section className={style.section}>
-                    <h2 className={style.subtitle}>Режим работы</h2>
+                    <SubtitlePage subtitle={'Режим работы'} />
                     <p className={style.text}>
                         <span className={style.boldText}>Понедельник - четверг:</span> 8:00 - 17:00 (обед 12:00 - 12:48)
                     </p>
@@ -84,7 +84,7 @@ export function ContactsInformation() {
                 </section>
 
                 <section className={style.section}>
-                    <h2 className={style.subtitle}>Реквизиты</h2>
+                    <SubtitlePage subtitle={'Реквизиты'} />
                     <p className={style.text}>
                         <span className={style.boldText}>ООО "УК ТЕПЛОКОМПЛЕКС"</span>
                     </p>
@@ -112,7 +112,7 @@ export function ContactsInformation() {
                 </section>
 
                 <section className={style.section}>
-                    <h2 className={style.subtitle}>Банковские реквизиты</h2>
+                    <SubtitlePage subtitle={'Банковские реквизиты'} />
                     <p className={style.text}>
                         <span className={style.boldText}>Банк:</span> Уральский филиал ПАО «ПРОМСВЯЗЬБАНК», г. Екатеринбург
                     </p>

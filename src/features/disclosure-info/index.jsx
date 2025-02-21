@@ -1336,7 +1336,7 @@ export function DisclosureInformation() {
                 <ul className={style.documentList}>
                     {filteredDocuments.length > 0 ? (
                         filteredDocuments.map((doc, index) => (
-                            <li key={index} className={style.documentItem}>
+                            <li key={index}>
                                 <a href={doc.file} download className={style.documentLink}>
                                     {`${doc.name}`}
                                 </a>

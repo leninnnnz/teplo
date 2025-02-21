@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import style from './index.module.scss';
-import {Content, TitlePage, Wrapper} from '../../shared/UI';
+import {Content, SubtitlePage, TitlePage, Wrapper} from '../../shared/UI';
 
 export function ClientInformation() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -31,10 +31,7 @@ export function ClientInformation() {
             <TitlePage title={'Информация для клиентов'} />
             <Content>
                 <section className={style.section}>
-                    <h2 className={style.subtitle}>
-                        Законодательство в части присоединения к системам теплоснабжения и (или) горячего водоснабжения, системам холодного
-                        водоснабжения и водоотведения:
-                    </h2>
+                    <SubtitlePage subtitle={'Законодательство в части присоединения к системам теплоснабжения и (или) горячего водоснабжения, системам холодного водоснабжения и водоотведения:'} />
                     <ul className={style.legislationList}>
                         {[
                             'Федеральный закон №190 «О теплоснабжении»',
@@ -54,8 +51,7 @@ export function ClientInformation() {
                     </ul>
                 </section>
                 <section className={style.section}>
-                    <h2 className={style.subtitle}>Формы публичного договора</h2>
-
+                    <SubtitlePage subtitle={'Формы публичного договора'} />
                     <input
                         type="text"
                         placeholder="Поиск договора..."

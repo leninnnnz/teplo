@@ -1,5 +1,5 @@
 import style from './index.module.scss';
-import { TitlePage, Wrapper, Content } from '../../shared/UI';
+import {TitlePage, Wrapper, Content, SubtitlePage} from '../../shared/UI';
 
 export function BusinessScope() {
     return (
@@ -7,12 +7,12 @@ export function BusinessScope() {
             <TitlePage title={'Сфера деятельности'} />
             <Content>
                 <section className={style.section}>
-                    <h2 className={style.subtitle}>Производство, передача и распределение пара и горячей воды (тепловой энергии)</h2>
+                    <SubtitlePage subtitle={'Производство, передача и распределение пара и горячей воды (тепловой энергии)'} />
                     <p className={style.text}>
-                        Протяженность тепловых сетей: <strong>645 км</strong>
+                        Протяженность тепловых сетей: 645 км
                     </p>
                     <p className={style.text}>
-                        Количество тепловых пунктов: <strong>18</strong>
+                        Количество тепловых пунктов: 18
                     </p>
                     <p className={style.text}>
                         <a href="#" className={style.link}>
@@ -20,7 +20,7 @@ export function BusinessScope() {
                         </a>
                     </p>
                     <p className={style.text}>
-                        Персонал на 01.12.2024 г.: <strong>217 человек</strong>
+                        Персонал на 01.12.2024 г.: 217 человек
                     </p>
                     <p className={style.text}>
                         <a href="#" className={style.link}>
@@ -30,12 +30,12 @@ export function BusinessScope() {
                 </section>
 
                 <section className={style.section}>
-                    <h2 className={style.subtitle}>Заключение договора на поставку горячего водоснабжения</h2>
+                    <SubtitlePage subtitle={'Заключение договора на поставку горячего водоснабжения'} />
                     <p className={style.text}>
                         Владельцу или арендатору нежилого помещения необходимо предоставить пакет документов и заявку по адресу:
                     </p>
                     <ul className={style.list}>
-                        <li className={style.listItem}>
+                        <li>
                             <a
                                 href="https://www.google.com/maps/search/?api=1&query=г.Каменск-Уральский,+ул.+Мичурина+2в"
                                 className={style.addressLink}
@@ -45,7 +45,7 @@ export function BusinessScope() {
                                 г. Каменск-Уральский, ул. Мичурина 2в, ООО «УК «ТЕПЛОКОМПЛЕКС»
                             </a>
                         </li>
-                        <li className={style.listItem}>
+                        <li>
                             <a
                                 href="https://www.google.com/maps/search/?api=1&query=г.Каменск-Уральский,+ул.+Октябрьская+41"
                                 className={style.addressLink}
@@ -62,14 +62,14 @@ export function BusinessScope() {
                 </section>
 
                 <section className={style.section}>
-                    <h2 className={style.subtitle}>Заявка и список документов</h2>
+                    <SubtitlePage subtitle={'Заявка и список документов'} />
                     <ul className={style.list}>
-                        <li className={style.listItem}>
+                        <li>
                             <a href="#" className={style.docLink} download>
                                 Заявка на заключение договора
                             </a>
                         </li>
-                        <li className={style.listItem}>
+                        <li>
                             <a href="#" className={style.docLink} download>
                                 Список документов
                             </a>

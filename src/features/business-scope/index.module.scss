@@ -2,75 +2,61 @@
     margin-bottom: 30px;
 }
 
-.subtitle {
-    font-size: 20px;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 20px;
-    position: relative;
-    padding-left: 12px;
-
-    &::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 100%;
-        width: 3px;
-        background-color: rgb(255, 97, 40);
-    }
-}
-
 .text {
     font-size: 18px;
     color: #333;
     margin-bottom: 12px;
 }
 
-.list {
-    list-style: none;
-    padding: 0;
-}
-
-.listItem {
+.link {
     font-size: 18px;
     color: #333;
-    margin-bottom: 10px;
-}
-
-.link {
-    color: #333;
     text-decoration: none;
-    font-weight: bold;
+    padding: 10px;
+    display: block;
     transition: color 0.3s ease;
+    position: relative;
+    border-bottom: 2px solid transparent;
 
     &:hover {
         color: rgb(255, 97, 40);
-        text-decoration: underline;
+        border-bottom: 2px solid rgb(255, 97, 40);
     }
 }
 
+.list {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 10px;
+}
+
 .docLink {
-    display: inline-block;
     font-size: 18px;
     color: #333;
-    transition: background 0.3s ease;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+    transition: color 0.3s ease;
+    position: relative;
+    border-bottom: 2px solid transparent;
 
     &:hover {
         color: rgb(255, 97, 40);
-        text-decoration: underline;
+        border-bottom: 2px solid rgb(255, 97, 40);
     }
 }
 
 .addressLink {
-    display: inline-block;
+    font-size: 18px;
     color: rgb(255, 97, 40);
     text-decoration: none;
-    font-weight: bold;
+    padding: 10px;
+    display: block;
     transition: color 0.3s ease;
+    position: relative;
+    border-bottom: 2px solid transparent;
 
     &:hover {
         color: #333;
-        text-decoration: underline;
     }
 }
