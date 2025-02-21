@@ -1,6 +1,6 @@
-import style from "./index.module.scss";
-import { useState, useEffect, useRef } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import style from './index.module.scss';
+import { useState, useEffect, useRef } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export function Header() {
     const [activeCategory, setActiveCategory] = useState(null);
@@ -27,43 +27,43 @@ export function Header() {
             }
         };
 
-        document.addEventListener("click", handleClickOutside);
+        document.addEventListener('click', handleClickOutside);
 
         return () => {
-            document.removeEventListener("click", handleClickOutside); // Очистка при размонтировании
+            document.removeEventListener('click', handleClickOutside); // Очистка при размонтировании
         };
     }, []);
 
     const navLinks = [
         {
-            category: "Для клиентов",
+            category: 'Для клиентов',
             items: [
-                { path: "/important-info", label: "Важная информация" },
-                { path: "/client-info", label: "Информация для клиентов" },
-                { path: "/fraud-prevention", label: "Профилактика мошеннических действий" },
+                { path: '/important-info', label: 'Важная информация' },
+                { path: '/client-info', label: 'Информация для клиентов' },
+                { path: '/fraud-prevention', label: 'Профилактика мошеннических действий' },
             ],
         },
         {
-            category: "О компании",
+            category: 'О компании',
             items: [
-                { path: "/financial-reports", label: "Бухгалтерская отчетность" },
-                { path: "/contacts", label: "Контакты" },
-                { path: "/procurement-info", label: "Информация о закупках" },
-                { path: "/disclosure-info", label: "Раскрытие информации" },
-                { path: "/business-scope", label: "Сфера деятельности" },
-                { path: "/partners", label: "Партнеры" },
+                { path: '/financial-reports', label: 'Бухгалтерская отчетность' },
+                { path: '/contacts', label: 'Контакты' },
+                { path: '/procurement-info', label: 'Информация о закупках' },
+                { path: '/disclosure-info', label: 'Раскрытие информации' },
+                { path: '/business-scope', label: 'Сфера деятельности' },
+                { path: '/partners', label: 'Партнеры' },
             ],
         },
         {
-            category: "Услуги",
+            category: 'Услуги',
             items: [
-                { path: "/tariffs", label: "Тарифы" },
-                { path: "/technical-connection", label: "Технологическое присоединение к ТС и ГВС" },
+                { path: '/tariffs', label: 'Тарифы' },
+                { path: '/technical-connection', label: 'Технологическое присоединение к ТС и ГВС' },
             ],
         },
         {
-            category: "Безопасность",
-            items: [{ path: "/occupational-safety", label: "Охрана труда" }],
+            category: 'Безопасность',
+            items: [{ path: '/occupational-safety', label: 'Охрана труда' }],
         },
     ];
 
@@ -72,8 +72,8 @@ export function Header() {
             <div className={style.headerContainer}>
                 <div className={style.logoWrapper}>
                     <p
-                        className={`${style.logoText} ${activeCategory === "/" ? style.activeLink : ""}`}
-                        onClick={() => handleItemClick("/")}
+                        className={`${style.logoText} ${activeCategory === '/' ? style.activeLink : ''}`}
+                        onClick={() => handleItemClick('/')}
                     >
                         ООО "УК "ТЕПЛОКОМПЛЕКС"
                     </p>
@@ -81,13 +81,13 @@ export function Header() {
                 </div>
 
                 <div className={style.contactWrapper}>
-                    <a href={"tel:+73439379828"} className={style.contactPhone}>
+                    <a href={'tel:+73439379828'} className={style.contactPhone}>
                         +7 (343) 937-98-28
                     </a>
                 </div>
 
                 <div className={style.loginWrapper}>
-                    <button className={style.loginButton} onClick={() => handleItemClick("/login")}>
+                    <button className={style.loginButton} onClick={() => handleItemClick('/login')}>
                         Войти
                     </button>
                 </div>
@@ -97,7 +97,7 @@ export function Header() {
                 {navLinks.map((section, index) => (
                     <div
                         key={index}
-                        className={`${style.navigationCategory} ${activeCategory === section.category ? style.activeCategory : ""}`}
+                        className={`${style.navigationCategory} ${activeCategory === section.category ? style.activeCategory : ''}`}
                     >
                         <p className={style.categoryTitle} onClick={() => handleCategoryToggle(section.category)}>
                             {section.category}
@@ -107,7 +107,7 @@ export function Header() {
                                 {section.items.map((item, idx) => (
                                     <li
                                         key={idx}
-                                        className={`${style.navigationItem} ${location.pathname === item.path ? style.activeLink : ""}`}
+                                        className={`${style.navigationItem} ${location.pathname === item.path ? style.activeLink : ''}`}
                                         onClick={() => handleItemClick(item.path)}
                                     >
                                         <a className={style.navigationLink}>{item.label}</a>

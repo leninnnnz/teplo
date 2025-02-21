@@ -1,9 +1,8 @@
 import './App.css';
-import { Header } from './components/header/header';
-import { Footer } from './components/footer/footer';
+import { Header } from './widgets/header/header';
+import { Footer } from './widgets/footer/footer';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Error } from './components/error/error';
-import { Main } from './components/main/main';
+import { Error } from './pages/error/error';
 import { FinancialReportsPage } from './pages/financial-reports';
 import { ImportantInfoPage } from './pages/important-info';
 import { ClientInfoPage } from './pages/client-info';
@@ -26,7 +25,7 @@ function App() {
 
                 <div className={style.contentBox}>
                     <Routes>
-                        <Route path={'/'} element={<Main />} />
+                        <Route path={'/'} element={<ImportantInfoPage />} />
                         <Route path={'/financial-reports'} element={<FinancialReportsPage />} />
                         <Route path={'/important-info'} element={<ImportantInfoPage />} />
                         <Route path={'/client-info'} element={<ClientInfoPage />} />

@@ -1,10 +1,10 @@
-import style from "./index.module.scss";
-import { TitlePage, Wrapper } from "../../shared/UI";
+import style from './index.module.scss';
+import { TitlePage, Wrapper } from '../../shared/UI';
 
 export function FraudstersStop() {
     return (
         <Wrapper>
-            <TitlePage title={"Профилактика мошеннических действий"} />
+            <TitlePage title={'Профилактика мошеннических действий'} />
 
             <div className={style.content}>
                 <div className={style.videoWrapper}>

@@ -1,10 +1,10 @@
-import style from "./index.module.scss";
-import { TitlePage, Wrapper } from "../../shared/UI";
+import style from './index.module.scss';
+import { TitlePage, Wrapper } from '../../shared/UI';
 
 export function ImportantInformation() {
     return (
         <Wrapper>
-            <TitlePage title={"Важная информация"} />
+            <TitlePage title={'Важная информация'} />
             <div className={style.content}>
                 <p className={style.intro}>Уважаемые абоненты!</p>
 
@@ -34,15 +34,15 @@ export function ImportantInformation() {
                 <div className={style.contactInfo}>
                     <p className={style.contactText}>
                         Показания индивидуальных приборов учета, заявления о разноске оплат, порядке начисления платы и т.д. Вы можете
-                        направить на электронную почту представительства{" "}
+                        направить на электронную почту представительства{' '}
                         <a href="mailto:kamensk-info@rcurala.ru" className={style.emailLink}>
                             kamensk-info@rcurala.ru
-                        </a>{" "}
-                        или{" "}
+                        </a>{' '}
+                        или{' '}
                         <a href="mailto:call-center@rcurala.ru" className={style.emailLink}>
                             call-center@rcurala.ru
                         </a>
-                        , а также{" "}
+                        , а также{' '}
                         <a href="mailto:info@uk-teplo.ru" className={style.emailLink}>
                             info@uk-teplo.ru
                         </a>
@@ -62,7 +62,7 @@ export function ImportantInformation() {
                     <br />
                     <a href="tel:88003029990" className={style.phoneLink}>
                         8 (800) 302-99-90
-                    </a>{" "}
+                    </a>{' '}
                     — АО «РЦ Урала»
                 </div>
 

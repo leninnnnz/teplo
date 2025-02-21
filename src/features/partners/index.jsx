@@ -1,23 +1,23 @@
-import style from "./index.module.scss";
-import { TitlePage, Wrapper } from "../../shared/UI";
+import style from './index.module.scss';
+import { TitlePage, Wrapper } from '../../shared/UI';
 
 export function PartnersInformation() {
     return (
         <Wrapper>
-            <TitlePage title={"Партнеры"} />
+            <TitlePage title={'Партнеры'} />
             <div className={style.content}>
                 <div className={style.partnerInfo}>
                     <section className={style.partner}>
                         <h2 className={style.subtitle}>Канова и партнёры</h2>
                         <p className={style.text}>
-                            Адрес в сети:{" "}
+                            Адрес в сети:{' '}
                             <a href="http://www.kanova.ru/" className={style.link} target="_blank" rel="noopener noreferrer">
                                 www.kanova.ru
                             </a>
                         </p>
 
                         <p className={style.text}>
-                            Адрес:{" "}
+                            Адрес:{' '}
                             <a
                                 href="https://www.google.com/maps/search/?api=1&query=Екатеринбург,+ул.+Белинского+83,+офис+512"
                                 target="_blank"

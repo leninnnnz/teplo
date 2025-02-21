@@ -1,10 +1,10 @@
-import style from "./index.module.scss";
-import { TitlePage, Wrapper } from "../../shared/UI";
+import style from './index.module.scss';
+import { TitlePage, Wrapper } from '../../shared/UI';
 
 export function BusinessScope() {
     return (
         <Wrapper>
-            <TitlePage title={"Сфера деятельности"} />
+            <TitlePage title={'Сфера деятельности'} />
             <div className={style.content}>
                 <section className={style.section}>
                     <h2 className={style.subtitle}>Производство, передача и распределение пара и горячей воды (тепловой энергии)</h2>

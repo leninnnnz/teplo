@@ -1,4 +1,4 @@
-import { ClientInformation } from "../../features/client-info";
+import { ClientInformation } from '../../features/client-info';
 
 export function ClientInfo() {
     return <ClientInformation />;

@@ -1,0 +1,56 @@
+.content {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%;
+}
+
+.title {
+  font-size: 6rem;
+  font-weight: bold;
+  color: rgb(255, 97, 40); // Акцентный цвет, как в фильтрах
+  margin-bottom: 20px;
+}
+
+.message {
+  font-size: 2rem;
+  color: #333; // Основной цвет текста
+  margin-bottom: 10px;
+}
+
+.description {
+  font-size: 1.2rem;
+  color: #6c757d; // Вторичный цвет текста
+  margin-bottom: 30px;
+}
+
+.button {
+  display: inline-block;
+  padding: 15px 30px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: rgb(255, 97, 40); // Акцентный цвет
+  border-radius: 25px; // Скругление, как у инпутов
+  text-decoration: none;
+  transition:
+          background-color 0.3s ease,
+          box-shadow 0.3s ease;
+
+  &:hover {
+    background-color: darken(rgb(255, 97, 40), 10%); // Затемнение при наведении
+    box-shadow: 0 0 8px rgba(255, 97, 40, 0.5); // Тень, как у select
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(255, 97, 40, 0.5); // Акцент на фокусе
+  }
+}
+:global(.wrapper) {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

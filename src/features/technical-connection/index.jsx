@@ -1,11 +1,11 @@
-import { useState } from "react";
-import style from "./index.module.scss";
-import { TitlePage, Wrapper } from "../../shared/UI";
+import { useState } from 'react';
+import style from './index.module.scss';
+import { TitlePage, Wrapper } from '../../shared/UI';
 
 export function TechnologicalConnection() {
     return (
         <Wrapper>
-            <TitlePage title={"Технологическое присоединение к ТС и ГВС"} />
+            <TitlePage title={'Технологическое присоединение к ТС и ГВС'} />
 
             <div className={style.content}>
                 <div className={style.section}>
@@ -13,7 +13,7 @@ export function TechnologicalConnection() {
                         Протяженность тепловых сетей ООО «УК «ТЕПЛОКОМПЛЕКС» составляет <strong>645 км</strong>.
                     </p>
                     <p className={style.text}>
-                        По вопросам подключения, присоединения к сетям, обращайтесь по телефону:{" "}
+                        По вопросам подключения, присоединения к сетям, обращайтесь по телефону:{' '}
                         <a href="tel:+73439379828" className={style.phoneLink}>
                             +7 (343) 937-98-28
                         </a>
@@ -68,7 +68,7 @@ export function TechnologicalConnection() {
                 <div className={style.section}>
                     <h2 className={style.subtitle}>Подача заявки</h2>
                     <p className={style.text}>
-                        Вы можете подать заявку на подключение в электронной форме, заполнив бланк и направив его по адресу:{" "}
+                        Вы можете подать заявку на подключение в электронной форме, заполнив бланк и направив его по адресу:{' '}
                         <a href="mailto:info@uk-teplo.ru" className={style.emailLink}>
                             info@uk-teplo.ru
                         </a>
