@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import style from './index.module.scss';
-import { TitlePage, Wrapper } from '../../shared/UI';
+import {Content, TitlePage, Wrapper} from '../../shared/UI';
 
 const documents = [
     {
@@ -1282,7 +1282,7 @@ export function DisclosureInformation() {
     return (
         <Wrapper>
             <TitlePage title={'Раскрытие информации'} />
-            <div className={style.content}>
+            <Content>
                 <div className={style.searchWrapper}>
                     <input
                         type="text"
@@ -1346,7 +1346,7 @@ export function DisclosureInformation() {
                         <p className={style.noResults}>Ничего не найдено</p>
                     )}
                 </ul>
-            </div>
+            </Content>
         </Wrapper>
     );
 }

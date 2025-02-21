@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import style from './index.module.scss';
-import { TitlePage, Wrapper } from '../../shared/UI';
+import {Content, TitlePage, Wrapper} from '../../shared/UI';
 
 export function OccupationalSafety() {
     return (
         <Wrapper>
             <TitlePage title={'Охрана труда'} />
-            <div className={style.content}>
+            <Content>
                 <h2 className={style.subtitle}>Специальная оценка условий труда (СУОТ)</h2>
 
                 <ul className={style.documentList}>
@@ -21,7 +21,7 @@ export function OccupationalSafety() {
                         </a>
                     </li>
                 </ul>
-            </div>
+            </Content>
         </Wrapper>
     );
 }

@@ -1,6 +1,6 @@
 import style from './index.module.scss';
 import React, { useState } from 'react';
-import { TitlePage, Wrapper } from '../../shared/UI';
+import {Content, TitlePage, Wrapper} from '../../shared/UI';
 
 export function ReadyReports() {
     const reports = [
@@ -27,7 +27,7 @@ export function ReadyReports() {
     return (
         <Wrapper>
             <TitlePage title={'Бухгалтерская отчетность'} />
-            <div className={style.content}>
+            <Content>
                 <input
                     type="text"
                     placeholder="Поиск по годам..."
@@ -48,7 +48,7 @@ export function ReadyReports() {
                         <li className={style.noResults}>Ничего не найдено</li>
                     )}
                 </ul>
-            </div>
+            </Content>
         </Wrapper>
     );
 }

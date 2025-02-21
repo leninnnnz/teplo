@@ -1,11 +1,11 @@
 import style from './index.module.scss';
-import { TitlePage, Wrapper } from '../../shared/UI';
+import {Content, TitlePage, Wrapper} from '../../shared/UI';
 
 export function ImportantInformation() {
     return (
         <Wrapper>
             <TitlePage title={'Важная информация'} />
-            <div className={style.content}>
+            <Content>
                 <p className={style.intro}>Уважаемые абоненты!</p>
 
                 <p className={style.mainText}>
@@ -70,7 +70,7 @@ export function ImportantInformation() {
                     Приносим извинения за временные неудобства,
                     <br /> с уважением, ООО «УК «ТЕПЛОКОМПЛЕКС»
                 </p>
-            </div>
+            </Content>
         </Wrapper>
     );
 }

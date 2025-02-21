@@ -1,12 +1,11 @@
 import style from './index.module.scss';
-import { TitlePage, Wrapper } from '../../shared/UI';
+import {Content, TitlePage, Wrapper} from '../../shared/UI';
 
 export function FraudstersStop() {
     return (
         <Wrapper>
             <TitlePage title={'Профилактика мошеннических действий'} />
-
-            <div className={style.content}>
+                <Content>
                 <div className={style.videoWrapper}>
                     <iframe
                         width="100%"
@@ -24,7 +23,7 @@ export function FraudstersStop() {
                     проверяйте информацию перед тем, как переводить деньги или сообщать свои личные данные. Если у вас есть сомнения,
                     свяжитесь с нашей компанией по официальным телефонам.
                 </p>
-            </div>
+            </Content>
         </Wrapper>
     );
 }

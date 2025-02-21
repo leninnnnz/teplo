@@ -1,11 +1,11 @@
 import style from './index.module.scss';
-import { TitlePage, Wrapper } from '../../shared/UI';
+import { TitlePage, Wrapper, Content } from '../../shared/UI';
 
 export function BusinessScope() {
     return (
         <Wrapper>
             <TitlePage title={'Сфера деятельности'} />
-            <div className={style.content}>
+            <Content>
                 <section className={style.section}>
                     <h2 className={style.subtitle}>Производство, передача и распределение пара и горячей воды (тепловой энергии)</h2>
                     <p className={style.text}>
@@ -76,7 +76,7 @@ export function BusinessScope() {
                         </li>
                     </ul>
                 </section>
-            </div>
+            </Content>
         </Wrapper>
     );
 }

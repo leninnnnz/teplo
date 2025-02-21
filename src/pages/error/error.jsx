@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import style from './index.module.scss';
-import {Wrapper} from "../../shared/UI";
+import {Content, Wrapper} from "../../shared/UI";
 import {Link} from "react-router-dom";
 
 export function Error() {
@@ -15,7 +15,7 @@ export function Error() {
 
     return (
         <Wrapper>
-            <div className={style.content}>
+            <Content>
                 <h1 className={style.title}>404</h1>
                 <p className={style.message}>Упс! Страница не найдена.</p>
                 <p className={style.description}>
@@ -24,7 +24,7 @@ export function Error() {
                 <Link to='/' ref={buttonRef} className={style.button}>
                     Вернуться на главную
                 </Link>
-            </div>
+            </Content>
         </Wrapper>
     );
 }

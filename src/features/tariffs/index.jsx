@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import style from './index.module.scss';
-import { TitlePage, Wrapper } from '../../shared/UI';
+import {Content, TitlePage, Wrapper} from '../../shared/UI';
 
 // Данные о тарифах
 const tariffs = [
@@ -372,7 +372,7 @@ export function TariffsInformation() {
     return (
         <Wrapper>
             <TitlePage title={'Тарифы'} />
-            <div className={style.content}>
+            <Content>
                 {/* Поле поиска */}
                 <div className={style.searchWrapper}>
                     <input
@@ -421,7 +421,7 @@ export function TariffsInformation() {
                         <p className={style.noResults}>Ничего не найдено</p>
                     )}
                 </ul>
-            </div>
+            </Content>
         </Wrapper>
     );
 }

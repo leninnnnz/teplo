@@ -1,11 +1,11 @@
 import style from './index.module.scss';
-import { TitlePage, Wrapper } from '../../shared/UI';
+import {Content, TitlePage, Wrapper} from '../../shared/UI';
 
 export function PartnersInformation() {
     return (
         <Wrapper>
             <TitlePage title={'Партнеры'} />
-            <div className={style.content}>
+            <Content>
                 <div className={style.partnerInfo}>
                     <section className={style.partner}>
                         <h2 className={style.subtitle}>Канова и партнёры</h2>
@@ -48,7 +48,7 @@ export function PartnersInformation() {
                         <img src="/images/partners.png" alt="Логотип Канова и партнёры" className={style.logo} />
                     </div>
                 </div>
-            </div>
+            </Content>
         </Wrapper>
     );
 }

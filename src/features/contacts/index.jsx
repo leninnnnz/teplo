@@ -1,11 +1,11 @@
 import style from './index.module.scss';
-import { TitlePage, Wrapper } from '../../shared/UI';
+import {Content, TitlePage, Wrapper} from '../../shared/UI';
 
 export function ContactsInformation() {
     return (
         <Wrapper>
             <TitlePage title={'Контактная информация'} />
-            <div className={style.content}>
+            <Content>
                 <section className={style.section}>
                     <h2 className={style.subtitle}>Руководство</h2>
                     <p className={style.text}>
@@ -126,7 +126,7 @@ export function ContactsInformation() {
                         <span className={style.boldText}>БИК:</span> 046577975
                     </p>
                 </section>
-            </div>
+            </Content>
         </Wrapper>
     );
 }

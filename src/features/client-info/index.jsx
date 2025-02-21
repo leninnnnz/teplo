@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import style from './index.module.scss';
-import { TitlePage, Wrapper } from '../../shared/UI';
+import {Content, TitlePage, Wrapper} from '../../shared/UI';
 
 export function ClientInformation() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -29,7 +29,7 @@ export function ClientInformation() {
     return (
         <Wrapper>
             <TitlePage title={'Информация для клиентов'} />
-            <div className={style.content}>
+            <Content>
                 <section className={style.section}>
                     <h2 className={style.subtitle}>
                         Законодательство в части присоединения к системам теплоснабжения и (или) горячего водоснабжения, системам холодного
@@ -78,7 +78,7 @@ export function ClientInformation() {
                         )}
                     </ul>
                 </section>
-            </div>
+            </Content>
         </Wrapper>
     );
 }

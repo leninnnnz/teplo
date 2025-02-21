@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import style from './index.module.scss';
-import { TitlePage, Wrapper } from '../../shared/UI';
+import {Content, TitlePage, Wrapper} from '../../shared/UI';
 
 export function TechnologicalConnection() {
     return (
         <Wrapper>
             <TitlePage title={'Технологическое присоединение к ТС и ГВС'} />
-
-            <div className={style.content}>
+            <Content>
                 <div className={style.section}>
                     <p className={style.text}>
                         Протяженность тепловых сетей ООО «УК «ТЕПЛОКОМПЛЕКС» составляет <strong>645 км</strong>.
@@ -91,7 +90,7 @@ export function TechnologicalConnection() {
                         </li>
                     </ul>
                 </div>
-            </div>
+            </Content>
         </Wrapper>
     );
 }
