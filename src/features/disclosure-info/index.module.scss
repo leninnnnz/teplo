@@ -12,13 +12,21 @@
     outline: none;
     transition: border-color 0.3s ease;
 
-    &:hover,
+    &:hover {
+        border-color: rgb(255, 97, 40);
+    }
+
     &:focus {
         border-color: rgb(255, 97, 40);
     }
 
-    &::placeholder {
+    ::placeholder {
         color: #bbb;
+    }
+
+    @media (max-width: 700px) {
+        font-size: 14px;
+        padding: 8px;
     }
 }
 
@@ -29,12 +37,20 @@
     margin-top: 10px;
     margin-bottom: 20px;
     flex-wrap: nowrap;
+
+    @media (max-width: 600px) {
+       flex-direction: column;
+    }
 }
 
 .selectWrapper {
     position: relative;
     width: 100%;
     max-width: 220px;
+
+    @media (max-width: 600px) {
+        max-width: unset;
+    }
 }
 
 .select {
@@ -58,6 +74,12 @@
         border-color: rgb(255, 97, 40);
         box-shadow: 0 0 8px rgba(255, 97, 40, 0.5);
         outline: none;
+    }
+
+    @media (max-width: 700px) {
+        font-size: 14px;
+        padding: 10px;
+        width: 100%;
     }
 }
 
@@ -95,6 +117,11 @@
         &:hover {
             color: rgb(255, 97, 40);
             border-bottom: 2px solid rgb(255, 97, 40);
+        }
+
+        @media (max-width: 700px) {
+            font-size: 16px;
+            padding: 8px;
         }
     }
 }

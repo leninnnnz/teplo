@@ -15,4 +15,10 @@
         bottom: -10px;
         left: 0;
     }
+    @media (max-width: 800px) {
+        font-size: 28px;
+    }
+    @media (max-width: 600px) {
+        font-size: 26px;
+    }
 }

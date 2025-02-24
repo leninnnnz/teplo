@@ -13,6 +13,10 @@
         line-height: 24px;
         text-align: justify;
 
+        @media (max-width: 700px) {
+            font-size: 16px;
+        }
+
         .bullet {
             display: inline-block;
             width: 8px;
@@ -46,6 +50,11 @@
     ::placeholder {
         color: #bbb;
     }
+
+    @media (max-width: 700px) {
+        font-size: 14px;
+        padding: 8px;
+    }
 }
 
 .contractList {
@@ -57,6 +66,7 @@
         color: #333;
         text-decoration: none;
         padding: 10px;
+
         display: block;
         transition: color 0.3s ease;
         position: relative;
@@ -65,6 +75,11 @@
         &:hover {
             color: rgb(255, 97, 40);
             border-bottom: 2px solid rgb(255, 97, 40);
+        }
+
+        @media (max-width: 700px) {
+            font-size: 16px;
+            padding: 8px;
         }
     }
 }

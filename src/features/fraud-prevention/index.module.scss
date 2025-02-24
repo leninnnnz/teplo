@@ -1,7 +1,7 @@
 .videoWrapper {
     margin-bottom: 20px;
     overflow: hidden;
-    border-radius: 8px;
+    border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -12,20 +12,13 @@
     text-align: justify;
     font-weight: normal;
     line-height: 1.5;
+
+    @media (max-width: 700px) {
+        font-size: 16px;
+    }
 }
 
 @media (max-width: 768px) {
-    .title {
-        font-size: 28px;
-    }
-
-    .content {
-        padding: 15px;
-    }
-
-    .text {
-        font-size: 18px;
-    }
 
     .videoWrapper iframe {
         height: 250px;

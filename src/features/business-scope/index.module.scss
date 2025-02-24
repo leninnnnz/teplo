@@ -6,6 +6,10 @@
     font-size: 18px;
     color: #333;
     margin-bottom: 12px;
+
+    @media (max-width: 700px) {
+        font-size: 16px;
+    }
 }
 
 .link {
@@ -21,6 +25,11 @@
     &:hover {
         color: rgb(255, 97, 40);
         border-bottom: 2px solid rgb(255, 97, 40);
+    }
+
+    @media (max-width: 700px) {
+        font-size: 16px;
+        padding: 8px;
     }
 }
 
@@ -44,6 +53,11 @@
         color: rgb(255, 97, 40);
         border-bottom: 2px solid rgb(255, 97, 40);
     }
+
+    @media (max-width: 700px) {
+        font-size: 16px;
+        padding: 8px;
+    }
 }
 
 .addressLink {
@@ -58,5 +72,10 @@
 
     &:hover {
         color: #333;
+    }
+
+    @media (max-width: 700px) {
+        font-size: 16px;
+        padding: 8px;
     }
 }

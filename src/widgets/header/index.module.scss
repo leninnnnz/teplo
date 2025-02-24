@@ -41,8 +41,11 @@
         color: #333;
     }
 
+    @media (max-width: 700px) {
+        font-size: 32px;
+    }
     @media (max-width: 600px) {
-        font-size: 24px;
+        font-size: 28px;
     }
 
     @media (max-width: 400px) {
@@ -111,7 +114,7 @@
         background: darken(rgb(255, 97, 40), 20%);
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 700px) {
         font-size: 14px;
         padding: 8px 16px;
     }
@@ -180,6 +183,10 @@
         color: #999;
         transition: transform 0.3s ease;
     }
+
+    @media (max-width: 700px) {
+        font-size: 16px;
+    }
 }
 
 .navigationCategory:hover .categoryTitle::after {
@@ -234,6 +241,13 @@
     margin-top: 30px;
     position: relative;
     z-index: 1;
+
+    @media (max-width: 800px) {
+        padding: 30px 0 20px;
+    }
+    @media (max-width: 600px) {
+        padding: 20px 0 10px;
+    }
 }
 
 .imageBanner::after {
