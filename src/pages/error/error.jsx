@@ -15,7 +15,7 @@ export function Error() {
 
     return (
         <Wrapper>
-            <Content>
+            <Content className={style.center}>
                 <h1 className={style.title}>404</h1>
                 <p className={style.message}>Упс! Страница не найдена.</p>
                 <p className={style.description}>
