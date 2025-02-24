@@ -1,11 +1,11 @@
 import style from './index.module.scss';
-import {Content, TitlePage, Wrapper} from '../../shared/UI';
+import { Content, TitlePage, Wrapper } from '../../shared/UI';
 
 export function FraudstersStop() {
     return (
         <Wrapper>
             <TitlePage title={'Профилактика мошеннических действий'} />
-                <Content>
+            <Content>
                 <div className={style.videoWrapper}>
                     <iframe
                         width="100%"

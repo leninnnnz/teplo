@@ -1,5 +1,5 @@
 import style from './index.module.scss';
-import {TitlePage, Wrapper, Content, SubtitlePage} from '../../shared/UI';
+import { TitlePage, Wrapper, Content, SubtitlePage } from '../../shared/UI';
 
 export function BusinessScope() {
     return (
@@ -8,20 +8,14 @@ export function BusinessScope() {
             <Content>
                 <section className={style.section}>
                     <SubtitlePage subtitle={'Производство, передача и распределение пара и горячей воды (тепловой энергии)'} />
-                    <p className={style.text}>
-                        Протяженность тепловых сетей: 645 км
-                    </p>
-                    <p className={style.text}>
-                        Количество тепловых пунктов: 18
-                    </p>
+                    <p className={style.text}>Протяженность тепловых сетей: 645 км</p>
+                    <p className={style.text}>Количество тепловых пунктов: 18</p>
                     <p className={style.text}>
                         <a href="#" className={style.link}>
                             Местонахождение тепловых пунктов
                         </a>
                     </p>
-                    <p className={style.text}>
-                        Персонал на 01.12.2024 г.: 217 человек
-                    </p>
+                    <p className={style.text}>Персонал на 01.12.2024 г.: 217 человек</p>
                     <p className={style.text}>
                         <a href="#" className={style.link}>
                             Свидетельство СРО

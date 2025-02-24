@@ -1,5 +1,5 @@
 import style from './index.module.scss';
-import {Content, TitlePage, Wrapper} from '../../shared/UI';
+import { Content, TitlePage, Wrapper } from '../../shared/UI';
 
 export function ImportantInformation() {
     return (

@@ -1,5 +1,5 @@
 import style from './index.module.scss';
-import {Content, TitlePage, Wrapper} from '../../shared/UI';
+import { Content, TitlePage, Wrapper } from '../../shared/UI';
 
 const purchases = [
     { name: 'Закупка люков 18.09.2018', link: '#' },

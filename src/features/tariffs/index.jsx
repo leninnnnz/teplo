@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import style from './index.module.scss';
-import {Content, TitlePage, Wrapper} from '../../shared/UI';
+import { Content, TitlePage, Wrapper } from '../../shared/UI';
 
 // Данные о тарифах
 const tariffs = [
@@ -402,7 +402,6 @@ export function TariffsInformation() {
                         </select>
                     </div>
                 </div>
-
 
                 <ul className={style.tariffList}>
                     {filteredTariffs.length > 0 ? (

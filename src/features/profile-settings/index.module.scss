@@ -1,0 +1,161 @@
+.settingsWrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+
+.title {
+  font-size: 32px;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.form {
+  background-color: white;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(255, 97, 40, 0.2);
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 18px;
+  color: #444;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.input {
+  padding: 12px;
+  font-size: 16px;
+  color: #444;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    border-color: rgb(255, 97, 40);
+  }
+}
+
+.fileInput {
+  padding: 8px 0;
+}
+
+.avatarPreview {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-top: 10px;
+  align-self: center;
+}
+
+.themeOptions {
+  display: flex;
+  gap: 20px;
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    color: #444;
+  }
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.saveButton, .skipButton {
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  flex: 1;
+}
+
+.saveButton {
+  background-color: rgb(255, 97, 40);
+  color: white;
+
+  &:hover {
+    background-color: #333;
+    transform: scale(1.05);
+  }
+}
+
+.skipButton {
+  background-color: #ddd;
+  color: #444;
+
+  &:hover {
+    background-color: #bbb;
+    transform: scale(1.05);
+  }
+}
+
+@media (max-width: 700px) {
+  .settingsWrapper {
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .form {
+    padding: 20px;
+  }
+
+  .label {
+    font-size: 16px;
+  }
+
+  .input {
+    font-size: 14px;
+  }
+
+  .saveButton, .skipButton {
+    font-size: 14px;
+  }
+
+  .avatarPreview {
+    width: 80px;
+    height: 80px;
+  }
+}

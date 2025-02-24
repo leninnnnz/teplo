@@ -1,6 +1,6 @@
 import style from './index.module.scss';
 import React, { useState } from 'react';
-import {Content, TitlePage, Wrapper} from '../../shared/UI';
+import { Content, TitlePage, Wrapper } from '../../shared/UI';
 
 export function ReadyReports() {
     const reports = [

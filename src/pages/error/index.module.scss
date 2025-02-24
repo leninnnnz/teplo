@@ -1,80 +1,80 @@
 .center {
-  text-align: center;
+    text-align: center;
 }
 
 .title {
-  font-size: 96px;
-  font-weight: bold;
-  color: rgb(255, 97, 40);
-  margin-bottom: 20px;
+    font-size: 96px;
+    font-weight: bold;
+    color: rgb(255, 97, 40);
+    margin-bottom: 20px;
 
-  @media (max-width: 800px) {
-    font-size: 78px;
-  }
+    @media (max-width: 800px) {
+        font-size: 78px;
+    }
 
-  @media (max-width: 500px) {
-    font-size: 64px;
-  }
+    @media (max-width: 500px) {
+        font-size: 64px;
+    }
 }
 
 .message {
-  font-size: 36px;
-  color: #333;
-  margin-bottom: 10px;
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 10px;
 
-  @media (max-width: 800px) {
-    font-size: 26px;
-  }
+    @media (max-width: 800px) {
+        font-size: 26px;
+    }
 
-  @media (max-width: 500px) {
-    font-size: 24px;
-  }
+    @media (max-width: 500px) {
+        font-size: 24px;
+    }
 }
 
 .description {
-  font-size: 20px;
-  color: #6c757d;
-  margin-bottom: 30px;
+    font-size: 20px;
+    color: #6c757d;
+    margin-bottom: 30px;
 
-  @media (max-width: 800px) {
-    font-size: 18px;
-  }
+    @media (max-width: 800px) {
+        font-size: 18px;
+    }
 
-  @media (max-width: 500px) {
-    font-size: 16px;
-  }
+    @media (max-width: 500px) {
+        font-size: 16px;
+    }
 }
 
 .button {
-  display: inline-block;
-  padding: 15px 30px;
-  font-size: 16px;
-  color: #fff;
-  background-color: rgb(255, 97, 40);
-  border-radius: 25px;
-  text-decoration: none;
-  transition:
-          background-color 0.3s ease,
-          box-shadow 0.3s ease;
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: 16px;
+    color: #fff;
+    background-color: rgb(255, 97, 40);
+    border-radius: 25px;
+    text-decoration: none;
+    transition:
+        background-color 0.3s ease,
+        box-shadow 0.3s ease;
 
-  &:hover {
-    background-color: darken(rgb(255, 97, 40), 10%);
-    box-shadow: 0 0 8px rgba(255, 97, 40, 0.5);
-  }
+    &:hover {
+        background-color: darken(rgb(255, 97, 40), 10%);
+        box-shadow: 0 0 8px rgba(255, 97, 40, 0.5);
+    }
 
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 8px rgba(255, 97, 40, 0.5);
-  }
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 8px rgba(255, 97, 40, 0.5);
+    }
 
-  @media (max-width: 700px) {
-    font-size: 14px;
-    padding: 10px 25px;
-  }
+    @media (max-width: 700px) {
+        font-size: 14px;
+        padding: 10px 25px;
+    }
 }
 :global(.wrapper) {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

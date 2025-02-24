@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import style from './index.module.scss';
-import {Content, SubtitlePage, TitlePage, Wrapper} from '../../shared/UI';
+import { Content, SubtitlePage, TitlePage, Wrapper } from '../../shared/UI';
 
 export function OccupationalSafety() {
     return (

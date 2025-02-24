@@ -1,22 +1,22 @@
 .subtitle {
-  font-size: 20px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 20px;
-  position: relative;
-  padding-left: 12px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+    position: relative;
+    padding-left: 12px;
 
-  &::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 3px;
-    background-color: rgb(255, 97, 40);
-  }
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 3px;
+        background-color: rgb(255, 97, 40);
+    }
 
-  @media (max-width: 700px) {
-    font-size: 18px;
-  }
+    @media (max-width: 700px) {
+        font-size: 18px;
+    }
 }

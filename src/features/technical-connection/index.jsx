@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import style from './index.module.scss';
-import {Content, SubtitlePage, TitlePage, Wrapper} from '../../shared/UI';
+import { Content, SubtitlePage, TitlePage, Wrapper } from '../../shared/UI';
 
 export function TechnologicalConnection() {
     return (
@@ -8,18 +8,14 @@ export function TechnologicalConnection() {
             <TitlePage title={'Технологическое присоединение к ТС и ГВС'} />
             <Content>
                 <div className={style.section}>
-                    <p className={style.text}>
-                        Протяженность тепловых сетей ООО «УК «ТЕПЛОКОМПЛЕКС» составляет 645 км.
-                    </p>
-                    <p className={style.text}>
-                        По вопросам подключения, присоединения к сетям, обращайтесь по телефону:{' '}
-                    </p>
+                    <p className={style.text}>Протяженность тепловых сетей ООО «УК «ТЕПЛОКОМПЛЕКС» составляет 645 км.</p>
+                    <p className={style.text}>По вопросам подключения, присоединения к сетям, обращайтесь по телефону: </p>
                     <a href="tel:+73439379828" className={style.phoneLink}>
                         +7 (343) 937-98-28
                     </a>
                 </div>
                 <div className={style.section}>
-                    <SubtitlePage subtitle={'Административные регламенты'}/>
+                    <SubtitlePage subtitle={'Административные регламенты'} />
                     <ul className={style.documentList}>
                         <li>
                             <a href="#" target="_blank" className={style.documentLink}>

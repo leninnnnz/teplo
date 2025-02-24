@@ -6,32 +6,32 @@ export function Header() {
     const [activeCategory, setActiveCategory] = useState(null);
     const navigate = useNavigate();
     const location = useLocation();
+    const menuRef = useRef(null);
 
-    const menuRef = useRef(null); // Ссылка на меню
+    // Проверяем, авторизован ли пользователь
+    const isAuthenticated = localStorage.getItem('isProfileSet') === 'true';
+
+    // Определяем, находится ли пользователь в личном кабинете
+    const isInCabinet = ['/profile-settings', '/my-applications'].includes(location.pathname);
 
     const handleCategoryToggle = (category) => {
         setActiveCategory((prevCategory) => (prevCategory === category ? null : category));
     };
 
-    // Обработчик клика по пункту меню
     const handleItemClick = (path) => {
-        setActiveCategory(null); // Закрыть меню
-        navigate(path); // Перейти по ссылке
+        setActiveCategory(null);
+        navigate(path);
     };
 
-    // Закрытие подменю при клике вне меню
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (menuRef.current && !menuRef.current.contains(event.target)) {
-                setActiveCategory(null); // Закрыть меню, если клик был вне его
+                setActiveCategory(null);
             }
         };
 
         document.addEventListener('click', handleClickOutside);
-
-        return () => {
-            document.removeEventListener('click', handleClickOutside); // Очистка при размонтировании
-        };
+        return () => document.removeEventListener('click', handleClickOutside);
     }, []);
 
     const navLinks = [
@@ -72,7 +72,7 @@ export function Header() {
             <div className={style.headerContainer}>
                 <div className={style.logoWrapper}>
                     <p
-                        className={`${style.logoText} ${activeCategory === '/' ? style.activeLink : ''}`}
+                        className={`${style.logoText} ${location.pathname === '/' ? style.activeLink : ''}`}
                         onClick={() => handleItemClick('/')}
                     >
                         ООО "УК "ТЕПЛОКОМПЛЕКС"
@@ -87,8 +87,11 @@ export function Header() {
                 </div>
 
                 <div className={style.loginWrapper}>
-                    <button className={style.loginButton} onClick={() => handleItemClick('/login')}>
-                        Войти
+                    <button
+                        className={style.loginButton}
+                        onClick={() => handleItemClick(isAuthenticated ? '/my-applications' : '/authorization')}
+                    >
+                        {isAuthenticated ? 'Личный кабинет' : 'Войти'}
                     </button>
                 </div>
             </div>
@@ -118,9 +121,11 @@ export function Header() {
                     </div>
                 ))}
             </nav>
-            <div className={style.imageBanner}>
-                <img src="/images/img.png" alt="О компании" />
-            </div>
+            {!isInCabinet && (
+                <div className={style.imageBanner}>
+                    <img src="/images/img.png" alt="О компании" />
+                </div>
+            )}
         </header>
     );
 }

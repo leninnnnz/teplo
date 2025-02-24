@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import style from './index.module.scss';
-import {Content, SubtitlePage, TitlePage, Wrapper} from '../../shared/UI';
+import { Content, SubtitlePage, TitlePage, Wrapper } from '../../shared/UI';
 
 export function ClientInformation() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -31,7 +31,11 @@ export function ClientInformation() {
             <TitlePage title={'Информация для клиентов'} />
             <Content>
                 <section className={style.section}>
-                    <SubtitlePage subtitle={'Законодательство в части присоединения к системам теплоснабжения и (или) горячего водоснабжения, системам холодного водоснабжения и водоотведения:'} />
+                    <SubtitlePage
+                        subtitle={
+                            'Законодательство в части присоединения к системам теплоснабжения и (или) горячего водоснабжения, системам холодного водоснабжения и водоотведения:'
+                        }
+                    />
                     <ul className={style.legislationList}>
                         {[
                             'Федеральный закон №190 «О теплоснабжении»',

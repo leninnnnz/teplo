@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import style from './index.module.scss';
-import {Content, TitlePage, Wrapper} from '../../shared/UI';
+import { Content, TitlePage, Wrapper } from '../../shared/UI';
 
 const documents = [
     {
