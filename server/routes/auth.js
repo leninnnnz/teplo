@@ -6,12 +6,12 @@ const User = require('../models/User');
 const router = express.Router();
 
 const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
+    host: 'smtp.yandex.ru',
     port: 587,
-    secure: false, // Используем TLS
+    secure: false,
     auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        user: 'semen.fedorov3005@yandex.ru',
+        pass: 'pfsghjajzybfhttu',
     },
 });
 
