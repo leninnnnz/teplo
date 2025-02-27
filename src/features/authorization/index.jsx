@@ -12,13 +12,27 @@ export function Authorization() {
     const [code, setCode] = useState('');
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
         if (isLogin) {
-            console.log('Login - Email:', email, 'Password:', password);
-            localStorage.setItem('isProfileSet', 'true'); // Устанавливаем при входе
-            const isProfileSet = localStorage.getItem('isProfileSet') === 'true';
-            navigate(isProfileSet ? '/my-applications' : '/profile-settings');
+            try {
+                const response = await fetch('http://localhost:5001/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password }),
+                });
+                const data = await response.json();
+
+                if (!response.ok) throw new Error(data.message || 'Ошибка входа');
+
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('isProfileSet', 'true');
+                const isProfileSet = localStorage.getItem('isProfileSet') === 'true';
+                navigate(isProfileSet ? '/my-applications' : '/profile-settings');
+            } catch (error) {
+                alert(error.message);
+            }
         } else if (!isCodeSent) {
             if (password !== confirmPassword) {
                 alert('Пароли не совпадают!');
@@ -28,16 +42,37 @@ export function Authorization() {
                 alert('Пароль должен быть сложным (буквы, цифры, спецсимволы, минимум 8 символов)!');
                 return;
             }
-            console.log('Register - Email:', email, 'Password:', password);
-            console.log('Код отправлен на:', email, 'Пример кода: 123456');
-            setIsCodeSent(true);
+
+            try {
+                const response = await fetch('http://localhost:5001/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password }),
+                });
+                const data = await response.json();
+
+                if (!response.ok) throw new Error(data.message || 'Ошибка регистрации');
+
+                setIsCodeSent(true);
+            } catch (error) {
+                alert(error.message);
+            }
         } else {
-            if (code === '123456') {
-                console.log('Код верный, регистрация завершена');
-                localStorage.setItem('isProfileSet', 'true');
+            try {
+                const response = await fetch('http://localhost:5001/api/auth/verify-code', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, code }),
+                });
+                const data = await response.json();
+
+                if (!response.ok) throw new Error(data.message || 'Ошибка подтверждения');
+
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('isProfileSet', 'false');
                 navigate('/profile-settings');
-            } else {
-                alert('Неверный код!');
+            } catch (error) {
+                alert(error.message);
             }
         }
     };
@@ -74,7 +109,13 @@ export function Authorization() {
                                 placeholder={'example@mail.com'}
                                 title={'Электронная почта'}
                             />
-                            <UIInputPassword onChange={setPassword} value={password} required={true} title={'Пароль'} />
+                            <UIInputPassword
+                                onChange={setPassword}
+                                value={password}
+                                required={true}
+                                title={'Пароль'}
+                                isConfirmPassword={false}
+                            />
 
                             {!isLogin && (
                                 <UIInputPassword
@@ -82,6 +123,7 @@ export function Authorization() {
                                     value={confirmPassword}
                                     required={true}
                                     title={'Подтверждение пароля'}
+                                    isConfirmPassword={true}
                                 />
                             )}
                             <button type="submit" className={style.submitButton}>
@@ -107,7 +149,7 @@ export function Authorization() {
                                 onChange={(value) => setCode(value)}
                                 required={true}
                                 title={'Код подтверждения'}
-                                placeholder={'"123456"'}
+                                placeholder={'123456'}
                                 maxLength={'6'}
                             />
                             <button type="submit" className={style.submitButton}>

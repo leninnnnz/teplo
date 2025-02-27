@@ -25,7 +25,7 @@ export function UIInput({ type = 'text', value, onChange, classNames, placeholde
     );
 }
 
-export function UIInputPassword({ value, onChange, classNames, required, title }) {
+export function UIInputPassword({ value, onChange, classNames, required, title, isConfirmPassword = false }) {
     const [isOpen, setIsOpen] = useState(false);
     const [passwordStrength, setPasswordStrength] = useState('weak');
 
@@ -46,7 +46,7 @@ export function UIInputPassword({ value, onChange, classNames, required, title }
                     id="password"
                     value={value}
                     onChange={(e) => handlePasswordChange(e.target.value)}
-                    className={`${style.input} ${style[passwordStrength]} ${classNames}`}
+                    className={`${style.input} ${isConfirmPassword && style[passwordStrength]} ${classNames}`}
                     placeholder="••••••••"
                     required={required}
                 />
@@ -54,10 +54,14 @@ export function UIInputPassword({ value, onChange, classNames, required, title }
                     {isOpen ? <IconEyeOff /> : <IconEye />}
                 </button>
             </div>
-            <div className={style.passwordHint}>
-                <span className={`${style.strengthMessage} ${style[passwordStrength]}`}>{getStrengthMessage(passwordStrength, value)}</span>
-                <span className={style.hintText}>Используйте буквы, цифры и специальные символы для надёжного пароля</span>
-            </div>
+            {isConfirmPassword && (
+                <div className={style.passwordHint}>
+                    <span className={`${style.strengthMessage} ${style[passwordStrength]}`}>
+                        {getStrengthMessage(passwordStrength, value)}
+                    </span>
+                    <span className={style.hintText}>Используйте буквы, цифры и специальные символы для надёжного пароля</span>
+                </div>
+            )}
         </div>
     );
 }
