@@ -1,0 +1,26 @@
+### Регистрация
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "leninnnnz@gmail.com",
+  "password": "Password123!"
+}
+
+### Подтверждение кода
+POST http://localhost:5000/api/auth/verify-code
+Content-Type: application/json
+
+{
+  "email": "leninnnnz@gmail.com",
+  "code": "123456"
+}
+
+### Вход
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "leninnnnz@gmail.com",
+  "password": "Password123!"
+}

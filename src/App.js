@@ -17,8 +17,8 @@ import { TechnoConnectionPage } from './pages/technical-connection';
 import { OccupationalSafetyPage } from './pages/occupational-safety';
 import { AuthorizationPage } from './pages/authorization';
 import style from './widgets/contacts/index.module.scss';
-import {ProfileSettingsPage} from "./pages/profile-settings";
-import {MyApplicationsPage} from "./pages/my-applications";
+import { ProfileSettingsPage } from './pages/profile-settings';
+import { MyApplicationsPage } from './pages/my-applications';
 
 function Layout() {
     const location = useLocation();

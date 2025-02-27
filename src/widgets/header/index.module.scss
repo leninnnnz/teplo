@@ -9,8 +9,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-right: 30px;
-    margin-left: 30px;
     padding: 20px 40px;
 
     @media (max-width: 800px) {
@@ -82,6 +80,7 @@
 }
 
 .loginWrapper {
+    position: relative; // Для позиционирования меню
     @media (max-width: 800px) {
         width: 100%;
     }
@@ -117,6 +116,33 @@
     @media (max-width: 700px) {
         font-size: 14px;
         padding: 8px 16px;
+    }
+}
+
+.cabinetMenu {
+    position: absolute;
+    top: 100%;
+    right: 0; // Выравниваем по правому краю кнопки
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+    list-style: none;
+    min-width: 180px;
+    z-index: 1000;
+}
+
+.cabinetMenuItem {
+    font-size: 14px;
+    color: #333;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #ff6128;
+        color: #fff;
     }
 }
 
@@ -206,10 +232,6 @@
     list-style: none;
     min-width: 180px;
     z-index: 10;
-}
-
-.navigationList.active {
-    display: block;
 }
 
 .navigationItem {

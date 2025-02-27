@@ -51,6 +51,7 @@ export function Authorization() {
         e.preventDefault();
         if (isLogin) {
             console.log('Login - Email:', email, 'Password:', password);
+            localStorage.setItem('isProfileSet', 'true'); // Устанавливаем при входе
             const isProfileSet = localStorage.getItem('isProfileSet') === 'true';
             navigate(isProfileSet ? '/my-applications' : '/profile-settings');
         } else if (!isCodeSent) {
@@ -68,7 +69,7 @@ export function Authorization() {
         } else {
             if (code === '123456') {
                 console.log('Код верный, регистрация завершена');
-                localStorage.setItem('isProfileSet', 'false'); // Новый пользователь
+                localStorage.setItem('isProfileSet', 'true');
                 navigate('/profile-settings');
             } else {
                 alert('Неверный код!');
@@ -90,26 +91,16 @@ export function Authorization() {
                 {!isCodeSent ? (
                     <>
                         <div className={style.tabs}>
-                            <button
-                                className={`${style.tab} ${isLogin ? style.activeTab : ''}`}
-                                onClick={() => setIsLogin(true)}
-                            >
+                            <button className={`${style.tab} ${isLogin ? style.activeTab : ''}`} onClick={() => setIsLogin(true)}>
                                 Вход
                             </button>
-                            <button
-                                className={`${style.tab} ${!isLogin ? style.activeTab : ''}`}
-                                onClick={() => setIsLogin(false)}
-                            >
+                            <button className={`${style.tab} ${!isLogin ? style.activeTab : ''}`} onClick={() => setIsLogin(false)}>
                                 Регистрация
                             </button>
                         </div>
 
-                        <h1 className={style.title}>
-                            {isLogin ? 'Вход в личный кабинет' : 'Регистрация'}
-                        </h1>
-                        <p className={style.subtitle}>
-                            {isLogin ? 'Введите свои данные для авторизации' : 'Создайте новый аккаунт'}
-                        </p>
+                        <h1 className={style.title}>{isLogin ? 'Вход в личный кабинет' : 'Регистрация'}</h1>
+                        <p className={style.subtitle}>{isLogin ? 'Введите свои данные для авторизации' : 'Создайте новый аккаунт'}</p>
 
                         <form onSubmit={handleSubmit} className={style.form}>
                             <div className={style.inputGroup}>
@@ -141,11 +132,7 @@ export function Authorization() {
                                         placeholder="••••••••"
                                         required
                                     />
-                                    <button
-                                        type="button"
-                                        className={style.showPasswordButton}
-                                        onClick={toggleShowPassword}
-                                    >
+                                    <button type="button" className={style.showPasswordButton} onClick={toggleShowPassword}>
                                         {showPassword ? <IconEyeOff /> : <IconEye />}
                                     </button>
                                 </div>
@@ -176,11 +163,7 @@ export function Authorization() {
                                             placeholder="••••••••"
                                             required
                                         />
-                                        <button
-                                            type="button"
-                                            className={style.showPasswordButton}
-                                            onClick={toggleShowConfirmPassword}
-                                        >
+                                        <button type="button" className={style.showPasswordButton} onClick={toggleShowConfirmPassword}>
                                             {showConfirmPassword ? <IconEyeOff /> : <IconEye />}
                                         </button>
                                     </div>
@@ -202,9 +185,7 @@ export function Authorization() {
                 ) : (
                     <>
                         <h1 className={style.title}>Подтверждение кода</h1>
-                        <p className={style.subtitle}>
-                            Введите 6-значный код, отправленный на {email}
-                        </p>
+                        <p className={style.subtitle}>Введите 6-значный код, отправленный на {email}</p>
                         <form onSubmit={handleSubmit} className={style.form}>
                             <div className={style.inputGroup}>
                                 <label htmlFor="code" className={style.label}>

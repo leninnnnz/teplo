@@ -1,6 +1,5 @@
-import ProfileSettings from "../../features/profile-settings";
-
+import ProfileSettings from '../../features/profile-settings';
 
 export function ProfileSettingsPage() {
-    return <ProfileSettings/>;
+    return <ProfileSettings />;
 }

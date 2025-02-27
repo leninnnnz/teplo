@@ -4,35 +4,68 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 export function Header() {
     const [activeCategory, setActiveCategory] = useState(null);
+    const [isCabinetMenuOpen, setIsCabinetMenuOpen] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('isProfileSet') === 'true');
     const navigate = useNavigate();
     const location = useLocation();
     const menuRef = useRef(null);
+    const cabinetMenuRef = useRef(null);
 
-    // Проверяем, авторизован ли пользователь
-    const isAuthenticated = localStorage.getItem('isProfileSet') === 'true';
-
-    // Определяем, находится ли пользователь в личном кабинете
     const isInCabinet = ['/profile-settings', '/my-applications'].includes(location.pathname);
+
+    useEffect(() => {
+        const handleStorageChange = () => {
+            const profileSet = localStorage.getItem('isProfileSet') === 'true';
+            console.log('Storage changed, isProfileSet:', localStorage.getItem('isProfileSet'), 'isAuthenticated:', profileSet);
+            setIsAuthenticated(profileSet);
+        };
+
+        handleStorageChange();
+        window.addEventListener('storage', handleStorageChange);
+        return () => window.removeEventListener('storage', handleStorageChange);
+    }, []);
 
     const handleCategoryToggle = (category) => {
         setActiveCategory((prevCategory) => (prevCategory === category ? null : category));
+        setIsCabinetMenuOpen(false);
     };
 
     const handleItemClick = (path) => {
         setActiveCategory(null);
+        setIsCabinetMenuOpen(false);
         navigate(path);
+    };
+
+    const handleCabinetMenuToggle = () => {
+        setIsCabinetMenuOpen((prev) => !prev);
+        setActiveCategory(null);
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem('isProfileSet');
+        setIsAuthenticated(false);
+        setIsCabinetMenuOpen(false);
+        navigate('/'); // Перенаправляем на главную страницу вместо '/authorization'
     };
 
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (menuRef.current && !menuRef.current.contains(event.target)) {
+            if (
+                menuRef.current &&
+                !menuRef.current.contains(event.target) &&
+                cabinetMenuRef.current &&
+                !cabinetMenuRef.current.contains(event.target)
+            ) {
                 setActiveCategory(null);
+                setIsCabinetMenuOpen(false);
             }
         };
 
         document.addEventListener('click', handleClickOutside);
         return () => document.removeEventListener('click', handleClickOutside);
     }, []);
+
+    console.log('Header render, isAuthenticated:', isAuthenticated);
 
     const navLinks = [
         {
@@ -67,6 +100,12 @@ export function Header() {
         },
     ];
 
+    const cabinetMenuItems = [
+        { path: '/profile-settings', label: 'Настройки пользователя' },
+        { path: '/my-applications', label: 'Мои заявления' },
+        { action: handleLogout, label: 'Выйти' },
+    ];
+
     return (
         <header className={style.headerWrapper}>
             <div className={style.headerContainer}>
@@ -86,13 +125,26 @@ export function Header() {
                     </a>
                 </div>
 
-                <div className={style.loginWrapper}>
+                <div className={style.loginWrapper} ref={cabinetMenuRef}>
                     <button
                         className={style.loginButton}
-                        onClick={() => handleItemClick(isAuthenticated ? '/my-applications' : '/authorization')}
+                        onClick={isAuthenticated ? handleCabinetMenuToggle : () => handleItemClick('/authorization')}
                     >
                         {isAuthenticated ? 'Личный кабинет' : 'Войти'}
                     </button>
+                    {isAuthenticated && isCabinetMenuOpen && (
+                        <ul className={style.cabinetMenu}>
+                            {cabinetMenuItems.map((item, index) => (
+                                <li
+                                    key={index}
+                                    className={style.cabinetMenuItem}
+                                    onClick={item.action ? item.action : () => handleItemClick(item.path)}
+                                >
+                                    {item.label}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
                 </div>
             </div>
 
