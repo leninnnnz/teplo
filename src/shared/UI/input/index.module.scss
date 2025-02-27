@@ -1,0 +1,103 @@
+.input {
+    padding: 12px;
+    font-size: 16px;
+    color: #444;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+
+    &:hover {
+        border-color: rgb(255, 97, 40);
+    }
+
+    &:focus {
+        border-color: rgb(255, 97, 40);
+    }
+
+    &::placeholder {
+        color: #999;
+    }
+
+    &.weak {
+        border-color: #dc3545;
+    }
+
+    &.medium {
+        border-color: rgb(255, 97, 40);
+    }
+
+    &.strong {
+        border-color: #28a745;
+    }
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.passwordWrapper {
+    position: relative;
+}
+
+.label {
+    font-size: 18px;
+    color: #444;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.showPasswordButton {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+
+    svg {
+        width: 20px;
+        height: 20px;
+        fill: rgb(255, 97, 40);
+        transition: fill 0.3s ease;
+    }
+
+    &:hover svg {
+        fill: #333;
+    }
+}
+
+.strengthMessage {
+    font-size: 14px;
+    text-align: center;
+
+    &.weak {
+        color: #dc3545;
+    }
+
+    &.medium {
+        color: rgb(255, 97, 40);
+    }
+
+    &.strong {
+        color: #28a745;
+    }
+}
+
+.hintText {
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+}
+
+.passwordHint {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
