@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 export function Header() {
     const [activeCategory, setActiveCategory] = useState(null);
     const [isCabinetMenuOpen, setIsCabinetMenuOpen] = useState(false);
-    const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('isProfileSet') === 'true');
+    const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
     const navigate = useNavigate();
     const location = useLocation();
     const menuRef = useRef(null);
@@ -43,9 +43,10 @@ export function Header() {
 
     const handleLogout = () => {
         localStorage.removeItem('isProfileSet');
+        localStorage.removeItem('token');
         setIsAuthenticated(false);
         setIsCabinetMenuOpen(false);
-        navigate('/'); // Перенаправляем на главную страницу вместо '/authorization'
+        navigate('/');
     };
 
     useEffect(() => {

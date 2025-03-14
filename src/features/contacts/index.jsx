@@ -117,10 +117,10 @@ export function ContactsInformation() {
                         <span className={style.boldText}>Банк:</span> Уральский филиал ПАО «ПРОМСВЯЗЬБАНК», г. Екатеринбург
                     </p>
                     <p className={style.text}>
-                        <span className={style.boldText}>Р/с:</span> 40702810105000005741
+                        <span className={style.boldText}>Р/с:</span> 40702810105001005741
                     </p>
                     <p className={style.text}>
-                        <span className={style.boldText}>К/с:</span> 30101810500000000975
+                        <span className={style.boldText}>К/с:</span> 30101810500100000975
                     </p>
                     <p className={style.text}>
                         <span className={style.boldText}>БИК:</span> 046577975
