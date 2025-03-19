@@ -115,8 +115,8 @@ export function Authorization() {
                                 required={true}
                                 title={'Пароль'}
                                 isConfirmPassword={false}
+                                showStrength={!isLogin} // Вкл только для "Регистрация"
                             />
-
                             {!isLogin && (
                                 <UIInputPassword
                                     onChange={(value) => setConfirmPassword(value)}
@@ -124,6 +124,7 @@ export function Authorization() {
                                     required={true}
                                     title={'Подтверждение пароля'}
                                     isConfirmPassword={true}
+                                    showStrength={false} // Выкл для подтверждения
                                 />
                             )}
                             <button type="submit" className={style.submitButton}>
