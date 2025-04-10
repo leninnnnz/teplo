@@ -1,0 +1,115 @@
+.loading,
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  font-size: 18px;
+  color: #666;
+}
+
+.controls {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.filterSelect {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #333;
+  outline: none;
+  min-width: 200px;
+}
+
+.searchInput {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  flex: 1;
+  outline: none;
+  min-width: 200px;
+}
+
+.applicationsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.applicationCard {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.cardNumber {
+  font-size: 14px;
+  color: #777;
+  font-weight: 500;
+}
+
+.cardType {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.cardBody {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardDate {
+  font-size: 14px;
+  color: #888;
+  margin: 0;
+}
+
+.statusSelect {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.statusSelect label {
+  font-size: 14px;
+  color: #333;
+}
+
+.statusDropdown {
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #333;
+  outline: none;
+}
+
+.noResults {
+  font-size: 16px;
+  color: #555;
+  text-align: center;
+  padding: 20px;
+}

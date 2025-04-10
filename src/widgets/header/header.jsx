@@ -11,7 +11,12 @@ export function Header() {
     const menuRef = useRef(null);
     const cabinetMenuRef = useRef(null);
 
-    const isInCabinet = ['/profile-settings', '/my-applications'].includes(location.pathname);
+    const isInCabinet = [
+        '/profile-settings',
+        '/my-applications',
+        '/submit-application',
+        '/application/:id', // Это не сработает напрямую, обработаем ниже
+    ].some((path) => location.pathname === path || location.pathname.startsWith('/application/'));
 
     useEffect(() => {
         const handleStorageChange = () => {
@@ -103,6 +108,7 @@ export function Header() {
 
     const cabinetMenuItems = [
         { path: '/profile-settings', label: 'Настройки пользователя' },
+        ...(localStorage.getItem('role') === 'employee' ? [{ path: '/employee/applications', label: 'Входящие заявления' }] : []),
         { path: '/my-applications', label: 'Мои заявления' },
         { action: handleLogout, label: 'Выйти' },
     ];
@@ -148,32 +154,33 @@ export function Header() {
                     )}
                 </div>
             </div>
-
-            <nav ref={menuRef} className={style.navigationMenu}>
-                {navLinks.map((section, index) => (
-                    <div
-                        key={index}
-                        className={`${style.navigationCategory} ${activeCategory === section.category ? style.activeCategory : ''}`}
-                    >
-                        <p className={style.categoryTitle} onClick={() => handleCategoryToggle(section.category)}>
-                            {section.category}
-                        </p>
-                        {activeCategory === section.category && (
-                            <ul className={style.navigationList}>
-                                {section.items.map((item, idx) => (
-                                    <li
-                                        key={idx}
-                                        className={`${style.navigationItem} ${location.pathname === item.path ? style.activeLink : ''}`}
-                                        onClick={() => handleItemClick(item.path)}
-                                    >
-                                        <a className={style.navigationLink}>{item.label}</a>
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                    </div>
-                ))}
-            </nav>
+            {!isInCabinet && (
+                <nav ref={menuRef} className={style.navigationMenu}>
+                    {navLinks.map((section, index) => (
+                        <div
+                            key={index}
+                            className={`${style.navigationCategory} ${activeCategory === section.category ? style.activeCategory : ''}`}
+                        >
+                            <p className={style.categoryTitle} onClick={() => handleCategoryToggle(section.category)}>
+                                {section.category}
+                            </p>
+                            {activeCategory === section.category && (
+                                <ul className={style.navigationList}>
+                                    {section.items.map((item, idx) => (
+                                        <li
+                                            key={idx}
+                                            className={`${style.navigationItem} ${location.pathname === item.path ? style.activeLink : ''}`}
+                                            onClick={() => handleItemClick(item.path)}
+                                        >
+                                            <a className={style.navigationLink}>{item.label}</a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </div>
+                    ))}
+                </nav>
+            )}
             {!isInCabinet && (
                 <div className={style.imageBanner}>
                     <img src="/images/img.png" alt="О компании" />

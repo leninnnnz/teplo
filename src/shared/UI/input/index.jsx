@@ -3,7 +3,18 @@ import { IconEye, IconEyeOff } from '../icons';
 import { useState } from 'react';
 import { checkPasswordStrength, getStrengthMessage } from '../../libs/utils';
 
-export function UIInput({ type = 'text', value, onChange, classNames, placeholder, maxLength, required, title }) {
+export function UIInput({
+    type = 'text',
+    value,
+    onChange,
+    classNames,
+    placeholder,
+    maxLength,
+    required,
+    title,
+    icon, // Добавляем пропс icon, который ты используешь в ProfileSettings
+    disabled = false, // Добавляем disabled с дефолтным значением false
+}) {
     return (
         <div className={style.inputGroup}>
             {title && (
@@ -11,16 +22,20 @@ export function UIInput({ type = 'text', value, onChange, classNames, placeholde
                     {title}
                 </label>
             )}
-            <input
-                type={type}
-                id={type}
-                value={value}
-                onChange={(e) => onChange(e.target.value)}
-                className={`${style.input} ${classNames}`}
-                placeholder={placeholder}
-                maxLength={maxLength}
-                required={required}
-            />
+            <div className={style.inputWrapper}>
+                {icon && <span className={style.inputIcon}>{icon}</span>}
+                <input
+                    type={type}
+                    id={type}
+                    value={value}
+                    onChange={(e) => onChange(e.target.value)}
+                    className={`${style.input} ${classNames || ''}`} // Добавляем || '' для случаев, когда classNames undefined
+                    placeholder={placeholder}
+                    maxLength={maxLength}
+                    required={required}
+                    disabled={disabled} // Передаём disabled в input
+                />
+            </div>
         </div>
     );
 }

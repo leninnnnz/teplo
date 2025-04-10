@@ -1,0 +1,32 @@
+.subtitle {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.fileInput {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.submitButton {
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ff5722 0%, #d81b60 100%);
+  color: white;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}

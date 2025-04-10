@@ -1,27 +1,104 @@
 import style from './index.module.scss';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Content, TitlePage, Wrapper } from '../../shared/UI';
+import { HotWater, ColdWater, Heating, Pending, Approved, Rejected } from '../../shared/UI/icons';
 
 export function MyApplications() {
     const navigate = useNavigate();
+    const [applications, setApplications] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    // Моковый список заявлений
-    const [applications] = useState([
-        { id: 1, type: 'ГВС', date: '2025-02-20', status: 'В обработке' },
-        { id: 2, type: 'ХВС', date: '2025-02-18', status: 'Одобрено' },
-        { id: 3, type: 'ТС', date: '2025-02-15', status: 'Вернулось' },
-    ]);
+    useEffect(() => {
+        const fetchApplications = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    throw new Error('Вы не авторизованы');
+                }
+
+                const response = await fetch('http://localhost:5001/api/applications', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Ошибка загрузки заявлений');
+                }
+
+                const data = await response.json();
+                setApplications(data);
+            } catch (err) {
+                console.error('Fetch error:', err.message);
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchApplications();
+    }, []);
 
     const handleNewApplication = () => {
-        navigate('/new-application');
+        navigate('/submit-application');
+    };
+
+    const handleCardClick = (id) => {
+        navigate(`/application/${id}`);
+    };
+
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('ru-RU', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+        });
+    };
+
+    const getTypeIcon = (type) => {
+        switch (type) {
+            case 'ГВС':
+                return <HotWater className={style.typeIcon} />;
+            case 'ХВС':
+                return <ColdWater className={style.typeIcon} />;
+            case 'ТС':
+                return <Heating className={style.typeIcon} />;
+            default:
+                return null;
+        }
+    };
+
+    const getStatusIcon = (status) => {
+        switch (status) {
+            case 'В обработке':
+                return <Pending className={style.statusIcon} />;
+            case 'Одобрено':
+                return <Approved className={style.statusIcon} />;
+            case 'Вернулось':
+                return <Rejected className={style.statusIcon} />;
+            default:
+                return null;
+        }
     };
 
     return (
         <Wrapper>
             <TitlePage title="Мои заявления" />
             <Content>
-                {applications.length === 0 ? (
+                {loading ? (
+                    <div className={style.loading}>
+                        <p>Загрузка...</p>
+                    </div>
+                ) : error ? (
+                    <div className={style.error}>
+                        <p>{error}</p>
+                    </div>
+                ) : applications.length === 0 ? (
                     <div className={style.emptyState}>
                         <p className={style.emptyText}>У вас пока нет заявлений</p>
                         <button className={style.submitButton} onClick={handleNewApplication}>
@@ -29,33 +106,27 @@ export function MyApplications() {
                         </button>
                     </div>
                 ) : (
-                    <>
-                        <div className={style.tableWrapper}>
-                            <table className={style.applicationsTable}>
-                                <thead>
-                                    <tr>
-                                        <th>Номер</th>
-                                        <th>Тип</th>
-                                        <th>Дата подачи</th>
-                                        <th>Статус</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {applications.map((app) => (
-                                        <tr key={app.id}>
-                                            <td>{app.id}</td>
-                                            <td>{app.type}</td>
-                                            <td>{app.date}</td>
-                                            <td className={style[`status-${app.status.toLowerCase().replace(' ', '-')}`]}>{app.status}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
+                    <div className={style.applicationsList}>
+                        {applications.map((app) => (
+                            <div key={app._id} className={style.applicationCard} onClick={() => handleCardClick(app._id)}>
+                                <div className={style.cardHeader}>
+                                    <span className={style.cardNumber}>№ {app._id}</span>
+                                    {getTypeIcon(app.type)}
+                                </div>
+                                <div className={style.cardBody}>
+                                    <p className={style.cardType}>{app.type}</p>
+                                    <p className={style.cardDate}>{formatDate(app.createdAt)}</p>
+                                </div>
+                                <div className={style.cardFooter}>
+                                    {getStatusIcon(app.status)}
+                                    <span className={style[`status-${app.status.toLowerCase().replace(' ', '-')}`]}>{app.status}</span>
+                                </div>
+                            </div>
+                        ))}
                         <button className={style.submitButton} onClick={handleNewApplication}>
                             Подать заявление
                         </button>
-                    </>
+                    </div>
                 )}
             </Content>
         </Wrapper>

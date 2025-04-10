@@ -1,0 +1,180 @@
+.subtitle {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.select {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #333;
+  outline: none;
+  transition: border-color 0.2s;
+
+  &:focus {
+    border-color: #ff5722;
+  }
+}
+
+.templateSection {
+  padding: 16px;
+  background: #f5f7fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.templateText {
+  font-size: 16px;
+  color: #555;
+  margin: 8px 0;
+}
+
+.templateLink {
+  color: #ff5722;
+  text-decoration: none;
+  font-weight: 500;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.docList {
+  padding-left: 20px;
+  margin: 8px 0;
+}
+
+.docItem {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.filesSection {
+  padding: 16px;
+  background: #f5f7fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.fileInput {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.fileLabel {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.fileUpload {
+  padding: 8px;
+  font-size: 14px;
+  color: #555;
+  border: 1px dashed #ddd;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-color: #ff5722;
+  }
+}
+
+.fileName {
+  font-size: 14px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.submitButton {
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ff5722 0%, #d81b60 100%);
+  color: white;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  opacity: 0.5;
+  flex: 1;
+
+  &:not(:disabled) {
+    opacity: 1;
+  }
+
+  &:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+}
+
+.backButton {
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border: 1px solid #ff5722;
+  border-radius: 12px;
+  background: white;
+  color: #ff5722;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+  opacity: 0.5;
+  flex: 1;
+
+  &:not(:disabled) {
+    opacity: 1;
+  }
+
+  &:hover:not(:disabled) {
+    background: #ff5722;
+    color: white;
+  }
+}
+
+.error {
+  font-size: 14px;
+  color: #d32f2f;
+  margin-top: 12px;
+  text-align: center;
+}

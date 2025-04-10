@@ -19,6 +19,10 @@ import { AuthorizationPage } from './pages/authorization';
 import style from './widgets/contacts/index.module.scss';
 import { ProfileSettingsPage } from './pages/profile-settings';
 import { MyApplicationsPage } from './pages/my-applications';
+import { AdminPage } from './pages/admin/admin';
+import { SubmitApplicationPage } from './pages/submit-application';
+import { ApplicationDetailsPage } from './pages/application-details';
+import { EmployeeApplicationsPage } from './pages/employee-applications';
 
 function Layout() {
     const location = useLocation();
@@ -45,6 +49,10 @@ function Layout() {
                     <Route path="/authorization" element={<AuthorizationPage />} />
                     <Route path="/profile-settings" element={<ProfileSettingsPage />} />
                     <Route path="/my-applications" element={<MyApplicationsPage />} />
+                    <Route path="/admin" element={<AdminPage />} />
+                    <Route path="/submit-application" element={<SubmitApplicationPage />} />
+                    <Route path="/employee/applications" element={<EmployeeApplicationsPage />} />
+                    <Route path="//application/:id" element={<ApplicationDetailsPage />} />
                     <Route path={'*'} element={<Error />} />
                 </Routes>
             </div>

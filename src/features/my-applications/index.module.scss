@@ -1,116 +1,165 @@
+.loading,
+.error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    font-size: 18px;
+    color: #666;
+}
+
 .emptyState {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
-    padding: 40px 0;
+    gap: 24px;
+    padding: 60px 0;
 }
 
 .emptyText {
-    font-size: 18px;
-    color: #444;
-    line-height: 1.6;
+    font-size: 20px;
+    color: #555;
+    line-height: 1.5;
     text-align: center;
+    font-weight: 400;
 }
 
-.tableWrapper {
-    width: 100%;
-    max-width: 100%; // Убираем ограничение, чтобы таблица растягивалась внутри Wrapper
-    margin-bottom: 30px;
-    overflow-x: auto;
+.applicationsList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 40px;
 }
 
-.applicationsTable {
-    width: 100%;
-    border-collapse: collapse;
+.applicationCard {
     background-color: white;
-    border-radius: 8px;
-    overflow: hidden; // Для скругления углов
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
 }
 
-.applicationsTable th,
-.applicationsTable td {
-    padding: 14px 20px;
-    text-align: left;
-    font-size: 16px;
-    color: #333;
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
 }
 
-.applicationsTable th {
-    background-color: rgb(255, 97, 40);
-    color: white;
-    font-weight: 600;
-    text-transform: uppercase;
+.cardNumber {
     font-size: 14px;
+    color: #777;
+    font-weight: 500;
 }
 
-.applicationsTable td {
-    border-bottom: 1px solid #eee;
+.typeIcon {
+    width: 28px;
+    height: 28px;
+    fill: rgb(255, 97, 40);
 }
 
-.applicationsTable tr:last-child td {
-    border-bottom: none;
+.cardBody {
+    margin-bottom: 16px;
 }
 
-// Стили для статусов
+.cardType {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.cardDate {
+    font-size: 14px;
+    color: #888;
+    margin: 4px 0 0;
+}
+
+.cardFooter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.statusIcon {
+    width: 20px;
+    height: 20px;
+}
+
 .status-в-обработке {
     color: #ff6128;
     font-weight: 600;
+    font-size: 14px;
 }
 
 .status-одобрено {
     color: #28a745;
     font-weight: 600;
+    font-size: 14px;
 }
 
 .status-вернулось {
     color: #dc3545;
     font-weight: 600;
+    font-size: 14px;
 }
 
 .submitButton {
-    padding: 12px 24px;
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+    padding: 14px 32px;
     font-size: 16px;
     font-weight: 600;
     color: white;
     background-color: rgb(255, 97, 40);
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
-    transition:
-        background-color 0.3s ease,
-        transform 0.2s ease;
-    box-shadow: 0 4px 10px rgba(255, 97, 40, 0.3);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 97, 40, 0.3);
 
     &:hover {
-        background-color: #333;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        background-color: darken(rgb(255, 97, 40), 10%);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(255, 97, 40, 0.4);
     }
 
     &:active {
         transform: translateY(0);
-        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 3px 10px rgba(255, 97, 40, 0.2);
     }
 }
 
 @media (max-width: 700px) {
     .emptyState {
-        padding: 20px 0;
+        padding: 40px 0;
     }
 
     .emptyText {
+        font-size: 18px;
+    }
+
+    .applicationCard {
+        padding: 16px;
+    }
+
+    .cardType {
         font-size: 16px;
     }
 
-    .applicationsTable th,
-    .applicationsTable td {
-        font-size: 14px;
-        padding: 10px 12px;
+    .cardDate {
+        font-size: 13px;
     }
 
     .submitButton {
-        font-size: 14px;
-        padding: 10px 20px;
+        padding: 12px 24px;
+        font-size: 15px;
     }
 }
