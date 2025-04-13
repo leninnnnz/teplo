@@ -73,6 +73,7 @@ export function UIInputPassword({
                     className={`${style.input} ${!isConfirmPassword && showStrength ? style[passwordStrength] : ''} ${classNames}`}
                     placeholder="••••••••"
                     required={required}
+                    autoComplete={'current-password'}
                 />
                 <button type="button" className={style.showPasswordButton} onClick={() => setIsOpen((prev) => !prev)}>
                     {isOpen ? <IconEyeOff /> : <IconEye />}

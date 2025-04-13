@@ -160,6 +160,8 @@ export function Authorization() {
                                 title={'Пароль'}
                                 isConfirmPassword={false}
                                 showStrength={!isLogin}
+                                name={'password'}
+                                id={'password'}
                             />
                             {!isLogin && (
                                 <UIInputPassword
