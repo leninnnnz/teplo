@@ -112,7 +112,18 @@ export function ApplicationDetails() {
                         </div>
                         <div className={style.commentSection}>
                             <span className={style.detailLabel}>Комментарий сотрудника:</span>
-                            <p className={style.commentText}>{application.comment || 'Комментарий отсутствует'}</p>
+                            <div className={style.commentHistory}>
+                                {application.comments && application.comments.length > 0 ? (
+                                    application.comments.map((c, index) => (
+                                        <p key={index} className={style.commentText}>
+                                            <strong>{c.author ? `${c.author.lastName} ${c.author.firstName}` : 'Сотрудник'}</strong> (
+                                            {formatDate(c.createdAt)}): {c.text}
+                                        </p>
+                                    ))
+                                ) : (
+                                    <p className={style.commentText}>Комментариев нет</p>
+                                )}
+                            </div>
                         </div>
                         <button className={style.backButton} onClick={() => navigate('/my-applications')}>
                             Назад
