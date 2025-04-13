@@ -6,23 +6,38 @@ export function Header() {
     const [activeCategory, setActiveCategory] = useState(null);
     const [isCabinetMenuOpen, setIsCabinetMenuOpen] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [isFading, setIsFading] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
     const menuRef = useRef(null);
     const cabinetMenuRef = useRef(null);
 
+    const images = ['/images/fountain1.jpg', '/images/fountain2.jpg'];
+    const userRole = localStorage.getItem('role');
+
+    console.log('Header render - isAuthenticated:', isAuthenticated, 'userRole:', userRole);
+
     const isInCabinet = [
         '/profile-settings',
         '/my-applications',
         '/submit-application',
-        '/application/:id', // Это не сработает напрямую, обработаем ниже
-    ].some((path) => location.pathname === path || location.pathname.startsWith('/application/'));
+        '/employee/applications',
+        '/application/:id',
+        '/employee/applications/:id',
+    ].some(
+        (path) =>
+            location.pathname === path ||
+            location.pathname.startsWith('/application/') ||
+            location.pathname.startsWith('/employee/applications/'),
+    );
 
     useEffect(() => {
         const handleStorageChange = () => {
             const profileSet = localStorage.getItem('isProfileSet') === 'true';
-            console.log('Storage changed, isProfileSet:', localStorage.getItem('isProfileSet'), 'isAuthenticated:', profileSet);
+            const newRole = localStorage.getItem('role');
             setIsAuthenticated(profileSet);
+            console.log('Storage changed - isAuthenticated:', profileSet, 'newRole:', newRole);
         };
 
         handleStorageChange();
@@ -31,26 +46,46 @@ export function Header() {
     }, []);
 
     const handleCategoryToggle = (category) => {
-        setActiveCategory((prevCategory) => (prevCategory === category ? null : category));
+        setIsFading(true);
+        setTimeout(() => {
+            setActiveCategory((prevCategory) => {
+                const newCategory = prevCategory === category ? null : category;
+                setCurrentImageIndex(newCategory ? 1 : 0);
+                setIsFading(false);
+                return newCategory;
+            });
+        }, 250);
         setIsCabinetMenuOpen(false);
     };
 
     const handleItemClick = (path) => {
-        setActiveCategory(null);
+        setIsFading(true);
+        setTimeout(() => {
+            setActiveCategory(null);
+            setCurrentImageIndex(0);
+            setIsFading(false);
+            navigate(path);
+        }, 250);
         setIsCabinetMenuOpen(false);
-        navigate(path);
     };
 
     const handleCabinetMenuToggle = () => {
-        setIsCabinetMenuOpen((prev) => !prev);
-        setActiveCategory(null);
+        setIsFading(true);
+        setTimeout(() => {
+            setIsCabinetMenuOpen((prev) => !prev);
+            setActiveCategory(null);
+            setCurrentImageIndex(0);
+            setIsFading(false);
+        }, 250);
     };
 
     const handleLogout = () => {
         localStorage.removeItem('isProfileSet');
         localStorage.removeItem('token');
+        localStorage.removeItem('role');
         setIsAuthenticated(false);
         setIsCabinetMenuOpen(false);
+        setCurrentImageIndex(0);
         navigate('/');
     };
 
@@ -62,16 +97,19 @@ export function Header() {
                 cabinetMenuRef.current &&
                 !cabinetMenuRef.current.contains(event.target)
             ) {
-                setActiveCategory(null);
-                setIsCabinetMenuOpen(false);
+                setIsFading(true);
+                setTimeout(() => {
+                    setActiveCategory(null);
+                    setIsCabinetMenuOpen(false);
+                    setCurrentImageIndex(0);
+                    setIsFading(false);
+                }, 250);
             }
         };
 
         document.addEventListener('click', handleClickOutside);
         return () => document.removeEventListener('click', handleClickOutside);
     }, []);
-
-    console.log('Header render, isAuthenticated:', isAuthenticated);
 
     const navLinks = [
         {
@@ -106,12 +144,18 @@ export function Header() {
         },
     ];
 
-    const cabinetMenuItems = [
-        { path: '/profile-settings', label: 'Настройки пользователя' },
-        ...(localStorage.getItem('role') === 'employee' ? [{ path: '/employee/applications', label: 'Входящие заявления' }] : []),
-        { path: '/my-applications', label: 'Мои заявления' },
-        { action: handleLogout, label: 'Выйти' },
-    ];
+    const cabinetMenuItems = [];
+    if (isAuthenticated) {
+        cabinetMenuItems.push({ path: '/profile-settings', label: 'Настройки пользователя' });
+        if (userRole === 'employee') {
+            cabinetMenuItems.push({ path: '/employee/applications', label: 'Входящие заявления' });
+        } else if (userRole && userRole !== 'employee') {
+            cabinetMenuItems.push({ path: '/my-applications', label: 'Мои заявления' });
+        }
+        cabinetMenuItems.push({ action: handleLogout, label: 'Выйти' });
+    }
+
+    console.log('cabinetMenuItems:', cabinetMenuItems);
 
     return (
         <header className={style.headerWrapper}>
@@ -181,9 +225,10 @@ export function Header() {
                     ))}
                 </nav>
             )}
-            {!isInCabinet && (
+            {/* Показываем фото только если НЕ авторизирован И НЕ в личном кабинете */}
+            {!isAuthenticated && !isInCabinet && (
                 <div className={style.imageBanner}>
-                    <img src="/images/img.png" alt="О компании" />
+                    <img src="/images/img.png" alt="Фонтан" className={`${style.bannerImage} ${isFading ? style.fadeOut : ''}`} />
                 </div>
             )}
         </header>

@@ -76,14 +76,21 @@
 
 .cardBody {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
 }
 
 .cardDate {
   font-size: 14px;
   color: #888;
-  margin: 0;
+  margin: 4px 0;
+}
+
+.cardStatus {
+  font-size: 14px;
+  color: #333;
+  margin: 4px 0;
+  font-weight: 500;
 }
 
 .statusSelect {

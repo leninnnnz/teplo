@@ -8,6 +8,7 @@ const User = require('./models/User');
 const Application = require('./models/Application');
 const multer = require('multer');
 const fs = require('fs');
+
 dotenv.config();
 
 const app = express();
@@ -22,7 +23,6 @@ app.use(
 
 app.use(express.json());
 
-// Настройка multer для временного сохранения файлов
 const upload = multer({ dest: 'uploads/' });
 
 // Подключение к MongoDB
@@ -56,7 +56,7 @@ const checkRole = (roles) => (req, res, next) => {
 
 app.get('/api/applications', authMiddleware, async (req, res) => {
     try {
-        const applications = await Application.find({ userId: req.user.id });
+        const applications = await Application.find({ userId: req.user.id }).populate('comments.author', 'firstName lastName');
         res.json(applications);
     } catch (error) {
         console.error('Applications fetch error:', error);
@@ -75,7 +75,6 @@ app.post('/api/applications', authMiddleware, upload.array('documents', 5), asyn
         }
 
         if (!files || files.length < 3) {
-            // Минимум 3 документа
             return res.status(400).json({ message: 'Прикрепите все необходимые документы' });
         }
 
@@ -87,9 +86,10 @@ app.post('/api/applications', authMiddleware, upload.array('documents', 5), asyn
                 data: fs.readFileSync(file.path),
                 contentType: file.mimetype,
             })),
+            comments: [],
         };
 
-        files.forEach((file) => fs.unlinkSync(file.path)); // Удаляем временные файлы
+        files.forEach((file) => fs.unlinkSync(file.path));
 
         const application = new Application(applicationData);
         await application.save();
@@ -101,10 +101,13 @@ app.post('/api/applications', authMiddleware, upload.array('documents', 5), asyn
     }
 });
 
-// Получение деталей заявления
+// Получение деталей заявления (для пользователя)
 app.get('/api/applications/:id', authMiddleware, async (req, res) => {
     try {
-        const application = await Application.findOne({ _id: req.params.id, userId: req.user.id });
+        const application = await Application.findOne({ _id: req.params.id, userId: req.user.id }).populate(
+            'comments.author',
+            'firstName lastName',
+        );
         if (!application) {
             return res.status(404).json({ message: 'Заявление не найдено' });
         }
@@ -115,13 +118,64 @@ app.get('/api/applications/:id', authMiddleware, async (req, res) => {
     }
 });
 
-// Получение всех заявлений (только для employee)
-app.get('/api/employee/applications', authMiddleware, async (req, res) => {
+app.put('/api/applications/:id/edit', authMiddleware, upload.array('documents', 5), async (req, res) => {
     try {
-        if (req.user.role !== 'employee') {
-            return res.status(403).json({ message: 'Доступ запрещён' });
+        const { type, description } = req.body;
+        const files = req.files;
+
+        const application = await Application.findOne({ _id: req.params.id, userId: req.user.id });
+        if (!application) {
+            return res.status(404).json({ message: 'Заявление не найдено' });
         }
-        const applications = await Application.find().populate('userId', 'email');
+        if (application.status !== 'В обработке' && application.status !== 'Вернулось') {
+            return res.status(403).json({ message: 'Редактирование доступно только для статусов "В обработке" или "Вернулось"' });
+        }
+
+        const updateData = { updatedAt: Date.now() };
+        if (type) updateData.type = type;
+        if (description) updateData.description = description;
+        if (files && files.length > 0) {
+            updateData.documents = files.map((file) => ({
+                data: fs.readFileSync(file.path),
+                contentType: file.mimetype,
+            }));
+            files.forEach((file) => fs.unlinkSync(file.path));
+        }
+
+        const updatedApplication = await Application.findByIdAndUpdate(req.params.id, updateData, { new: true });
+        res.json({ message: 'Заявление обновлено', application: updatedApplication });
+    } catch (error) {
+        console.error('Application edit error:', error);
+        res.status(500).json({ message: 'Ошибка редактирования заявления', error: error.message });
+    }
+});
+
+app.delete('/api/applications/:id', authMiddleware, async (req, res) => {
+    try {
+        const application = await Application.findById(req.params.id);
+        if (!application) {
+            return res.status(404).json({ message: 'Заявление не найдено' });
+        }
+        if (application.status !== 'Завершённый') {
+            return res.status(403).json({ message: 'Удаление доступно только для завершённых заявлений' });
+        }
+        if (req.user.role !== 'employee' && application.userId.toString() !== req.user.id) {
+            return res.status(403).json({ message: 'Нет прав для удаления этого заявления' });
+        }
+
+        await Application.findByIdAndDelete(req.params.id);
+        res.json({ message: 'Заявление удалено' });
+    } catch (error) {
+        console.error('Application delete error:', error);
+        res.status(500).json({ message: 'Ошибка удаления заявления', error: error.message });
+    }
+});
+
+app.get('/api/employee/applications', authMiddleware, checkRole(['employee']), async (req, res) => {
+    try {
+        const applications = await Application.find()
+            .populate('userId', 'firstName lastName patronymic email')
+            .populate('comments.author', 'firstName lastName');
         res.json(applications);
     } catch (error) {
         console.error('Employee applications fetch error:', error);
@@ -129,14 +183,48 @@ app.get('/api/employee/applications', authMiddleware, async (req, res) => {
     }
 });
 
-// Обновление статуса заявления
-app.put('/api/applications/:id', authMiddleware, async (req, res) => {
+app.get('/api/employee/applications/:id', authMiddleware, checkRole(['employee']), async (req, res) => {
     try {
-        if (req.user.role !== 'employee') {
-            return res.status(403).json({ message: 'Доступ запрещён' });
+        const application = await Application.findById(req.params.id)
+            .populate('userId', 'firstName lastName patronymic email')
+            .populate('comments.author', 'firstName lastName');
+        if (!application) {
+            return res.status(404).json({ message: 'Заявление не найдено' });
         }
-        const { status } = req.body;
-        const application = await Application.findByIdAndUpdate(req.params.id, { status }, { new: true });
+        res.json(application);
+    } catch (error) {
+        console.error('Employee application details fetch error:', error);
+        res.status(500).json({ message: 'Ошибка загрузки заявления', error: error.message });
+    }
+});
+
+app.put('/api/applications/:id', authMiddleware, checkRole(['employee']), upload.single('commentFile'), async (req, res) => {
+    try {
+        const { status, comment } = req.body;
+        const file = req.file;
+
+        const updateData = { updatedAt: Date.now() };
+        if (status) updateData.status = status;
+
+        if (comment) {
+            const commentData = {
+                text: comment,
+                author: req.user.id,
+                createdAt: new Date(),
+            };
+            if (file) {
+                commentData.file = {
+                    data: fs.readFileSync(file.path),
+                    contentType: file.mimetype,
+                };
+                fs.unlinkSync(file.path);
+            }
+            updateData.$push = { comments: commentData };
+        }
+
+        const application = await Application.findByIdAndUpdate(req.params.id, updateData, { new: true })
+            .populate('userId', 'firstName lastName patronymic email')
+            .populate('comments.author', 'firstName lastName');
         if (!application) {
             return res.status(404).json({ message: 'Заявление не найдено' });
         }
@@ -147,12 +235,6 @@ app.put('/api/applications/:id', authMiddleware, async (req, res) => {
     }
 });
 
-// Пример защищённого эндпоинта для админа
-app.get('/api/admin', authMiddleware, checkRole(['admin']), (req, res) => {
-    res.json({ message: 'Добро пожаловать в админ-панель' });
-});
-
-// Профиль: получение данных
 app.get('/api/profile', authMiddleware, async (req, res) => {
     try {
         const user = await User.findById(req.user.id);

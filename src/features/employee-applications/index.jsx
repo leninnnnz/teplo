@@ -48,32 +48,22 @@ export function EmployeeApplications() {
         fetchApplications();
     }, [navigate]);
 
-    const handleStatusChange = async (applicationId, newStatus) => {
-        try {
-            const token = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:5001/api/applications/${applicationId}`, {
-                method: 'PUT',
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ status: newStatus }),
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || 'Ошибка изменения статуса');
-            }
-
-            setApplications((prev) => prev.map((app) => (app._id === applicationId ? { ...app, status: newStatus } : app)));
-        } catch (err) {
-            setError(err.message);
-        }
+    const handleCardClick = (applicationId) => {
+        navigate(`/employee/applications/${applicationId}`);
     };
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
-        return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+        return date.toLocaleString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+    };
+
+    const getFullName = (user) => {
+        if (!user || (!user.firstName && !user.lastName && !user.patronymic)) {
+            console.log('No user data:', user);
+            return 'Не указан';
+        }
+        const { firstName = '', lastName = '', patronymic = '' } = user;
+        return `${lastName} ${firstName} ${patronymic}`.trim() || 'Не указан';
     };
 
     const filteredApplications = applications.filter((app) => {
@@ -110,25 +100,15 @@ export function EmployeeApplications() {
                         <p className={style.noResults}>Заявления не найдены</p>
                     ) : (
                         filteredApplications.map((app) => (
-                            <div key={app._id} className={style.applicationCard}>
+                            <div key={app._id} className={style.applicationCard} onClick={() => handleCardClick(app._id)}>
                                 <div className={style.cardHeader}>
                                     <span className={style.cardNumber}>№ {app._id}</span>
                                     <span className={style.cardType}>{app.type}</span>
                                 </div>
                                 <div className={style.cardBody}>
-                                    <p className={style.cardDate}>Дата: {formatDate(app.createdAt)}</p>
-                                    <div className={style.statusSelect}>
-                                        <label>Статус:</label>
-                                        <select
-                                            value={app.status}
-                                            onChange={(e) => handleStatusChange(app._id, e.target.value)}
-                                            className={style.statusDropdown}
-                                        >
-                                            <option value="В обработке">В обработке</option>
-                                            <option value="Одобрено">Одобрено</option>
-                                            <option value="Вернулось">Вернулось</option>
-                                        </select>
-                                    </div>
+                                    <p className={style.cardDate}>Пользователь: {getFullName(app.userId)}</p>
+                                    <p className={style.cardDate}>Дата изменения: {formatDate(app.updatedAt || app.createdAt)}</p>
+                                    <p className={style.cardStatus}>Статус: {app.status}</p>
                                 </div>
                             </div>
                         ))

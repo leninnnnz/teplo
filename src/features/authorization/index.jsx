@@ -3,6 +3,23 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { checkPasswordStrength, UIInput, UIInputPassword } from '../../shared/UI';
 
+const decodeToken = (token) => {
+    try {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(
+            atob(base64)
+                .split('')
+                .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+                .join(''),
+        );
+        return JSON.parse(jsonPayload);
+    } catch (error) {
+        console.error('Ошибка декодирования токена:', error);
+        return {};
+    }
+};
+
 export function Authorization() {
     const [isLogin, setIsLogin] = useState(true);
     const [email, setEmail] = useState('');
@@ -28,8 +45,23 @@ export function Authorization() {
 
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('isProfileSet', 'true');
+
+                let userRole;
+                if (data.role) {
+                    userRole = data.role;
+                    localStorage.setItem('role', userRole);
+                } else {
+                    const decodedToken = decodeToken(data.token);
+                    userRole = decodedToken.role || 'client';
+                    localStorage.setItem('role', userRole);
+                }
+
                 const isProfileSet = localStorage.getItem('isProfileSet') === 'true';
-                navigate(isProfileSet ? '/my-applications' : '/profile-settings');
+                if (userRole === 'employee') {
+                    navigate('/employee/applications');
+                } else {
+                    navigate(isProfileSet ? '/my-applications' : '/profile-settings');
+                }
             } catch (error) {
                 alert(error.message);
             }
@@ -70,6 +102,18 @@ export function Authorization() {
 
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('isProfileSet', 'false');
+
+                // Извлекаем роль после регистрации
+                let userRole;
+                if (data.role) {
+                    userRole = data.role;
+                    localStorage.setItem('role', userRole);
+                } else {
+                    const decodedToken = decodeToken(data.token);
+                    userRole = decodedToken.role || 'client';
+                    localStorage.setItem('role', userRole);
+                }
+
                 navigate('/profile-settings');
             } catch (error) {
                 alert(error.message);
@@ -115,7 +159,7 @@ export function Authorization() {
                                 required={true}
                                 title={'Пароль'}
                                 isConfirmPassword={false}
-                                showStrength={!isLogin} // Вкл только для "Регистрация"
+                                showStrength={!isLogin}
                             />
                             {!isLogin && (
                                 <UIInputPassword
@@ -124,7 +168,7 @@ export function Authorization() {
                                     required={true}
                                     title={'Подтверждение пароля'}
                                     isConfirmPassword={true}
-                                    showStrength={false} // Выкл для подтверждения
+                                    showStrength={false}
                                 />
                             )}
                             <button type="submit" className={style.submitButton}>

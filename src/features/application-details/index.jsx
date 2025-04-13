@@ -73,12 +73,16 @@ export function ApplicationDetails() {
 
     const requiredDocs = ['Скан заполненного заявления', 'Скан паспорта', 'Скан СНИЛС'];
 
+    const getUserFriendlyId = (id) => {
+        return id.slice(-6);
+    };
+
     if (loading) return <div className={style.loading}>Загрузка...</div>;
     if (error) return <div className={style.error}>{error}</div>;
 
     return (
         <Wrapper>
-            <TitlePage title={`Заявление №${id}`} />
+            <TitlePage title={`Заявление №${getUserFriendlyId(id)}`} />
             <Content>
                 {application && (
                     <div className={style.detailsContainer}>

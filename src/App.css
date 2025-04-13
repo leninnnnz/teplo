@@ -85,8 +85,8 @@ h6 {
 .App {
     height: 100dvh;
     width: 100dvw;
-
     margin: 0 auto;
-
+    display: flex;
     overflow-x: hidden;
+    flex-direction: column;
 }

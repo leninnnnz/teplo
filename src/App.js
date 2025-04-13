@@ -23,6 +23,7 @@ import { AdminPage } from './pages/admin/admin';
 import { SubmitApplicationPage } from './pages/submit-application';
 import { ApplicationDetailsPage } from './pages/application-details';
 import { EmployeeApplicationsPage } from './pages/employee-applications';
+import { EmployeeApplicationDetailsPage } from './pages/employee-application-details';
 
 function Layout() {
     const location = useLocation();
@@ -52,6 +53,7 @@ function Layout() {
                     <Route path="/admin" element={<AdminPage />} />
                     <Route path="/submit-application" element={<SubmitApplicationPage />} />
                     <Route path="/employee/applications" element={<EmployeeApplicationsPage />} />
+                    <Route path="/employee/applications/:id" element={<EmployeeApplicationDetailsPage />} />
                     <Route path="//application/:id" element={<ApplicationDetailsPage />} />
                     <Route path={'*'} element={<Error />} />
                 </Routes>

@@ -1,0 +1,127 @@
+.loading,
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  font-size: 18px;
+  color: #666;
+}
+
+.detailsContainer {
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.detailItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.detailLabel {
+  font-weight: 600;
+  color: #333;
+  font-size: 16px;
+}
+
+.detailValue {
+  color: #555;
+  font-size: 16px;
+  display: flex;
+  align-items: center; /* Для выравнивания select с текстом */
+}
+
+.docList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.docItem {
+  margin: 8px 0;
+}
+
+.downloadButton {
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #ff6128;
+  background: none;
+  border: 1px solid #ff6128;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+
+  &:hover {
+    background: #ff6128;
+    color: white;
+  }
+}
+
+.commentSection {
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.commentText {
+  color: #555;
+  font-size: 16px;
+  margin: 8px 0 0;
+  background: #f5f7fa;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.commentInput {
+  width: 100%;
+  min-height: 100px;
+  margin: 8px 0 12px; /* Добавляем отступ снизу перед кнопкой */
+  padding: 12px;
+  font-size: 16px;
+  color: #555;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  resize: vertical;
+  background: #f5f7fa;
+  outline: none;
+
+  &:focus {
+    border-color: #ff6128;
+  }
+}
+
+.statusDropdown {
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #333;
+  outline: none;
+  cursor: pointer;
+}
+
+.backButton {
+  display: block;
+  width: fit-content;
+  margin: 20px auto 0;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  background-color: rgb(255, 97, 40);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    background-color: darken(rgb(255, 97, 40), 10%);
+    transform: translateY(-3px);
+  }
+}
