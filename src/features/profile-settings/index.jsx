@@ -22,7 +22,7 @@ export function ProfileSettings() {
                 const decoded = JSON.parse(atob(token.split('.')[1]));
                 console.log('Decoded token:', decoded); // Лог для проверки токена
                 setEmail(decoded.email || '');
-                setRole(decoded.role || ''); // Роль из токена
+                setRole(decoded.role || '');
                 fetchUserData(token);
             } catch (err) {
                 setError('Ошибка загрузки данных пользователя');
@@ -46,7 +46,7 @@ export function ProfileSettings() {
                 setLastName(data.user.lastName || '');
                 setPatronymic(data.user.patronymic || '');
                 setPhone(data.user.phone || '');
-                setRole(data.user.role || ''); // Роль из ответа сервера
+                setRole(data.user.role || '');
             } else {
                 throw new Error(data.message || 'Ошибка загрузки профиля');
             }
@@ -96,8 +96,13 @@ export function ProfileSettings() {
     };
 
     const handleSkip = () => {
+        console.log('User role:', role); // Лог для проверки роли
         localStorage.setItem('isProfileSet', 'true');
-        navigate('/my-applications');
+        if (role === 'employee') {
+            navigate('/employee/applications');
+        } else {
+            navigate('/my-applications');
+        }
     };
 
     const handleEdit = () => {

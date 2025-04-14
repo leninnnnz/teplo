@@ -54,6 +54,7 @@ const checkRole = (roles) => (req, res, next) => {
     next();
 };
 
+// Получение заявлений пользователя
 app.get('/api/applications', authMiddleware, async (req, res) => {
     try {
         const applications = await Application.find({ userId: req.user.id }).populate('comments.author', 'firstName lastName');
@@ -118,6 +119,7 @@ app.get('/api/applications/:id', authMiddleware, async (req, res) => {
     }
 });
 
+// Удаление заявления
 app.delete('/api/applications/:id', authMiddleware, async (req, res) => {
     try {
         const application = await Application.findById(req.params.id);
@@ -139,6 +141,7 @@ app.delete('/api/applications/:id', authMiddleware, async (req, res) => {
     }
 });
 
+// Получение всех заявлений (для сотрудника)
 app.get('/api/employee/applications', authMiddleware, checkRole(['employee']), async (req, res) => {
     try {
         const applications = await Application.find()
@@ -151,6 +154,7 @@ app.get('/api/employee/applications', authMiddleware, checkRole(['employee']), a
     }
 });
 
+// Получение деталей заявления (для сотрудника)
 app.get('/api/employee/applications/:id', authMiddleware, checkRole(['employee']), async (req, res) => {
     try {
         const application = await Application.findById(req.params.id)
@@ -166,7 +170,7 @@ app.get('/api/employee/applications/:id', authMiddleware, checkRole(['employee']
     }
 });
 
-// Удаление комментария (для сотрудника)
+// Удаление комментария
 app.delete('/api/applications/:id/comments/:commentId', authMiddleware, checkRole(['employee']), async (req, res) => {
     try {
         const { id, commentId } = req.params;
@@ -188,7 +192,62 @@ app.delete('/api/applications/:id/comments/:commentId', authMiddleware, checkRol
     }
 });
 
-// Универсальный маршрут для обновления заявления
+// Обновление заявления для сотрудника (статус, комментарий, файл)
+app.put(
+    '/api/employee/applications/:id',
+    authMiddleware,
+    checkRole(['employee']),
+    upload.fields([{ name: 'commentFile', maxCount: 1 }]),
+    async (req, res) => {
+        try {
+            const { id } = req.params;
+            const { status, comment } = req.body;
+            const files = req.files || {};
+            console.log('Received employee update request:', { id, status, comment, commentFile: files.commentFile });
+
+            const application = await Application.findById(id);
+            if (!application) {
+                return res.status(404).json({ message: 'Заявление не найдено' });
+            }
+
+            const updateData = { updatedAt: Date.now() };
+
+            // Обновление статуса
+            if (status) {
+                updateData.status = status;
+            }
+
+            // Добавление комментария
+            if (comment || files.commentFile) {
+                const commentData = {
+                    text: comment || '',
+                    author: req.user.id,
+                    createdAt: new Date(),
+                };
+                if (files.commentFile) {
+                    commentData.file = {
+                        data: fs.readFileSync(files.commentFile[0].path),
+                        contentType: files.commentFile[0].mimetype,
+                    };
+                    fs.unlinkSync(files.commentFile[0].path);
+                }
+                updateData.$push = { comments: commentData };
+            }
+
+            const updatedApplication = await Application.findByIdAndUpdate(id, updateData, { new: true })
+                .populate('userId', 'firstName lastName patronymic email')
+                .populate('comments.author', 'firstName lastName');
+            console.log('Updated application:', updatedApplication);
+
+            res.json(updatedApplication);
+        } catch (error) {
+            console.error('Employee application update error:', error);
+            res.status(500).json({ message: 'Ошибка обновления заявления', error: error.message });
+        }
+    },
+);
+
+// Обновление заявления для пользователя
 app.put(
     '/api/applications/:id',
     authMiddleware,
@@ -201,86 +260,65 @@ app.put(
     async (req, res) => {
         try {
             const { id } = req.params;
-            const { comment, status } = req.body;
-            const files = req.files;
+            const { comment } = req.body;
+            const files = req.files || {};
             const user = req.user;
-
-            console.log('Received update request:', { id, comment, files: Object.keys(files), status }); // Отладка
+            console.log('Received user update request:', {
+                id,
+                comment,
+                commentFile: files.commentFile,
+                documents: Object.keys(files).filter((key) => key.startsWith('document_')),
+            });
 
             const application = await Application.findById(id);
             if (!application) {
                 return res.status(404).json({ message: 'Заявление не найдено' });
             }
 
-            if (user.role === 'user' && application.userId.toString() !== user.id) {
+            if (application.userId.toString() !== user.id) {
                 return res.status(403).json({ message: 'Доступ запрещён: вы не владелец заявления' });
             }
 
-            const updateData = { updatedAt: Date.now() };
-
-            if (user.role === 'employee') {
-                if (status) {
-                    updateData.status = status;
-                }
-                if (comment || files['commentFile']) {
-                    const commentData = {
-                        text: comment || '',
-                        author: user.id,
-                        createdAt: new Date(),
-                    };
-                    if (files['commentFile']) {
-                        commentData.file = {
-                            data: fs.readFileSync(files['commentFile'][0].path),
-                            contentType: files['commentFile'][0].mimetype,
-                        };
-                        fs.unlinkSync(files['commentFile'][0].path);
-                    }
-                    updateData.$push = { comments: commentData };
-                }
+            if (application.status !== 'Вернулось') {
+                return res.status(403).json({ message: 'Редактирование доступно только для статуса "Вернулось"' });
             }
 
-            if (user.role === 'user') {
-                if (application.status !== 'Вернулось') {
-                    return res.status(403).json({ message: 'Редактирование доступно только для статуса "Вернулось"' });
-                }
+            const updateData = { updatedAt: Date.now(), status: 'В обработке' };
 
-                updateData.status = 'В обработке';
-
-                const newDocuments = [...application.documents];
-                ['document_0', 'document_1', 'document_2'].forEach((field, index) => {
-                    if (files[field]) {
-                        newDocuments[index] = {
-                            data: fs.readFileSync(files[field][0].path),
-                            contentType: files[field][0].mimetype,
-                        };
-                        fs.unlinkSync(files[field][0].path);
-                    }
-                });
-                updateData.documents = newDocuments;
-
-                if (comment || files['commentFile']) {
-                    const commentData = {
-                        text: comment || '',
-                        author: user.id,
-                        createdAt: new Date(),
+            // Обновление документов
+            const newDocuments = [...application.documents];
+            ['document_0', 'document_1', 'document_2'].forEach((field, index) => {
+                if (files[field]) {
+                    newDocuments[index] = {
+                        data: fs.readFileSync(files[field][0].path),
+                        contentType: files[field][0].mimetype,
                     };
-                    if (files['commentFile']) {
-                        commentData.file = {
-                            data: fs.readFileSync(files['commentFile'][0].path),
-                            contentType: files['commentFile'][0].mimetype,
-                        };
-                        fs.unlinkSync(files['commentFile'][0].path);
-                    }
-                    console.log('Adding user comment:', commentData); // Отладка
-                    updateData.$push = { comments: commentData };
+                    fs.unlinkSync(files[field][0].path);
                 }
+            });
+            updateData.documents = newDocuments;
+
+            // Добавление комментария
+            if (comment || files.commentFile) {
+                const commentData = {
+                    text: comment || '',
+                    author: user.id,
+                    createdAt: new Date(),
+                };
+                if (files.commentFile) {
+                    commentData.file = {
+                        data: fs.readFileSync(files.commentFile[0].path),
+                        contentType: files.commentFile[0].mimetype,
+                    };
+                    fs.unlinkSync(files.commentFile[0].path);
+                }
+                updateData.$push = { comments: commentData };
             }
 
-            console.log('Updating application:', id, 'with data:', updateData); // Отладка
             const updatedApplication = await Application.findByIdAndUpdate(id, updateData, { new: true })
                 .populate('userId', 'firstName lastName patronymic email')
                 .populate('comments.author', 'firstName lastName');
-            console.log('Updated application:', updatedApplication); // Отладка
+            console.log('Updated application:', updatedApplication);
 
             res.json(updatedApplication);
         } catch (error) {
@@ -290,6 +328,7 @@ app.put(
     },
 );
 
+// Профиль пользователя
 app.get('/api/profile', authMiddleware, async (req, res) => {
     try {
         const user = await User.findById(req.user.id);

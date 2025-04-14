@@ -1,13 +1,16 @@
 .subtitle {
-  font-size: 18px;
-  color: #666;
-  margin-bottom: 24px;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.4;
+  margin-bottom: 30px;
+  text-align: left;
+  font-weight: 400;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 20px;
   max-width: 600px;
   margin: 0 auto;
 }
@@ -18,107 +21,159 @@
   gap: 8px;
 }
 
-.label {
-  font-size: 16px;
-  font-weight: 500;
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 600;
   color: #333;
+  margin-bottom: 12px;
 }
 
 .select {
   padding: 12px;
   font-size: 16px;
-  border-radius: 8px;
+  border-radius: 12px;
   border: 1px solid #ddd;
   background: #fff;
   color: #333;
   outline: none;
   transition: border-color 0.2s;
 
+  &:hover,
   &:focus {
-    border-color: #ff5722;
+    border-color: rgb(255, 97, 40);
   }
 }
 
-.templateSection {
+.instructionCard {
+  background: #f9f9fb;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
   padding: 16px;
-  background: #f5f7fa;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.sectionTitle {
-  font-size: 20px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .templateText {
   font-size: 16px;
-  color: #555;
+  color: #333;
   margin: 8px 0;
 }
 
-.templateLink {
-  color: #ff5722;
-  text-decoration: none;
+.templateButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  font-size: 14px;
   font-weight: 500;
+  color: rgb(255, 97, 40);
+  background: white;
+  border: 1px solid rgb(255, 97, 40);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
 
   &:hover {
-    text-decoration: underline;
+    background: rgb(255, 97, 40);
+    color: white;
   }
 }
 
 .docList {
   padding-left: 20px;
   margin: 8px 0;
+  list-style-position: outside;
 }
 
 .docItem {
   font-size: 16px;
-  color: #555;
-  line-height: 1.5;
-}
-
-.filesSection {
-  padding: 16px;
-  background: #f5f7fa;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.fileInput {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-
-.fileLabel {
-  font-size: 16px;
-  font-weight: 500;
   color: #333;
+  line-height: 1.5;
+  margin: 4px 0;
 }
 
-.fileUpload {
-  padding: 8px;
-  font-size: 14px;
-  color: #555;
-  border: 1px dashed #ddd;
-  border-radius: 8px;
-  background: #fff;
-  cursor: pointer;
-  transition: border-color 0.2s;
+.fileCard {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s;
 
   &:hover {
-    border-color: #ff5722;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 }
 
-.fileName {
+.fileLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.fileInputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.customFileInput {
+  display: inline-block;
+  padding: 8px 16px;
   font-size: 14px;
-  color: #666;
-  margin-top: 4px;
+  color: rgb(255, 97, 40);
+  background: white;
+  border: 1px solid rgb(255, 97, 40);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+
+  &:hover {
+    background: rgb(255, 97, 40);
+    color: white;
+  }
+
+  span {
+    display: block;
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  input {
+    display: none;
+  }
+}
+
+.fileUpload {
+  display: none;
+}
+
+.removeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgb(255, 97, 40);
+  transition: color 0.2s;
+
+  &:hover {
+    color: darken(rgb(255, 97, 40), 10%);
+  }
+}
+
+.removeIcon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
 }
 
 .buttonGroup {
@@ -133,11 +188,11 @@
   font-weight: 600;
   border: none;
   border-radius: 12px;
-  background: linear-gradient(135deg, #ff5722 0%, #d81b60 100%);
   color: white;
+  background-color: rgb(255, 97, 40);
   cursor: pointer;
-  transition: opacity 0.2s;
   opacity: 0.5;
+  transition: opacity 0.2s;
   flex: 1;
 
   &:not(:disabled) {
@@ -145,7 +200,7 @@
   }
 
   &:hover:not(:disabled) {
-    opacity: 0.9;
+    background-color: darken(rgb(255, 97, 40), 10%);
   }
 }
 
@@ -167,8 +222,7 @@
   }
 
   &:hover:not(:disabled) {
-    background: #ff5722;
-    color: white;
+    background: darken(white, 10%);
   }
 }
 
@@ -177,4 +231,32 @@
   color: #d32f2f;
   margin-top: 12px;
   text-align: center;
+}
+
+@media (max-width: 600px) {
+  .form {
+    max-width: 100%;
+  }
+
+  .instructionCard,
+  .fileCard {
+    padding: 12px;
+  }
+
+  .customFileInput span {
+    max-width: 200px;
+  }
+
+  .fileInputWrapper {
+    flex-wrap: wrap;
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+  }
+
+  .submitButton,
+  .backButton {
+    width: 100%;
+  }
 }

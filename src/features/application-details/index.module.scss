@@ -74,48 +74,105 @@
   }
 }
 
-.customFileInput {
-  display: inline-block;
-  padding: 8px 16px;
+.attachFileLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
   font-size: 14px;
+  font-weight: 500;
   color: #ff6128;
-  background: white;
+  background: #fff;
   border: 1px solid #ff6128;
-  border-radius: 6px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
+  transition: background-color 0.2s, color 0.2s, transform 0.2s;
+
+  &:hover {
+    background: #ff6128;
+    color: white;
+    transform: scale(1.02);
+  }
+
+  span {
+    max-width: 300px; /* Увеличили ширину */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+
+.fileInputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fileInputLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ff6128;
+  background: #fff;
+  border: 1px solid #ff6128;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, transform 0.2s;
 
   &:hover {
     background: #ff6128;
     color: white;
   }
 
+  &.fileAttached {
+    background: rgba(255, 97, 40, 0.1);
+    border-color: #ff6128;
+    color: #ff6128;
+  }
+
   span {
-    display: block;
     max-width: 200px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
+}
 
-  input {
-    display: none;
+.attachIcon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.fileInput {
+  display: none;
+}
+
+.removeFileButton {
+  padding: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+  opacity: 0.7;
+
+  &:hover {
+    opacity: 1;
+    transform: scale(1.1);
   }
 }
 
-.removeButton {
-  padding: 8px 16px;
-  font-size: 14px;
-  color: #ff4444;
-  background: none;
-  border: 1px solid #ff4444;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
+.trashIcon {
+  width: 18px;
+  height: 18px;
+  fill: #ff4444;
 
-  &:hover {
-    background: #ff4444;
-    color: white;
+  .removeFileButton:hover & {
+    fill: #cc0000;
   }
 }
 
@@ -128,13 +185,6 @@
   flex-direction: column;
   gap: 16px;
   border: 1px solid #e0e0e0;
-}
-
-.editSectionTitle {
-  font-size: 18px;
-  font-weight: 600;
-  color: #333;
-  margin: 0;
 }
 
 .commentInput {
@@ -150,32 +200,37 @@
   outline: none;
   transition: border-color 0.2s;
 
+  &:hover {
+    border-color: #ff6128;
+  }
+
   &:focus {
     border-color: #ff6128;
   }
 }
 
+.actionButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
 .saveButton {
-  padding: 12px 24px;
-  font-size: 16px;
+  padding: 10px 20px;
+  font-size: 14px;
   font-weight: 600;
   color: white;
   background: #ff6128;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.2s;
-  align-self: flex-end;
+  transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
 
   &:hover {
     background: darken(#ff6128, 10%);
-    transform: translateY(-2px);
   }
-}
-
-.commentSection {
-  padding: 12px 0;
-  border-bottom: 1px solid #f0f0f0;
 }
 
 .commentHistory {
@@ -234,7 +289,6 @@
 
   &:hover {
     background-color: darken(#ff6128, 10%);
-    transform: translateY(-3px);
   }
 }
 
@@ -248,7 +302,7 @@
     align-items: flex-start;
   }
 
-  .customFileInput span {
+  .fileInputLabel span {
     max-width: 150px;
   }
 

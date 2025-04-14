@@ -31,10 +31,26 @@
 }
 
 .detailValue {
-  color: #555;
+  color: #333;
   font-size: 16px;
   display: flex;
   align-items: center;
+}
+
+.statusDropdown {
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #333;
+  outline: none;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    border: 1px solid rgb(255, 97, 40);
+  }
 }
 
 .docList {
@@ -50,15 +66,15 @@
 .downloadButton {
   padding: 8px 16px;
   font-size: 14px;
-  color: #ff6128;
+  color: rgb(255, 97, 40);
   background: none;
-  border: 1px solid #ff6128;
+  border: 1px solid rgb(255, 97, 40);
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.2s, color 0.2s;
 
   &:hover {
-    background: #ff6128;
+    background: rgb(255, 97, 40);
     color: white;
   }
 }
@@ -68,7 +84,7 @@
   border-bottom: 1px solid #eee;
   display: flex;
   flex-direction: column;
-  gap: 12px; /* Отступы между элементами */
+  gap: 12px;
 }
 
 .commentInput {
@@ -84,29 +100,45 @@
   outline: none;
   transition: border-color 0.2s;
 
+  &:hover,
   &:focus {
-    border-color: #ff6128;
+    border-color: rgb(255, 97, 40);
   }
 }
 
-.customFileInput {
-  display: inline-block;
-  padding: 8px 16px;
+.fileInputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fileInputLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
   font-size: 14px;
-  color: #ff6128;
+  font-weight: 500;
+  color: rgb(255, 97, 40);
   background: #fff;
-  border: 1px solid #ff6128;
-  border-radius: 8px;
+  border: 1px solid rgb(255, 97, 40);
+  border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
+  transition: background-color 0.2s, color 0.2s, transform 0.2s;
 
   &:hover {
-    background: #ff6128;
+    background: rgb(255, 97, 40);
     color: white;
+    transform: scale(1.02);
+  }
+
+  &.fileAttached {
+    background: rgba(255, 97, 40, 0.1);
+    border-color: rgb(255, 97, 40);
+    color: rgb(255, 97, 40);
   }
 
   span {
-    display: block;
     max-width: 200px;
     white-space: nowrap;
     overflow: hidden;
@@ -115,7 +147,57 @@
 }
 
 .fileInput {
-  display: none; /* Скрываем стандартный input */
+  display: none;
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.removeFileButton {
+  padding: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+  opacity: 0.7;
+
+  &:hover {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.trashIcon {
+  width: 18px;
+  height: 18px;
+  fill: #ff4444;
+
+  .removeFileButton:hover & {
+    fill: #cc0000;
+  }
+}
+
+.submitButton {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  background: rgb(255, 97, 40);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    background: darken(rgb(255, 97, 40), 10%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 97, 40, 0.3);
+  }
 }
 
 .commentHistory {
@@ -145,14 +227,14 @@
   margin-left: 8px;
   padding: 4px 8px;
   font-size: 12px;
-  color: #ff6128;
+  color: rgb(255, 97, 40);
   background: none;
-  border: 1px solid #ff6128;
+  border: 1px solid rgb(255, 97, 40);
   border-radius: 4px;
   cursor: pointer;
 
   &:hover {
-    background: #ff6128;
+    background: rgb(255, 97, 40);
     color: white;
   }
 }
@@ -161,29 +243,24 @@
   padding: 8px;
   background: none;
   border: none;
-  color: #ff4444;
   cursor: pointer;
-  transition: color 0.2s;
-
-  svg {
-    width: 16px;
-    height: 16px;
-  }
+  transition: transform 0.2s, opacity 0.2s;
+  opacity: 0.7;
 
   &:hover {
-    color: #cc0000;
+    opacity: 1;
+    transform: scale(1.1);
   }
-}
 
-.statusDropdown {
-  padding: 8px;
-  font-size: 16px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  background: #fff;
-  color: #333;
-  outline: none;
-  cursor: pointer;
+  .trashIcon {
+    width: 16px;
+    height: 16px;
+    fill: #ff4444;
+
+    .deleteCommentButton:hover & {
+      fill: #cc0000;
+    }
+  }
 }
 
 .backButton {
@@ -202,6 +279,5 @@
 
   &:hover {
     background-color: darken(rgb(255, 97, 40), 10%);
-    transform: translateY(-3px);
   }
 }

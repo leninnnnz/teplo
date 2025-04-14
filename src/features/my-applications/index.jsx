@@ -51,13 +51,16 @@ export function MyApplications() {
         navigate(`/application/${id}`);
     };
 
-    const formatDate = (dateString) => {
+    const formatDateTime = (dateString) => {
         const date = new Date(dateString);
-        return date.toLocaleDateString('ru-RU', {
+        return `${date.toLocaleDateString('ru-RU', {
             day: 'numeric',
             month: 'long',
             year: 'numeric',
-        });
+        })}, ${date.toLocaleTimeString('ru-RU', {
+            hour: '2-digit',
+            minute: '2-digit',
+        })}`;
     };
 
     const getTypeIcon = (type) => {
@@ -109,17 +112,19 @@ export function MyApplications() {
                     <div className={style.applicationsList}>
                         {applications.map((app) => (
                             <div key={app._id} className={style.applicationCard} onClick={() => handleCardClick(app._id)}>
-                                <div className={style.cardHeader}>
-                                    <span className={style.cardNumber}>№ {app._id}</span>
-                                    {getTypeIcon(app.type)}
-                                </div>
                                 <div className={style.cardBody}>
-                                    <p className={style.cardType}>{app.type}</p>
-                                    <p className={style.cardDate}>{formatDate(app.createdAt)}</p>
-                                </div>
-                                <div className={style.cardFooter}>
-                                    {getStatusIcon(app.status)}
-                                    <span className={style[`status-${app.status.toLowerCase().replace(' ', '-')}`]}>{app.status}</span>
+                                    <div className={style.cardTypeWrapper}>
+                                        <p className={style.cardType}>{app.type}</p>
+                                    </div>
+                                    <p className={style.cardDate}>Дата подачи заявления: {formatDateTime(app.createdAt)}</p>
+                                    {app.updatedAt && (
+                                        <p className={style.cardUpdate}>Дата последнего изменения: {formatDateTime(app.updatedAt)}</p>
+                                    )}
+                                    <div className={style.cardStatus}>
+                                        {getStatusIcon(app.status)}
+                                        <span className={style.statusLabel}>Статус: </span>
+                                        <span className={style[`status-${app.status.toLowerCase().replace(' ', '-')}`]}>{app.status}</span>
+                                    </div>
                                 </div>
                             </div>
                         ))}

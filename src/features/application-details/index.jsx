@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Content, TitlePage, Wrapper } from '../../shared/UI';
+import { IconTrash } from '../../shared/UI/icons'; // Добавляем IconAttach
 import style from './index.module.scss';
 
 export function ApplicationDetails() {
@@ -9,9 +10,10 @@ export function ApplicationDetails() {
     const [application, setApplication] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [newDocuments, setNewDocuments] = useState([]); // Новые файлы
-    const [comment, setComment] = useState(''); // Комментарий
-    const [commentFile, setCommentFile] = useState(null); // Файл для комментария
+    const [newDocuments, setNewDocuments] = useState([]);
+    const [comment, setComment] = useState('');
+    const [commentFile, setCommentFile] = useState(null);
+    const [deletedDocs, setDeletedDocs] = useState([]);
 
     useEffect(() => {
         const fetchApplication = async () => {
@@ -41,7 +43,8 @@ export function ApplicationDetails() {
                 const data = await response.json();
                 console.log('Fetched application:', data);
                 setApplication(data);
-                setNewDocuments(new Array(data.documents.length).fill(null)); // Инициализация новых файлов
+                setNewDocuments(new Array(data.documents.length).fill(null));
+                setDeletedDocs(new Array(data.documents.length).fill(false)); // Инициализация
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -62,7 +65,7 @@ export function ApplicationDetails() {
                 hour: '2-digit',
                 minute: '2-digit',
             })
-            .replace(',', ''); // Формат: 14.04.24 14:30
+            .replace(',', '');
     };
 
     const handleDownload = (docIndex) => {
@@ -99,16 +102,39 @@ export function ApplicationDetails() {
         const updatedDocuments = [...newDocuments];
         updatedDocuments[index] = file;
         setNewDocuments(updatedDocuments);
+        const updatedDeleted = [...deletedDocs];
+        updatedDeleted[index] = false; // Сбрасываем флаг удаления
+        setDeletedDocs(updatedDeleted);
+    };
+
+    const handlePreviewNewDocument = (index) => {
+        const file = newDocuments[index];
+        if (!file) return;
+
+        const url = window.URL.createObjectURL(file);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = file.name;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
     };
 
     const handleRemoveDocument = (index) => {
         const updatedDocuments = [...newDocuments];
         updatedDocuments[index] = null;
         setNewDocuments(updatedDocuments);
+        const updatedDeleted = [...deletedDocs];
+        updatedDeleted[index] = true; // Помечаем как удалённый
+        setDeletedDocs(updatedDeleted);
     };
-
     const handleCommentFileChange = (e) => {
         setCommentFile(e.target.files[0]);
+    };
+
+    const handleRemoveCommentFile = () => {
+        setCommentFile(null);
     };
 
     const handleSave = async () => {
@@ -116,27 +142,24 @@ export function ApplicationDetails() {
             const token = localStorage.getItem('token');
             const formData = new FormData();
 
-            // Добавляем новые файлы документов
             newDocuments.forEach((file, index) => {
                 if (file) {
                     formData.append(`document_${index}`, file);
                 }
             });
 
-            // Добавляем комментарий и файл комментария
-            formData.append('comment', comment || ''); // Отправляем пустую строку, если нет текста
+            formData.append('comment', comment || '');
             if (commentFile) {
                 formData.append('commentFile', commentFile);
             }
 
-            // Устанавливаем статус "В обработке"
             formData.append('status', 'В обработке');
 
             console.log('Sending FormData:', {
                 comment: comment || '',
                 commentFile: commentFile ? commentFile.name : null,
                 documents: newDocuments.map((f) => (f ? f.name : null)),
-            }); // Отладка
+            });
 
             const response = await fetch(`http://localhost:5001/api/applications/${id}`, {
                 method: 'PUT',
@@ -155,6 +178,7 @@ export function ApplicationDetails() {
             console.log('Updated application:', updatedApplication);
             setApplication(updatedApplication);
             setNewDocuments(new Array(updatedApplication.documents.length).fill(null));
+            setDeletedDocs(new Array(updatedApplication.documents.length).fill(false)); // Сбрасываем
             setComment('');
             setCommentFile(null);
         } catch (err) {
@@ -194,29 +218,37 @@ export function ApplicationDetails() {
                             <ul className={style.docList}>
                                 {application.documents.map((doc, index) => (
                                     <li key={index} className={style.docItem}>
-                                        <button
-                                            className={style.downloadButton}
-                                            onClick={() => handleDownload(index)}
-                                            disabled={application.status === 'Вернулось' && newDocuments[index]}
-                                        >
-                                            Скачать {requiredDocs[index]}
-                                        </button>
-                                        {application.status === 'Вернулось' && (
-                                            <>
-                                                <label className={style.customFileInput}>
-                                                    <span>
-                                                        {newDocuments[index] ? newDocuments[index].name : `Заменить ${requiredDocs[index]}`}
-                                                    </span>
+                                        {application.status === 'Вернулось' && (deletedDocs[index] || newDocuments[index]) ? (
+                                            newDocuments[index] ? (
+                                                <button className={style.downloadButton} onClick={() => handlePreviewNewDocument(index)}>
+                                                    Скачать {newDocuments[index].name}
+                                                </button>
+                                            ) : (
+                                                <label className={style.attachFileLabel}>
+                                                    <span>Прикрепить скан {requiredDocs[index]}</span>
                                                     <input
                                                         type="file"
                                                         onChange={(e) => handleFileChange(index, e.target.files[0])}
                                                         accept=".pdf,.jpg,.png"
+                                                        className={style.fileInput}
                                                     />
                                                 </label>
-                                                {(doc || newDocuments[index]) && (
-                                                    <button className={style.removeButton} onClick={() => handleRemoveDocument(index)}>
-                                                        Удалить
-                                                    </button>
+                                            )
+                                        ) : (
+                                            <>
+                                                <button className={style.downloadButton} onClick={() => handleDownload(index)}>
+                                                    Скачать {requiredDocs[index]}
+                                                </button>
+                                                {application.status === 'Вернулось' && (
+                                                    <div className={style.fileInputWrapper}>
+                                                        <button
+                                                            className={style.removeFileButton}
+                                                            onClick={() => handleRemoveDocument(index)}
+                                                            title="Удалить документ"
+                                                        >
+                                                            <IconTrash className={style.trashIcon} />
+                                                        </button>
+                                                    </div>
                                                 )}
                                             </>
                                         )}
@@ -226,7 +258,6 @@ export function ApplicationDetails() {
                         </div>
                         {application.status === 'Вернулось' && (
                             <div className={style.editSection}>
-                                <h3 className={style.editSectionTitle}>Редактировать заявление</h3>
                                 <span className={style.detailLabel}>Комментарий:</span>
                                 <textarea
                                     value={comment}
@@ -234,13 +265,31 @@ export function ApplicationDetails() {
                                     placeholder="Введите комментарий (необязательно)..."
                                     className={style.commentInput}
                                 />
-                                <label className={style.customFileInput}>
-                                    <span>{commentFile ? commentFile.name : 'Прикрепить файл (необязательно)'}</span>
-                                    <input type="file" onChange={handleCommentFileChange} accept=".pdf,.jpg,.png" />
-                                </label>
-                                <button className={style.saveButton} onClick={handleSave}>
-                                    Сохранить
-                                </button>
+                                <div className={style.actionButtons}>
+                                    <div className={style.fileInputWrapper}>
+                                        <label className={`${style.fileInputLabel} ${commentFile ? style.fileAttached : ''}`}>
+                                            <span>{commentFile ? commentFile.name : 'Прикрепить файл (необязательно)'}</span>
+                                            <input
+                                                type="file"
+                                                onChange={handleCommentFileChange}
+                                                accept=".pdf,.jpg,.png"
+                                                className={style.fileInput}
+                                            />
+                                        </label>
+                                        {commentFile && (
+                                            <button
+                                                className={style.removeFileButton}
+                                                onClick={handleRemoveCommentFile}
+                                                title="Удалить файл"
+                                            >
+                                                <IconTrash className={style.trashIcon} />
+                                            </button>
+                                        )}
+                                    </div>
+                                    <button className={style.saveButton} onClick={handleSave}>
+                                        Сохранить
+                                    </button>
+                                </div>
                             </div>
                         )}
                         <div className={style.commentHistory}>

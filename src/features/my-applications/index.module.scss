@@ -18,43 +18,57 @@
 
 .emptyText {
     font-size: 20px;
-    color: #555;
+    color: #333;
     line-height: 1.5;
     text-align: center;
     font-weight: 400;
 }
 
+.submitButton {
+    padding: 14px 32px;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    background-color: rgb(255, 97, 40);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    flex: 1;
+
+    &:hover {
+        background-color: darken(rgb(255, 97, 40), 15%);
+    }
+
+    &:disabled {
+        background: #ccc;
+        box-shadow: none;
+        cursor: not-allowed;
+    }
+}
+
 .applicationsList {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    margin-bottom: 40px;
+    gap: 20px;
 }
 
 .applicationCard {
     background-color: white;
     border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #ccc;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
 
     &:hover {
-        transform: translateY(-5px);
+        border: 1px solid rgb(255, 97, 40);
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     }
 }
 
-.cardHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-}
-
 .cardNumber {
     font-size: 14px;
-    color: #777;
+    color: #333;
     font-weight: 500;
 }
 
@@ -65,7 +79,15 @@
 }
 
 .cardBody {
-    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cardTypeWrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .cardType {
@@ -75,16 +97,24 @@
     margin: 0;
 }
 
-.cardDate {
+.cardDate,
+.cardUpdate {
     font-size: 14px;
-    color: #888;
-    margin: 4px 0 0;
+    color: #777;
+    margin: 0;
+    line-height: 1.4;
 }
 
-.cardFooter {
+.cardStatus {
     display: flex;
     align-items: center;
     gap: 8px;
+}
+
+.statusLabel {
+    color: #333;
+    font-weight: 600;
+    font-size: 14px;
 }
 
 .statusIcon {
@@ -110,33 +140,6 @@
     font-size: 14px;
 }
 
-.submitButton {
-    display: block;
-    width: fit-content;
-    margin: 0 auto;
-    padding: 14px 32px;
-    font-size: 16px;
-    font-weight: 600;
-    color: white;
-    background-color: rgb(255, 97, 40);
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 15px rgba(255, 97, 40, 0.3);
-
-    &:hover {
-        background-color: darken(rgb(255, 97, 40), 10%);
-        transform: translateY(-3px);
-        box-shadow: 0 8px 20px rgba(255, 97, 40, 0.4);
-    }
-
-    &:active {
-        transform: translateY(0);
-        box-shadow: 0 3px 10px rgba(255, 97, 40, 0.2);
-    }
-}
-
 @media (max-width: 700px) {
     .emptyState {
         padding: 40px 0;
@@ -154,7 +157,15 @@
         font-size: 16px;
     }
 
-    .cardDate {
+    .cardDate,
+    .cardUpdate {
+        font-size: 13px;
+    }
+
+    .statusLabel,
+    .status-в-обработке,
+    .status-одобрено,
+    .status-вернулось {
         font-size: 13px;
     }
 
