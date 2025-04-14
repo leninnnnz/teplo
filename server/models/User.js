@@ -15,6 +15,8 @@ const UserSchema = new mongoose.Schema({
         default: 'user', // Значение по умолчанию
     },
     createdAt: { type: Date, default: Date.now },
+    resetCode: { type: String },
+    resetCodeExpires: { type: Date },
 });
 
 module.exports = mongoose.model('User', UserSchema);

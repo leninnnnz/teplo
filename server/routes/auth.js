@@ -14,13 +14,13 @@ console.log('EMAIL_PASS:', process.env.EMAIL_PASS);
 const transporter = nodemailer.createTransport({
     host: 'smtp.yandex.ru',
     port: 587,
-    secure: false, // Используем STARTTLS
+    secure: false,
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
     },
     tls: {
-        rejectUnauthorized: false, // Для локальной разработки
+        rejectUnauthorized: false,
     },
 });
 
@@ -43,11 +43,11 @@ router.post('/register', async (req, res) => {
             email,
             password: hashedPassword,
             verificationCode,
-            role: 'user', // Явно задаём роль
+            role: 'user',
         });
 
         await user.save();
-        console.log('User saved:', user); // Лог для проверки
+        console.log('User saved:', user);
 
         await transporter.sendMail({
             from: `"Teplo" <${process.env.EMAIL_USER}>`,
@@ -55,7 +55,7 @@ router.post('/register', async (req, res) => {
             subject: 'Код подтверждения',
             text: `Ваш код подтверждения: ${verificationCode}`,
         });
-        console.log('Email sent to:', email); // Лог для проверки отправки
+        console.log('Email sent to:', email);
 
         res.status(201).json({ message: 'Код отправлен на ваш email' });
     } catch (error) {
@@ -64,6 +64,7 @@ router.post('/register', async (req, res) => {
     }
 });
 
+// Верификация кода
 router.post('/verify-code', async (req, res) => {
     const { email, code } = req.body;
 
@@ -89,6 +90,7 @@ router.post('/verify-code', async (req, res) => {
     }
 });
 
+// Вход
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
@@ -113,6 +115,74 @@ router.post('/login', async (req, res) => {
     } catch (error) {
         console.error('Ошибка входа:', error);
         res.status(500).json({ message: 'Ошибка сервера', error: error.message });
+    }
+});
+
+// Отправка кода для восстановления
+router.post('/forgot-password', async (req, res) => {
+    try {
+        const { email } = req.body;
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ message: 'Пользователь не найден' });
+        }
+
+        const code = Math.floor(100000 + Math.random() * 900000).toString();
+        user.resetCode = code;
+        user.resetCodeExpires = Date.now() + 3600000;
+        await user.save();
+
+        await transporter.sendMail({
+            from: `"Teplo" <${process.env.EMAIL_USER}>`,
+            to: email,
+            subject: 'Код для восстановления пароля',
+            text: `Ваш код для восстановления: ${code}`,
+        });
+        console.log(`Код отправлен на ${email}: ${code}`);
+
+        res.json({ message: 'Код отправлен на ваш email' });
+    } catch (err) {
+        console.error('Forgot password error:', err);
+        res.status(500).json({ message: 'Ошибка сервера' });
+    }
+});
+
+// Проверка кода
+router.post('/verify-reset-code', async (req, res) => {
+    try {
+        const { email, code } = req.body;
+        const user = await User.findOne({ email });
+        if (!user || user.resetCode !== code || user.resetCodeExpires < Date.now()) {
+            return res.status(400).json({ message: 'Неверный или истёкший код' });
+        }
+        res.json({ message: 'Код верный' });
+    } catch (err) {
+        console.error('Verify reset code error:', err);
+        res.status(500).json({ message: 'Ошибка сервера' });
+    }
+});
+
+// Сброс пароля
+router.post('/reset-password', async (req, res) => {
+    try {
+        const { email, code, password } = req.body;
+        const user = await User.findOne({ email });
+        if (!user || user.resetCode !== code || user.resetCodeExpires < Date.now()) {
+            return res.status(400).json({ message: 'Неверный или истёкший код' });
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        user.password = hashedPassword;
+        user.resetCode = null;
+        user.resetCodeExpires = null;
+        await user.save();
+
+        res.json({ message: 'Пароль успешно изменён' });
+    } catch (err) {
+        console.error('Reset password error:', err);
+        res.status(500).json({ message: 'Ошибка сервера' });
     }
 });
 
