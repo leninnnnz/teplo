@@ -34,7 +34,7 @@
   color: #555;
   font-size: 16px;
   display: flex;
-  align-items: center; /* Для выравнивания select с текстом */
+  align-items: center;
 }
 
 .docList {
@@ -64,23 +64,16 @@
 }
 
 .commentSection {
-  padding: 12px 0;
+  padding: 16px 0;
   border-bottom: 1px solid #eee;
-}
-
-.commentText {
-  color: #555;
-  font-size: 16px;
-  margin: 8px 0 0;
-  background: #f5f7fa;
-  padding: 12px;
-  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* Отступы между элементами */
 }
 
 .commentInput {
   width: 100%;
   min-height: 100px;
-  margin: 8px 0 12px; /* Добавляем отступ снизу перед кнопкой */
   padding: 12px;
   font-size: 16px;
   color: #555;
@@ -89,9 +82,96 @@
   resize: vertical;
   background: #f5f7fa;
   outline: none;
+  transition: border-color 0.2s;
 
   &:focus {
     border-color: #ff6128;
+  }
+}
+
+.customFileInput {
+  display: inline-block;
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #ff6128;
+  background: #fff;
+  border: 1px solid #ff6128;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+
+  &:hover {
+    background: #ff6128;
+    color: white;
+  }
+
+  span {
+    display: block;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.fileInput {
+  display: none; /* Скрываем стандартный input */
+}
+
+.commentHistory {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.commentItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.commentText {
+  color: #555;
+  font-size: 16px;
+  margin: 0;
+  background: #f5f7fa;
+  padding: 12px;
+  border-radius: 8px;
+  flex: 1;
+}
+
+.downloadCommentFile {
+  margin-left: 8px;
+  padding: 4px 8px;
+  font-size: 12px;
+  color: #ff6128;
+  background: none;
+  border: 1px solid #ff6128;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background: #ff6128;
+    color: white;
+  }
+}
+
+.deleteCommentButton {
+  padding: 8px;
+  background: none;
+  border: none;
+  color: #ff4444;
+  cursor: pointer;
+  transition: color 0.2s;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  &:hover {
+    color: #cc0000;
   }
 }
 

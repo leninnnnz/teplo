@@ -9,11 +9,11 @@
 }
 
 .detailsContainer {
-  padding: 20px;
+  padding: 24px;
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  max-width: 600px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  max-width: 700px;
   margin: 0 auto;
 }
 
@@ -21,7 +21,7 @@
   display: flex;
   justify-content: space-between;
   padding: 12px 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .detailLabel {
@@ -42,7 +42,14 @@
 }
 
 .docItem {
-  margin: 8px 0;
+  margin: 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: #fafafa;
+  padding: 12px;
+  border-radius: 8px;
 }
 
 .downloadButton {
@@ -51,7 +58,157 @@
   color: #ff6128;
   background: none;
   border: 1px solid #ff6128;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+
+  &:hover {
+    background: #ff6128;
+    color: white;
+  }
+
+  &:disabled {
+    color: #ccc;
+    border-color: #ccc;
+    cursor: not-allowed;
+  }
+}
+
+.customFileInput {
+  display: inline-block;
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #ff6128;
+  background: white;
+  border: 1px solid #ff6128;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+
+  &:hover {
+    background: #ff6128;
+    color: white;
+  }
+
+  span {
+    display: block;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  input {
+    display: none;
+  }
+}
+
+.removeButton {
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #ff4444;
+  background: none;
+  border: 1px solid #ff4444;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+
+  &:hover {
+    background: #ff4444;
+    color: white;
+  }
+}
+
+.editSection {
+  padding: 16px;
+  margin: 16px 0;
+  background: #f5f7fa;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 1px solid #e0e0e0;
+}
+
+.editSectionTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.commentInput {
+  width: 100%;
+  min-height: 120px;
+  padding: 12px;
+  font-size: 16px;
+  color: #555;
+  border: 1px solid #ddd;
   border-radius: 8px;
+  resize: vertical;
+  background: white;
+  outline: none;
+  transition: border-color 0.2s;
+
+  &:focus {
+    border-color: #ff6128;
+  }
+}
+
+.saveButton {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  background: #ff6128;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  align-self: flex-end;
+
+  &:hover {
+    background: darken(#ff6128, 10%);
+    transform: translateY(-2px);
+  }
+}
+
+.commentSection {
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.commentHistory {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.commentItem {
+  display: flex;
+  align-items: flex-start;
+  background: linear-gradient(145deg, #f5f7fa, #ffffff);
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.commentText {
+  color: #555;
+  font-size: 16px;
+  margin: 0;
+  flex: 1;
+}
+
+.downloadCommentFile {
+  margin-top: 8px;
+  padding: 6px 12px;
+  font-size: 13px;
+  color: #ff6128;
+  background: none;
+  border: 1px solid #ff6128;
+  border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.2s, color 0.2s;
 
@@ -61,36 +218,42 @@
   }
 }
 
-.commentSection {
-  padding: 12px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.commentText {
-  color: #555;
-  font-size: 16px;
-  margin: 8px 0 0;
-  background: #f5f7fa;
-  padding: 12px;
-  border-radius: 8px;
-}
-
 .backButton {
   display: block;
   width: fit-content;
-  margin: 20px auto 0;
+  margin: 24px auto 0;
   padding: 12px 24px;
   font-size: 16px;
   font-weight: 600;
   color: white;
-  background-color: rgb(255, 97, 40);
+  background-color: #ff6128;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
 
   &:hover {
-    background-color: darken(rgb(255, 97, 40), 10%);
+    background-color: darken(#ff6128, 10%);
     transform: translateY(-3px);
+  }
+}
+
+@media (max-width: 600px) {
+  .detailsContainer {
+    padding: 16px;
+  }
+
+  .docItem {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .customFileInput span {
+    max-width: 150px;
+  }
+
+  .saveButton {
+    width: 100%;
+    align-self: stretch;
   }
 }

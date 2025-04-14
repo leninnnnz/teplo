@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Content, TitlePage, Wrapper } from '../../shared/UI';
+import { IconTrash } from '../../shared/UI/icons'; // Проверь путь
 import style from './index.module.scss';
 
 export function EmployeeApplicationDetails() {
@@ -10,6 +11,7 @@ export function EmployeeApplicationDetails() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [comment, setComment] = useState('');
+    const [commentFile, setCommentFile] = useState(null);
 
     useEffect(() => {
         const fetchApplication = async () => {
@@ -37,9 +39,8 @@ export function EmployeeApplicationDetails() {
                 }
 
                 const data = await response.json();
-                console.log('Fetched application:', data); // Отладка
+                console.log('Fetched application:', data);
                 setApplication(data);
-                setComment(data.comment || '');
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -62,12 +63,9 @@ export function EmployeeApplicationDetails() {
                 body: JSON.stringify({ status: newStatus }),
             });
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || 'Ошибка изменения статуса');
-            }
-
-            setApplication((prev) => ({ ...prev, status: newStatus }));
+            if (!response.ok) throw new Error('Ошибка изменения статуса');
+            const updatedApplication = await response.json();
+            setApplication(updatedApplication);
         } catch (err) {
             setError(err.message);
         }
@@ -76,38 +74,99 @@ export function EmployeeApplicationDetails() {
     const handleCommentSave = async () => {
         try {
             const token = localStorage.getItem('token');
+            const formData = new FormData();
+            formData.append('comment', comment);
+            if (commentFile) {
+                formData.append('commentFile', commentFile);
+            }
+
             const response = await fetch(`http://localhost:5001/api/applications/${id}`, {
                 method: 'PUT',
                 headers: {
                     Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ comment }),
+                body: formData,
             });
 
             if (!response.ok) throw new Error('Ошибка сохранения комментария');
             const updatedApplication = await response.json();
             setApplication(updatedApplication);
-            setComment(''); // Очищаем поле ввода
+            setComment('');
+            setCommentFile(null);
         } catch (err) {
             setError(err.message);
         }
     };
 
+    const handleCommentDelete = async (commentId) => {
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) throw new Error('Токен не найден');
+
+            console.log('Deleting comment:', { applicationId: id, commentId }); // Отладка
+            const response = await fetch(`http://localhost:5001/api/applications/${id}/comments/${commentId}`, {
+                method: 'DELETE',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error('Delete comment error:', errorData); // Отладка
+                throw new Error(errorData.message || 'Ошибка удаления комментария');
+            }
+
+            const updatedApplication = await response.json();
+            console.log('Updated application:', updatedApplication); // Отладка
+            setApplication(updatedApplication);
+        } catch (err) {
+            console.error('Handle delete error:', err.message); // Отладка
+            setError(err.message);
+        }
+    };
+
+    const handleFileChange = (e) => {
+        setCommentFile(e.target.files[0]);
+    };
+
     const formatDate = (dateString) => {
         const date = new Date(dateString);
-        return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+        return date
+            .toLocaleString('ru-RU', {
+                day: '2-digit',
+                month: '2-digit',
+                year: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+            })
+            .replace(',', ''); // Формат: 14.04.24 14:30
     };
 
     const handleDownload = (docIndex) => {
         if (!application || !application.documents[docIndex]) return;
-
         const doc = application.documents[docIndex];
         const blob = new Blob([new Uint8Array(doc.data.data)], { type: doc.contentType });
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
         link.download = `${requiredDocs[docIndex]}.${doc.contentType.split('/')[1]}`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+    };
+
+    const handleCommentFileDownload = (commentId) => {
+        const comment = application.comments.find((c) => c._id === commentId);
+        if (!comment || !comment.file) return;
+
+        const blob = new Blob([new Uint8Array(comment.file.data.data)], { type: comment.file.contentType });
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `comment_file_${commentId}.${comment.file.contentType.split('/')[1]}`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -145,6 +204,7 @@ export function EmployeeApplicationDetails() {
                                     <option value="В обработке">В обработке</option>
                                     <option value="Одобрено">Одобрено</option>
                                     <option value="Вернулось">Вернулось</option>
+                                    <option value="Завершённый">Завершённый</option>
                                 </select>
                             </span>
                         </div>
@@ -152,8 +212,9 @@ export function EmployeeApplicationDetails() {
                             <span className={style.detailLabel}>Пользователь:</span>
                             <span className={style.detailValue}>
                                 {application.userId
-                                    ? `${application.userId.lastName || ''} ${application.userId.firstName || ''} ${application.userId.patronymic || ''}`.trim() ||
-                                      'Не указан'
+                                    ? `${application.userId.lastName || ''} ${application.userId.firstName || ''} ${
+                                          application.userId.patronymic || ''
+                                      }`.trim() || 'Не указан'
                                     : 'Не указан'}
                             </span>
                         </div>
@@ -169,36 +230,60 @@ export function EmployeeApplicationDetails() {
                                 ))}
                             </ul>
                         </div>
-                        <div className={style.detailsContainer}>
-                            {/* ... (остальные элементы те же) */}
-                            <div className={style.commentSection}>
-                                <span className={style.detailLabel}>Комментарии:</span>
-                                <textarea
-                                    value={comment}
-                                    onChange={(e) => setComment(e.target.value)}
-                                    placeholder="Введите комментарий..."
-                                    className={style.commentInput}
-                                />
-                                <button className={style.downloadButton} onClick={handleCommentSave}>
-                                    Добавить комментарий
-                                </button>
-                                <div className={style.commentHistory}>
-                                    {application.comments && application.comments.length > 0 ? (
-                                        application.comments.map((c, index) => (
-                                            <p key={index} className={style.commentText}>
-                                                <strong>{c.author ? `${c.author.lastName} ${c.author.firstName}` : 'Сотрудник'}</strong> (
-                                                {formatDate(c.createdAt)}): {c.text}
-                                            </p>
-                                        ))
-                                    ) : (
-                                        <p className={style.commentText}>Комментариев нет</p>
-                                    )}
-                                </div>
-                            </div>
-                            <button className={style.backButton} onClick={() => navigate('/employee/applications')}>
-                                Назад
+                        <div className={style.commentSection}>
+                            <span className={style.detailLabel}>Комментарии:</span>
+                            <textarea
+                                value={comment}
+                                onChange={(e) => setComment(e.target.value)}
+                                placeholder="Введите комментарий..."
+                                className={style.commentInput}
+                            />
+                            <label className={style.customFileInput}>
+                                <span>{commentFile ? commentFile.name : 'Прикрепить файл'}</span>
+                                <input type="file" onChange={handleFileChange} className={style.fileInput} accept=".pdf,.jpg,.png" />
+                            </label>
+                            <button className={style.downloadButton} onClick={handleCommentSave}>
+                                Добавить комментарий
                             </button>
+                            <div className={style.commentHistory}>
+                                {application.comments && application.comments.length > 0 ? (
+                                    application.comments.map((c) => (
+                                        <div key={c._id} className={style.commentItem}>
+                                            <p className={style.commentText}>
+                                                <strong>
+                                                    {c.author
+                                                        ? `${c.author.lastName || ''} ${c.author.firstName || ''}`.trim()
+                                                        : 'Сотрудник'}
+                                                </strong>{' '}
+                                                ({formatDate(c.createdAt)}):{' '}
+                                                {c.text || (c.file ? '(файл без текста)' : '(пустой комментарий)')}
+                                                {c.file && (
+                                                    <button
+                                                        className={style.downloadCommentFile}
+                                                        onClick={() => handleCommentFileDownload(c._id)}
+                                                    >
+                                                        Скачать файл
+                                                    </button>
+                                                )}
+                                            </p>
+                                            <button
+                                                className={style.deleteCommentButton}
+                                                onClick={() => handleCommentDelete(c._id)}
+                                                title="Удалить комментарий"
+                                                data-testid="delete-comment-button"
+                                            >
+                                                <IconTrash width={16} height={16} />
+                                            </button>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <p className={style.commentText}>Комментариев нет</p>
+                                )}
+                            </div>
                         </div>
+                        <button className={style.backButton} onClick={() => navigate('/employee/applications')}>
+                            Назад
+                        </button>
                     </div>
                 )}
             </Content>

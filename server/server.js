@@ -118,38 +118,6 @@ app.get('/api/applications/:id', authMiddleware, async (req, res) => {
     }
 });
 
-app.put('/api/applications/:id/edit', authMiddleware, upload.array('documents', 5), async (req, res) => {
-    try {
-        const { type, description } = req.body;
-        const files = req.files;
-
-        const application = await Application.findOne({ _id: req.params.id, userId: req.user.id });
-        if (!application) {
-            return res.status(404).json({ message: 'Заявление не найдено' });
-        }
-        if (application.status !== 'В обработке' && application.status !== 'Вернулось') {
-            return res.status(403).json({ message: 'Редактирование доступно только для статусов "В обработке" или "Вернулось"' });
-        }
-
-        const updateData = { updatedAt: Date.now() };
-        if (type) updateData.type = type;
-        if (description) updateData.description = description;
-        if (files && files.length > 0) {
-            updateData.documents = files.map((file) => ({
-                data: fs.readFileSync(file.path),
-                contentType: file.mimetype,
-            }));
-            files.forEach((file) => fs.unlinkSync(file.path));
-        }
-
-        const updatedApplication = await Application.findByIdAndUpdate(req.params.id, updateData, { new: true });
-        res.json({ message: 'Заявление обновлено', application: updatedApplication });
-    } catch (error) {
-        console.error('Application edit error:', error);
-        res.status(500).json({ message: 'Ошибка редактирования заявления', error: error.message });
-    }
-});
-
 app.delete('/api/applications/:id', authMiddleware, async (req, res) => {
     try {
         const application = await Application.findById(req.params.id);
@@ -198,42 +166,129 @@ app.get('/api/employee/applications/:id', authMiddleware, checkRole(['employee']
     }
 });
 
-app.put('/api/applications/:id', authMiddleware, checkRole(['employee']), upload.single('commentFile'), async (req, res) => {
+// Удаление комментария (для сотрудника)
+app.delete('/api/applications/:id/comments/:commentId', authMiddleware, checkRole(['employee']), async (req, res) => {
     try {
-        const { status, comment } = req.body;
-        const file = req.file;
-
-        const updateData = { updatedAt: Date.now() };
-        if (status) updateData.status = status;
-
-        if (comment) {
-            const commentData = {
-                text: comment,
-                author: req.user.id,
-                createdAt: new Date(),
-            };
-            if (file) {
-                commentData.file = {
-                    data: fs.readFileSync(file.path),
-                    contentType: file.mimetype,
-                };
-                fs.unlinkSync(file.path);
-            }
-            updateData.$push = { comments: commentData };
-        }
-
-        const application = await Application.findByIdAndUpdate(req.params.id, updateData, { new: true })
-            .populate('userId', 'firstName lastName patronymic email')
-            .populate('comments.author', 'firstName lastName');
+        const { id, commentId } = req.params;
+        const application = await Application.findById(id);
         if (!application) {
             return res.status(404).json({ message: 'Заявление не найдено' });
         }
-        res.json(application);
+
+        application.comments = application.comments.filter((comment) => comment._id.toString() !== commentId);
+        await application.save();
+
+        const updatedApplication = await Application.findById(id)
+            .populate('userId', 'firstName lastName patronymic email')
+            .populate('comments.author', 'firstName lastName');
+        res.json(updatedApplication);
     } catch (error) {
-        console.error('Application update error:', error);
-        res.status(500).json({ message: 'Ошибка обновления заявления', error: error.message });
+        console.error('Comment delete error:', error);
+        res.status(500).json({ message: 'Ошибка удаления комментария', error: error.message });
     }
 });
+
+// Универсальный маршрут для обновления заявления
+app.put(
+    '/api/applications/:id',
+    authMiddleware,
+    upload.fields([
+        { name: 'commentFile', maxCount: 1 },
+        { name: 'document_0', maxCount: 1 },
+        { name: 'document_1', maxCount: 1 },
+        { name: 'document_2', maxCount: 1 },
+    ]),
+    async (req, res) => {
+        try {
+            const { id } = req.params;
+            const { comment, status } = req.body;
+            const files = req.files;
+            const user = req.user;
+
+            console.log('Received update request:', { id, comment, files: Object.keys(files), status }); // Отладка
+
+            const application = await Application.findById(id);
+            if (!application) {
+                return res.status(404).json({ message: 'Заявление не найдено' });
+            }
+
+            if (user.role === 'user' && application.userId.toString() !== user.id) {
+                return res.status(403).json({ message: 'Доступ запрещён: вы не владелец заявления' });
+            }
+
+            const updateData = { updatedAt: Date.now() };
+
+            if (user.role === 'employee') {
+                if (status) {
+                    updateData.status = status;
+                }
+                if (comment || files['commentFile']) {
+                    const commentData = {
+                        text: comment || '',
+                        author: user.id,
+                        createdAt: new Date(),
+                    };
+                    if (files['commentFile']) {
+                        commentData.file = {
+                            data: fs.readFileSync(files['commentFile'][0].path),
+                            contentType: files['commentFile'][0].mimetype,
+                        };
+                        fs.unlinkSync(files['commentFile'][0].path);
+                    }
+                    updateData.$push = { comments: commentData };
+                }
+            }
+
+            if (user.role === 'user') {
+                if (application.status !== 'Вернулось') {
+                    return res.status(403).json({ message: 'Редактирование доступно только для статуса "Вернулось"' });
+                }
+
+                updateData.status = 'В обработке';
+
+                const newDocuments = [...application.documents];
+                ['document_0', 'document_1', 'document_2'].forEach((field, index) => {
+                    if (files[field]) {
+                        newDocuments[index] = {
+                            data: fs.readFileSync(files[field][0].path),
+                            contentType: files[field][0].mimetype,
+                        };
+                        fs.unlinkSync(files[field][0].path);
+                    }
+                });
+                updateData.documents = newDocuments;
+
+                if (comment || files['commentFile']) {
+                    const commentData = {
+                        text: comment || '',
+                        author: user.id,
+                        createdAt: new Date(),
+                    };
+                    if (files['commentFile']) {
+                        commentData.file = {
+                            data: fs.readFileSync(files['commentFile'][0].path),
+                            contentType: files['commentFile'][0].mimetype,
+                        };
+                        fs.unlinkSync(files['commentFile'][0].path);
+                    }
+                    console.log('Adding user comment:', commentData); // Отладка
+                    updateData.$push = { comments: commentData };
+                }
+            }
+
+            console.log('Updating application:', id, 'with data:', updateData); // Отладка
+            const updatedApplication = await Application.findByIdAndUpdate(id, updateData, { new: true })
+                .populate('userId', 'firstName lastName patronymic email')
+                .populate('comments.author', 'firstName lastName');
+            console.log('Updated application:', updatedApplication); // Отладка
+
+            res.json(updatedApplication);
+        } catch (error) {
+            console.error('Application update error:', error);
+            res.status(500).json({ message: 'Ошибка обновления заявления', error: error.message });
+        }
+    },
+);
 
 app.get('/api/profile', authMiddleware, async (req, res) => {
     try {
@@ -255,7 +310,6 @@ app.get('/api/profile', authMiddleware, async (req, res) => {
     }
 });
 
-// Профиль: сохранение данных
 app.post('/api/profile', authMiddleware, async (req, res) => {
     try {
         const { firstName, lastName, patronymic, phone } = req.body;

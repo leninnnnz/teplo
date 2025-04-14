@@ -9,6 +9,9 @@ export function ApplicationDetails() {
     const [application, setApplication] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [newDocuments, setNewDocuments] = useState([]); // Новые файлы
+    const [comment, setComment] = useState(''); // Комментарий
+    const [commentFile, setCommentFile] = useState(null); // Файл для комментария
 
     useEffect(() => {
         const fetchApplication = async () => {
@@ -36,7 +39,9 @@ export function ApplicationDetails() {
                 }
 
                 const data = await response.json();
+                console.log('Fetched application:', data);
                 setApplication(data);
+                setNewDocuments(new Array(data.documents.length).fill(null)); // Инициализация новых файлов
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -49,11 +54,15 @@ export function ApplicationDetails() {
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
-        return date.toLocaleDateString('ru-RU', {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric',
-        });
+        return date
+            .toLocaleString('ru-RU', {
+                day: '2-digit',
+                month: '2-digit',
+                year: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+            })
+            .replace(',', ''); // Формат: 14.04.24 14:30
     };
 
     const handleDownload = (docIndex) => {
@@ -69,6 +78,88 @@ export function ApplicationDetails() {
         link.click();
         document.body.removeChild(link);
         window.URL.revokeObjectURL(url);
+    };
+
+    const handleCommentFileDownload = (commentId) => {
+        const comment = application.comments.find((c) => c._id === commentId);
+        if (!comment || !comment.file) return;
+
+        const blob = new Blob([new Uint8Array(comment.file.data.data)], { type: comment.file.contentType });
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `comment_file_${commentId}.${comment.file.contentType.split('/')[1]}`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+    };
+
+    const handleFileChange = (index, file) => {
+        const updatedDocuments = [...newDocuments];
+        updatedDocuments[index] = file;
+        setNewDocuments(updatedDocuments);
+    };
+
+    const handleRemoveDocument = (index) => {
+        const updatedDocuments = [...newDocuments];
+        updatedDocuments[index] = null;
+        setNewDocuments(updatedDocuments);
+    };
+
+    const handleCommentFileChange = (e) => {
+        setCommentFile(e.target.files[0]);
+    };
+
+    const handleSave = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            const formData = new FormData();
+
+            // Добавляем новые файлы документов
+            newDocuments.forEach((file, index) => {
+                if (file) {
+                    formData.append(`document_${index}`, file);
+                }
+            });
+
+            // Добавляем комментарий и файл комментария
+            formData.append('comment', comment || ''); // Отправляем пустую строку, если нет текста
+            if (commentFile) {
+                formData.append('commentFile', commentFile);
+            }
+
+            // Устанавливаем статус "В обработке"
+            formData.append('status', 'В обработке');
+
+            console.log('Sending FormData:', {
+                comment: comment || '',
+                commentFile: commentFile ? commentFile.name : null,
+                documents: newDocuments.map((f) => (f ? f.name : null)),
+            }); // Отладка
+
+            const response = await fetch(`http://localhost:5001/api/applications/${id}`, {
+                method: 'PUT',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                body: formData,
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Ошибка сохранения изменений');
+            }
+
+            const updatedApplication = await response.json();
+            console.log('Updated application:', updatedApplication);
+            setApplication(updatedApplication);
+            setNewDocuments(new Array(updatedApplication.documents.length).fill(null));
+            setComment('');
+            setCommentFile(null);
+        } catch (err) {
+            setError(err.message);
+        }
     };
 
     const requiredDocs = ['Скан заполненного заявления', 'Скан паспорта', 'Скан СНИЛС'];
@@ -88,7 +179,7 @@ export function ApplicationDetails() {
                     <div className={style.detailsContainer}>
                         <div className={style.detailItem}>
                             <span className={style.detailLabel}>Тип:</span>
-                            <span className={style.detailValue}>{application.type}</span>
+                            <span className={style.detailValue}>{application.type || 'Не указан'}</span>
                         </div>
                         <div className={style.detailItem}>
                             <span className={style.detailLabel}>Дата подачи:</span>
@@ -103,27 +194,78 @@ export function ApplicationDetails() {
                             <ul className={style.docList}>
                                 {application.documents.map((doc, index) => (
                                     <li key={index} className={style.docItem}>
-                                        <button className={style.downloadButton} onClick={() => handleDownload(index)}>
+                                        <button
+                                            className={style.downloadButton}
+                                            onClick={() => handleDownload(index)}
+                                            disabled={application.status === 'Вернулось' && newDocuments[index]}
+                                        >
                                             Скачать {requiredDocs[index]}
                                         </button>
+                                        {application.status === 'Вернулось' && (
+                                            <>
+                                                <label className={style.customFileInput}>
+                                                    <span>
+                                                        {newDocuments[index] ? newDocuments[index].name : `Заменить ${requiredDocs[index]}`}
+                                                    </span>
+                                                    <input
+                                                        type="file"
+                                                        onChange={(e) => handleFileChange(index, e.target.files[0])}
+                                                        accept=".pdf,.jpg,.png"
+                                                    />
+                                                </label>
+                                                {(doc || newDocuments[index]) && (
+                                                    <button className={style.removeButton} onClick={() => handleRemoveDocument(index)}>
+                                                        Удалить
+                                                    </button>
+                                                )}
+                                            </>
+                                        )}
                                     </li>
                                 ))}
                             </ul>
                         </div>
-                        <div className={style.commentSection}>
-                            <span className={style.detailLabel}>Комментарий сотрудника:</span>
-                            <div className={style.commentHistory}>
-                                {application.comments && application.comments.length > 0 ? (
-                                    application.comments.map((c, index) => (
-                                        <p key={index} className={style.commentText}>
-                                            <strong>{c.author ? `${c.author.lastName} ${c.author.firstName}` : 'Сотрудник'}</strong> (
-                                            {formatDate(c.createdAt)}): {c.text}
-                                        </p>
-                                    ))
-                                ) : (
-                                    <p className={style.commentText}>Комментариев нет</p>
-                                )}
+                        {application.status === 'Вернулось' && (
+                            <div className={style.editSection}>
+                                <h3 className={style.editSectionTitle}>Редактировать заявление</h3>
+                                <span className={style.detailLabel}>Комментарий:</span>
+                                <textarea
+                                    value={comment}
+                                    onChange={(e) => setComment(e.target.value)}
+                                    placeholder="Введите комментарий (необязательно)..."
+                                    className={style.commentInput}
+                                />
+                                <label className={style.customFileInput}>
+                                    <span>{commentFile ? commentFile.name : 'Прикрепить файл (необязательно)'}</span>
+                                    <input type="file" onChange={handleCommentFileChange} accept=".pdf,.jpg,.png" />
+                                </label>
+                                <button className={style.saveButton} onClick={handleSave}>
+                                    Сохранить
+                                </button>
                             </div>
+                        )}
+                        <div className={style.commentHistory}>
+                            {application.comments && application.comments.length > 0 ? (
+                                application.comments.map((c) => (
+                                    <div key={c._id} className={style.commentItem}>
+                                        <p className={style.commentText}>
+                                            <strong>
+                                                {c.author ? `${c.author.lastName || ''} ${c.author.firstName || ''}`.trim() : 'Сотрудник'}
+                                            </strong>{' '}
+                                            ({formatDate(c.createdAt)}): {c.text || (c.file ? '(файл без текста)' : '(пустой комментарий)')}
+                                            {c.file && (
+                                                <button
+                                                    className={style.downloadCommentFile}
+                                                    onClick={() => handleCommentFileDownload(c._id)}
+                                                >
+                                                    Скачать файл
+                                                </button>
+                                            )}
+                                        </p>
+                                    </div>
+                                ))
+                            ) : (
+                                <p className={style.commentText}>Комментариев нет</p>
+                            )}
                         </div>
                         <button className={style.backButton} onClick={() => navigate('/my-applications')}>
                             Назад
