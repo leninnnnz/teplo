@@ -3,6 +3,7 @@
     box-sizing: border-box;
     padding: 50px 0;
     margin: 0 auto;
+    width: 100%;
 }
 
 .headerContainer {
@@ -80,7 +81,7 @@
 }
 
 .loginWrapper {
-    position: relative; // Для позиционирования меню
+    position: relative;
     @media (max-width: 800px) {
         width: 100%;
     }
@@ -121,7 +122,7 @@
 .cabinetMenu {
     position: absolute;
     top: 100%;
-    right: 0; // Выравниваем по правому краю кнопки
+    right: 0;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 4px;

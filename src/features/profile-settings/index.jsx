@@ -20,7 +20,7 @@ export function ProfileSettings() {
         if (token) {
             try {
                 const decoded = JSON.parse(atob(token.split('.')[1]));
-                console.log('Decoded token:', decoded); // Лог для проверки токена
+                console.log('Decoded token:', decoded);
                 setEmail(decoded.email || '');
                 setRole(decoded.role || '');
                 fetchUserData(token);
@@ -40,7 +40,7 @@ export function ProfileSettings() {
                 },
             });
             const data = await response.json();
-            console.log('Profile data:', data); // Лог для проверки ответа сервера
+            console.log('Profile data:', data);
             if (response.ok) {
                 setFirstName(data.user.firstName || '');
                 setLastName(data.user.lastName || '');
@@ -96,7 +96,7 @@ export function ProfileSettings() {
     };
 
     const handleSkip = () => {
-        console.log('User role:', role); // Лог для проверки роли
+        console.log('User role:', role);
         localStorage.setItem('isProfileSet', 'true');
         if (role === 'employee') {
             navigate('/employee/applications');
@@ -171,11 +171,6 @@ export function ProfileSettings() {
                         <button className={style.skipButton} onClick={handleSkip} disabled={loading}>
                             {isProfileSet ? 'Выйти' : 'Пропустить'}
                         </button>
-                        {role === 'admin' && (
-                            <button className={style.adminButton} onClick={() => navigate('/admin')}>
-                                Админ-панель
-                            </button>
-                        )}
                     </div>
                 </div>
             </Content>

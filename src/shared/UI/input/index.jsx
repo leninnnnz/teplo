@@ -3,18 +3,7 @@ import { IconEye, IconEyeOff } from '../icons';
 import { useState } from 'react';
 import { checkPasswordStrength, getStrengthMessage } from '../../libs/utils';
 
-export function UIInput({
-    type = 'text',
-    value,
-    onChange,
-    classNames,
-    placeholder,
-    maxLength,
-    required,
-    title,
-    icon, // Добавляем пропс icon, который ты используешь в ProfileSettings
-    disabled = false, // Добавляем disabled с дефолтным значением false
-}) {
+export function UIInput({ type = 'text', value, onChange, classNames, placeholder, maxLength, required, title, icon, disabled = false }) {
     return (
         <div className={style.inputGroup}>
             {title && (
@@ -29,26 +18,18 @@ export function UIInput({
                     id={type}
                     value={value}
                     onChange={(e) => onChange(e.target.value)}
-                    className={`${style.input} ${classNames || ''}`} // Добавляем || '' для случаев, когда classNames undefined
+                    className={`${style.input} ${classNames || ''}`}
                     placeholder={placeholder}
                     maxLength={maxLength}
                     required={required}
-                    disabled={disabled} // Передаём disabled в input
+                    disabled={disabled}
                 />
             </div>
         </div>
     );
 }
 
-export function UIInputPassword({
-    value,
-    onChange,
-    classNames,
-    required,
-    title,
-    isConfirmPassword = false,
-    showStrength = false, // Новый пропс
-}) {
+export function UIInputPassword({ value, onChange, classNames, required, title, isConfirmPassword = false, showStrength = false }) {
     const [isOpen, setIsOpen] = useState(false);
     const [passwordStrength, setPasswordStrength] = useState('weak');
 
@@ -79,16 +60,14 @@ export function UIInputPassword({
                     {isOpen ? <IconEyeOff /> : <IconEye />}
                 </button>
             </div>
-            {!isConfirmPassword &&
-                showStrength &&
-                value && ( // Показываем только если showStrength === true
-                    <div className={style.passwordHint}>
-                        <span className={`${style.strengthMessage} ${style[passwordStrength]}`}>
-                            {getStrengthMessage(passwordStrength, value)}
-                        </span>
-                        <span className={style.hintText}>Используйте буквы, цифры и специальные символы для надёжного пароля</span>
-                    </div>
-                )}
+            {!isConfirmPassword && showStrength && value && (
+                <div className={style.passwordHint}>
+                    <span className={`${style.strengthMessage} ${style[passwordStrength]}`}>
+                        {getStrengthMessage(passwordStrength, value)}
+                    </span>
+                    <span className={style.hintText}>Используйте буквы, цифры и специальные символы для надёжного пароля</span>
+                </div>
+            )}
         </div>
     );
 }

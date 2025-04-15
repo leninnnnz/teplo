@@ -152,27 +152,19 @@
   display: none;
 }
 
-.removeFileButton {
+.deleteFileButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 8px;
   background: none;
   border: none;
   cursor: pointer;
-  transition: transform 0.2s, opacity 0.2s;
-  opacity: 0.7;
+  color: rgb(255, 97, 40);
+  transition: color 0.2s;
 
   &:hover {
-    opacity: 1;
-    transform: scale(1.1);
-  }
-}
-
-.trashIcon {
-  width: 18px;
-  height: 18px;
-  fill: #ff4444;
-
-  .removeFileButton:hover & {
-    fill: #cc0000;
+    color: darken(rgb(255, 97, 40), 10%);
   }
 }
 

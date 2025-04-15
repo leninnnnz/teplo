@@ -1,5 +1,5 @@
 module.exports = {
-    printWidth: 140, // Максимальная длина строки
+    printWidth: 140,
     tabWidth: 4,
     trailingComma: 'all',
     semi: true,

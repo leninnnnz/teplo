@@ -9,7 +9,7 @@ export function Error() {
     useEffect(() => {
         buttonRef.current?.scrollIntoView({
             behavior: 'smooth',
-            block: 'center', // Кнопка будет в центре экрана
+            block: 'center',
         });
     }, []);
 

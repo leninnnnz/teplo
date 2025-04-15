@@ -56,10 +56,12 @@ export function Authorization() {
                     localStorage.setItem('role', userRole);
                 }
 
-                const isProfileSet = localStorage.getItem('isProfileSet') === 'true';
-                if (userRole === 'employee') {
+                if (userRole === 'admin') {
+                    navigate('/admin/users');
+                } else if (userRole === 'employee') {
                     navigate('/employee/applications');
                 } else {
+                    const isProfileSet = localStorage.getItem('isProfileSet') === 'true';
                     navigate(isProfileSet ? '/my-applications' : '/profile-settings');
                 }
             } catch (error) {
@@ -103,7 +105,6 @@ export function Authorization() {
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('isProfileSet', 'false');
 
-                // Извлекаем роль после регистрации
                 let userRole;
                 if (data.role) {
                     userRole = data.role;

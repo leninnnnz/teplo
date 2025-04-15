@@ -1,11 +1,12 @@
-import style from './index.module.scss';
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import style from './index.module.scss';
 
 export function Header() {
     const [activeCategory, setActiveCategory] = useState(null);
     const [isCabinetMenuOpen, setIsCabinetMenuOpen] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
+    const [userRole, setUserRole] = useState(localStorage.getItem('userRole') || null);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [isFading, setIsFading] = useState(false);
     const navigate = useNavigate();
@@ -14,7 +15,6 @@ export function Header() {
     const cabinetMenuRef = useRef(null);
 
     const images = ['/images/fountain1.jpg', '/images/fountain2.jpg'];
-    const userRole = localStorage.getItem('role');
 
     console.log('Header render - isAuthenticated:', isAuthenticated, 'userRole:', userRole);
 
@@ -25,22 +25,62 @@ export function Header() {
         '/employee/applications',
         '/application/:id',
         '/employee/applications/:id',
+        '/admin/users',
+        '/admin/users/:id/applications',
+        '/admin/applications/:id',
+        '/admin/applications',
     ].some(
         (path) =>
             location.pathname === path ||
             location.pathname.startsWith('/application/') ||
-            location.pathname.startsWith('/employee/applications/'),
+            location.pathname.startsWith('/employee/applications/') ||
+            location.pathname.startsWith('/admin/users/') ||
+            location.pathname.startsWith('/admin/applications/'),
     );
 
     useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            try {
+                const payload = JSON.parse(atob(token.split('.')[1]));
+                const isExpired = payload.exp * 1000 < Date.now();
+                if (!isExpired) {
+                    setIsAuthenticated(true);
+                    setUserRole(payload.role);
+                    localStorage.setItem('userRole', payload.role);
+                } else {
+                    handleLogout();
+                }
+            } catch (error) {
+                console.error('Token decode error:', error);
+                handleLogout();
+            }
+        } else {
+            setIsAuthenticated(false);
+            setUserRole(null);
+            localStorage.removeItem('userRole');
+        }
+    }, []);
+
+    useEffect(() => {
         const handleStorageChange = () => {
-            const profileSet = localStorage.getItem('isProfileSet') === 'true';
-            const newRole = localStorage.getItem('role');
-            setIsAuthenticated(profileSet);
-            console.log('Storage changed - isAuthenticated:', profileSet, 'newRole:', newRole);
+            const token = localStorage.getItem('token');
+            let newRole = null;
+            let newIsAuthenticated = false;
+            if (token) {
+                try {
+                    const payload = JSON.parse(atob(token.split('.')[1]));
+                    newRole = payload.role;
+                    newIsAuthenticated = payload.exp * 1000 > Date.now();
+                } catch (error) {
+                    console.error('Storage change token error:', error);
+                }
+            }
+            setIsAuthenticated(newIsAuthenticated);
+            setUserRole(newRole);
+            console.log('Storage changed - isAuthenticated:', newIsAuthenticated, 'newRole:', newRole);
         };
 
-        handleStorageChange();
         window.addEventListener('storage', handleStorageChange);
         return () => window.removeEventListener('storage', handleStorageChange);
     }, []);
@@ -80,10 +120,11 @@ export function Header() {
     };
 
     const handleLogout = () => {
-        localStorage.removeItem('isProfileSet');
         localStorage.removeItem('token');
-        localStorage.removeItem('role');
+        localStorage.removeItem('isProfileSet');
+        localStorage.removeItem('userRole');
         setIsAuthenticated(false);
+        setUserRole(null);
         setIsCabinetMenuOpen(false);
         setCurrentImageIndex(0);
         navigate('/');
@@ -108,7 +149,7 @@ export function Header() {
         };
 
         document.addEventListener('click', handleClickOutside);
-        return () => document.removeEventListener('click', handleClickOutside);
+        return () => document.addEventListener('click', handleClickOutside);
     }, []);
 
     const navLinks = [
@@ -149,7 +190,10 @@ export function Header() {
         cabinetMenuItems.push({ path: '/profile-settings', label: 'Настройки пользователя' });
         if (userRole === 'employee') {
             cabinetMenuItems.push({ path: '/employee/applications', label: 'Входящие заявления' });
-        } else if (userRole && userRole !== 'employee') {
+        } else if (userRole === 'admin') {
+            cabinetMenuItems.push({ path: '/admin/users', label: 'Список пользователей' });
+            cabinetMenuItems.push({ path: '/admin/applications', label: 'Список заявлений' });
+        } else if (userRole === 'user') {
             cabinetMenuItems.push({ path: '/my-applications', label: 'Мои заявления' });
         }
         cabinetMenuItems.push({ action: handleLogout, label: 'Выйти' });
@@ -225,10 +269,9 @@ export function Header() {
                     ))}
                 </nav>
             )}
-            {/* Показываем фото только если НЕ авторизирован И НЕ в личном кабинете */}
             {!isAuthenticated && !isInCabinet && (
                 <div className={style.imageBanner}>
-                    <img src="/images/img.png" alt="Фонтан" className={`${style.bannerImage} ${isFading ? style.fadeOut : ''}`} />
+                    <img src={images[currentImageIndex]} alt="Фонтан" className={`${style.bannerImage} ${isFading ? style.fadeOut : ''}`} />
                 </div>
             )}
         </header>

@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const authRoutes = require('./routes/auth');
+const adminRoutes = require('./routes/admin');
 const User = require('./models/User');
 const Application = require('./models/Application');
 const multer = require('multer');
@@ -23,7 +24,7 @@ app.use(
 
 app.use(express.json());
 
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({ dest: 'Uploads/' });
 
 // Подключение к MongoDB
 mongoose
@@ -53,6 +54,10 @@ const checkRole = (roles) => (req, res, next) => {
     }
     next();
 };
+
+// Роуты
+app.use('/api/auth', authRoutes);
+app.use('/api/admin', authMiddleware, checkRole(['admin']), adminRoutes);
 
 // Получение заявлений пользователя
 app.get('/api/applications', authMiddleware, async (req, res) => {
@@ -192,7 +197,7 @@ app.delete('/api/applications/:id/comments/:commentId', authMiddleware, checkRol
     }
 });
 
-// Обновление заявления для сотрудника (статус, комментарий, файл)
+// Обновление заявления для сотрудника
 app.put(
     '/api/employee/applications/:id',
     authMiddleware,
@@ -212,12 +217,10 @@ app.put(
 
             const updateData = { updatedAt: Date.now() };
 
-            // Обновление статуса
             if (status) {
                 updateData.status = status;
             }
 
-            // Добавление комментария
             if (comment || files.commentFile) {
                 const commentData = {
                     text: comment || '',
@@ -285,7 +288,6 @@ app.put(
 
             const updateData = { updatedAt: Date.now(), status: 'В обработке' };
 
-            // Обновление документов
             const newDocuments = [...application.documents];
             ['document_0', 'document_1', 'document_2'].forEach((field, index) => {
                 if (files[field]) {
@@ -298,7 +300,6 @@ app.put(
             });
             updateData.documents = newDocuments;
 
-            // Добавление комментария
             if (comment || files.commentFile) {
                 const commentData = {
                     text: comment || '',
@@ -370,7 +371,12 @@ app.post('/api/profile', authMiddleware, async (req, res) => {
     }
 });
 
-app.use('/api/auth', authRoutes);
-
 const PORT = process.env.PORT || 5001;
+
+console.log('Registered routes:');
+app._router.stack.forEach((r) => {
+    if (r.route && r.route.path) {
+        console.log(`${Object.keys(r.route.methods).join(', ').toUpperCase()} ${r.route.path}`);
+    }
+});
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

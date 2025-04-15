@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Content, TitlePage, Wrapper } from '../../shared/UI';
-import { IconTrash } from '../../shared/UI/icons'; // Добавляем IconAttach
+import { IconTrash } from '../../shared/UI/icons';
 import style from './index.module.scss';
 
 export function ApplicationDetails() {
@@ -44,7 +44,7 @@ export function ApplicationDetails() {
                 console.log('Fetched application:', data);
                 setApplication(data);
                 setNewDocuments(new Array(data.documents.length).fill(null));
-                setDeletedDocs(new Array(data.documents.length).fill(false)); // Инициализация
+                setDeletedDocs(new Array(data.documents.length).fill(false));
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -103,7 +103,7 @@ export function ApplicationDetails() {
         updatedDocuments[index] = file;
         setNewDocuments(updatedDocuments);
         const updatedDeleted = [...deletedDocs];
-        updatedDeleted[index] = false; // Сбрасываем флаг удаления
+        updatedDeleted[index] = false;
         setDeletedDocs(updatedDeleted);
     };
 
@@ -126,7 +126,7 @@ export function ApplicationDetails() {
         updatedDocuments[index] = null;
         setNewDocuments(updatedDocuments);
         const updatedDeleted = [...deletedDocs];
-        updatedDeleted[index] = true; // Помечаем как удалённый
+        updatedDeleted[index] = true;
         setDeletedDocs(updatedDeleted);
     };
     const handleCommentFileChange = (e) => {
@@ -178,7 +178,7 @@ export function ApplicationDetails() {
             console.log('Updated application:', updatedApplication);
             setApplication(updatedApplication);
             setNewDocuments(new Array(updatedApplication.documents.length).fill(null));
-            setDeletedDocs(new Array(updatedApplication.documents.length).fill(false)); // Сбрасываем
+            setDeletedDocs(new Array(updatedApplication.documents.length).fill(false));
             setComment('');
             setCommentFile(null);
         } catch (err) {
@@ -242,11 +242,11 @@ export function ApplicationDetails() {
                                                 {application.status === 'Вернулось' && (
                                                     <div className={style.fileInputWrapper}>
                                                         <button
-                                                            className={style.removeFileButton}
+                                                            className={style.deleteFileButton}
                                                             onClick={() => handleRemoveDocument(index)}
                                                             title="Удалить документ"
                                                         >
-                                                            <IconTrash className={style.trashIcon} />
+                                                            <IconTrash className={style.deleteIcon} />
                                                         </button>
                                                     </div>
                                                 )}
@@ -278,11 +278,11 @@ export function ApplicationDetails() {
                                         </label>
                                         {commentFile && (
                                             <button
-                                                className={style.removeFileButton}
+                                                className={style.deleteFileButton}
                                                 onClick={handleRemoveCommentFile}
                                                 title="Удалить файл"
                                             >
-                                                <IconTrash className={style.trashIcon} />
+                                                <IconTrash className={style.deleteIcon} />
                                             </button>
                                         )}
                                     </div>

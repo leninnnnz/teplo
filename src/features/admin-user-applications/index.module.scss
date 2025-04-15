@@ -1,0 +1,198 @@
+.loading,
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  font-size: 18px;
+  color: #666;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 60px 0;
+}
+
+.emptyText {
+  font-size: 20px;
+  color: #333;
+  line-height: 1.5;
+  text-align: center;
+  font-weight: 400;
+}
+
+.applicationsList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.applicationCard {
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    border: 1px solid rgb(255, 97, 40);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.cardType {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.cardNumber {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+  margin: 0;
+}
+
+.cardDate,
+.cardUpdate {
+  font-size: 14px;
+  color: #333;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.cardStatus {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.statusLabel {
+  color: #333;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.status-в-обработке {
+  color: #ff6128;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.status-одобрено {
+  color: #28a745;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.status-вернулось {
+  color: #dc3545;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.deleteButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgb(255, 97, 40);
+  transition: color 0.2s;
+
+  &:hover {
+    color: darken(rgb(255, 97, 40), 10%);
+  }
+}
+.deleteIcon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+
+.backButtonWrapper {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.backButton {
+  color: #fff;
+  background-color: rgb(255, 97, 40);
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+
+  &:hover {
+    background-color: darken(rgb(255, 97, 40), 10%);
+    color: #fff;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: rgb(255, 97, 40);
+    box-shadow: 0 0 5px rgba(255, 97, 40, 0.5);
+  }
+}
+
+@media (max-width: 700px) {
+  .emptyState {
+    padding: 40px 0;
+  }
+
+  .emptyText {
+    font-size: 18px;
+  }
+
+  .applicationCard {
+    padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cardType {
+    font-size: 16px;
+  }
+
+  .cardNumber,
+  .cardDate,
+  .cardUpdate {
+    font-size: 13px;
+  }
+
+  .statusLabel,
+  .status-в-обработке,
+  .status-одобрено,
+  .status-вернулось {
+    font-size: 13px;
+  }
+
+  .deleteButton {
+    margin-top: 12px;
+    align-self: flex-start;
+  }
+
+  .backButtonWrapper {
+    margin-top: 16px;
+  }
+}

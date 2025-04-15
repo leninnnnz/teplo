@@ -12,11 +12,9 @@ const UserSchema = new mongoose.Schema({
     role: {
         type: String,
         enum: ['admin', 'employee', 'user'],
-        default: 'user', // Значение по умолчанию
+        default: 'user',
     },
     createdAt: { type: Date, default: Date.now },
-    resetCode: { type: String },
-    resetCodeExpires: { type: Date },
 });
 
 module.exports = mongoose.model('User', UserSchema);

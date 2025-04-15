@@ -19,11 +19,14 @@ import { AuthorizationPage } from './pages/authorization';
 import style from './widgets/contacts/index.module.scss';
 import { ProfileSettingsPage } from './pages/profile-settings';
 import { MyApplicationsPage } from './pages/my-applications';
-import { AdminPage } from './pages/admin/admin';
+import { AdminPage } from './pages/admin';
 import { SubmitApplicationPage } from './pages/submit-application';
 import { ApplicationDetailsPage } from './pages/application-details';
 import { EmployeeApplicationsPage } from './pages/employee-applications';
 import { EmployeeApplicationDetailsPage } from './pages/employee-application-details';
+import { AdminUserApplicationsPage } from './pages/admin-user-applications';
+import { AdminApplicationDetailsPage } from './pages/admin-applications-details';
+import { AdminApplicationsPage } from './pages/admin-applications';
 
 function Layout() {
     const location = useLocation();
@@ -50,11 +53,14 @@ function Layout() {
                     <Route path="/authorization" element={<AuthorizationPage />} />
                     <Route path="/profile-settings" element={<ProfileSettingsPage />} />
                     <Route path="/my-applications" element={<MyApplicationsPage />} />
-                    <Route path="/admin" element={<AdminPage />} />
+                    <Route path="/admin/users" element={<AdminPage />} />
                     <Route path="/submit-application" element={<SubmitApplicationPage />} />
                     <Route path="/employee/applications" element={<EmployeeApplicationsPage />} />
                     <Route path="/employee/applications/:id" element={<EmployeeApplicationDetailsPage />} />
                     <Route path="//application/:id" element={<ApplicationDetailsPage />} />
+                    <Route path="/admin/users/:id/applications" element={<AdminUserApplicationsPage />} />
+                    <Route path="/admin/applications/:id" element={<AdminApplicationDetailsPage />} />
+                    <Route path="/admin/applications" element={<AdminApplicationsPage />} />
                     <Route path={'*'} element={<Error />} />
                 </Routes>
             </div>

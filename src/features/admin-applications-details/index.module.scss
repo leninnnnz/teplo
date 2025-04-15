@@ -87,117 +87,6 @@
   gap: 12px;
 }
 
-.commentInput {
-  width: 100%;
-  min-height: 100px;
-  padding: 12px;
-  font-size: 16px;
-  color: #555;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  resize: vertical;
-  background: #f5f7fa;
-  outline: none;
-  transition: border-color 0.2s;
-
-  &:hover,
-  &:focus {
-    border-color: rgb(255, 97, 40);
-  }
-}
-
-.fileInputWrapper {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.fileInputLabel {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 16px;
-  font-size: 14px;
-  font-weight: 500;
-  color: rgb(255, 97, 40);
-  background: #fff;
-  border: 1px solid rgb(255, 97, 40);
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.2s, color 0.2s, transform 0.2s;
-
-  &:hover {
-    background: rgb(255, 97, 40);
-    color: white;
-    transform: scale(1.02);
-  }
-
-  &.fileAttached {
-    background: rgba(255, 97, 40, 0.1);
-    border-color: rgb(255, 97, 40);
-    color: rgb(255, 97, 40);
-  }
-
-  span {
-    max-width: 200px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-}
-
-.fileInput {
-  display: none;
-}
-
-.actionButtons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.deleteFileButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: rgb(255, 97, 40);
-  transition: color 0.2s;
-
-  &:hover {
-    color: darken(rgb(255, 97, 40), 10%);
-  }
-}
-.deleteIcon {
-  width: 20px;
-  height: 20px;
-  fill: currentColor;
-}
-
-
-.submitButton {
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 600;
-  color: white;
-  background: rgb(255, 97, 40);
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
-
-  &:hover {
-    background: darken(rgb(255, 97, 40), 10%);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 97, 40, 0.3);
-  }
-}
-
 .commentHistory {
   margin-top: 16px;
   display: flex;
@@ -237,23 +126,6 @@
   }
 }
 
-.deleteCommentButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: rgb(255, 97, 40);
-  transition: color 0.2s;
-
-  &:hover {
-    color: darken(rgb(255, 97, 40), 10%);
-  }
-}
-
-
 .backButton {
   display: block;
   width: fit-content;
@@ -269,6 +141,51 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
 
   &:hover {
-    background-color: darken(rgb(255, 97, 40), 10%);
+    background-color: #e55a27; /* darken(rgb(255, 97, 40), 10%) */
+  }
+}
+
+@media (max-width: 700px) {
+  .detailsContainer {
+    padding: 16px;
+  }
+
+  .detailItem {
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 0;
+  }
+
+  .detailLabel,
+  .detailValue {
+    font-size: 14px;
+  }
+
+  .statusDropdown {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .downloadButton {
+    width: 100%;
+    text-align: center;
+  }
+
+  .commentText {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .downloadCommentFile {
+    width: 100%;
+    text-align: center;
+    margin-left: 0;
+    margin-top: 8px;
+  }
+
+  .backButton {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
   }
 }

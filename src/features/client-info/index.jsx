@@ -14,15 +14,13 @@ export function ClientInformation() {
         { name: 'Договор по транспортировке сточных вод', link: '#' },
         { name: 'Договор по транспортировке холодной воды', link: '#' },
     ]);
-    const [filteredContracts, setFilteredContracts] = useState(contracts); // Состояние для отфильтрованных данных
+    const [filteredContracts, setFilteredContracts] = useState(contracts);
 
     const handleSearch = (e) => {
         const term = e.target.value.toLowerCase();
         setSearchTerm(term);
 
-        const filtered = contracts.filter(
-            (contract) => contract.name.toLowerCase().includes(term), // Исправлено: применяем toLowerCase() к contract.name
-        );
+        const filtered = contracts.filter((contract) => contract.name.toLowerCase().includes(term));
         setFilteredContracts(filtered);
     };
 

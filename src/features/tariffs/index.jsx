@@ -2,7 +2,6 @@ import { useState, useMemo } from 'react';
 import style from './index.module.scss';
 import { Content, TitlePage, Wrapper } from '../../shared/UI';
 
-// Данные о тарифах
 const tariffs = [
     {
         name: 'Тариф на услуги горячего водоснабжения на период с 01.07.2015 по 31.12.2015 установлен Постановлением Правительства Свердловской области №82-ПК от 01.07.2015 г.',

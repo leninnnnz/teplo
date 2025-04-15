@@ -1,0 +1,233 @@
+.loading,
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  font-size: 18px;
+  color: #666;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 60px 0;
+}
+
+.emptyText {
+  font-size: 20px;
+  color: #333;
+  line-height: 1.5;
+  text-align: center;
+  font-weight: 400;
+}
+
+.filters {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 200px;
+}
+
+.filterSelect {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  color: #333;
+  outline: none;
+  cursor: pointer;
+  min-width: 150px;
+
+  &:hover,
+  &:focus {
+    border-color: rgb(255, 97, 40);
+  }
+}
+
+.resetButton {
+  padding: 8px 16px;
+  font-size: 14px;
+  color: rgb(255, 97, 40);
+  background: none;
+  border: 1px solid rgb(255, 97, 40);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+
+  &:hover {
+    background: rgb(255, 97, 40);
+    color: white;
+  }
+}
+
+.applicationsList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.applicationCard {
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    border: 1px solid rgb(255, 97, 40);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cardType {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.cardNumber {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+  margin: 0;
+}
+
+.cardEmail {
+  font-size: 14px;
+  color: #333;
+  margin: 0;
+}
+
+.cardDate,
+.cardUpdate {
+  font-size: 14px;
+  color: #333;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.cardStatus {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.statusLabel {
+  color: #333;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.status-в-обработке {
+  color: #ff6128;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.status-вернулось {
+  color: #dc3545;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.status-одобрено {
+  color: #28a745;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.status-завершённый {
+  color: #6c757d;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.backButton {
+  display: block;
+  width: fit-content;
+  margin: 20px 0 0;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  background-color: rgb(255, 97, 40);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #e55a27;
+  }
+}
+
+@media (max-width: 700px) {
+  .emptyState {
+    padding: 40px 0;
+  }
+
+  .emptyText {
+    font-size: 18px;
+  }
+
+  .filters {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .searchInput,
+  .filterSelect {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .resetButton {
+    width: 100%;
+  }
+
+  .applicationCard {
+    padding: 16px;
+  }
+
+  .cardType {
+    font-size: 16px;
+  }
+
+  .cardNumber,
+  .cardEmail,
+  .cardDate,
+  .cardUpdate {
+    font-size: 13px;
+  }
+
+  .statusLabel,
+  .status-в-обработке,
+  .status-вернулось,
+  .status-одобрено,
+  .status-завершённый {
+    font-size: 13px;
+  }
+
+  .backButton {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+  }
+}

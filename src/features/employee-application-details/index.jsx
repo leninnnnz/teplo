@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Content, TitlePage, Wrapper } from '../../shared/UI';
-import { IconTrash, IconAttach } from '../../shared/UI/icons';
+import { IconTrash } from '../../shared/UI/icons';
 import style from './index.module.scss';
 
 export function EmployeeApplicationDetails() {
@@ -261,8 +261,8 @@ export function EmployeeApplicationDetails() {
                                     <input type="file" onChange={handleFileChange} className={style.fileInput} accept=".pdf,.jpg,.png" />
                                 </label>
                                 {commentFile && (
-                                    <button className={style.removeFileButton} onClick={handleFileRemove} title="Удалить файл">
-                                        <IconTrash className={style.trashIcon} />
+                                    <button className={style.deleteFileButton} onClick={handleFileRemove} title="Удалить файл">
+                                        <IconTrash className={style.deleteIcon} />
                                     </button>
                                 )}
                             </div>
@@ -294,7 +294,7 @@ export function EmployeeApplicationDetails() {
                                             title="Удалить комментарий"
                                             data-testid="delete-comment-button"
                                         >
-                                            <IconTrash className={style.trashIcon} />
+                                            <IconTrash className={style.deleteIcon} />
                                         </button>
                                     </div>
                                 ))

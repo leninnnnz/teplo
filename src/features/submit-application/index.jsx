@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Content, TitlePage, Wrapper } from '../../shared/UI';
-import { IconTrash } from '../../shared/UI/icons'; // Добавляем иконку удаления
+import { IconTrash } from '../../shared/UI/icons';
 import style from './index.module.scss';
 
 export function SubmitApplication() {
@@ -162,11 +162,11 @@ export function SubmitApplication() {
                                             {files[doc] && (
                                                 <button
                                                     type="button"
-                                                    className={style.removeButton}
+                                                    className={style.deleteButton}
                                                     onClick={handleRemoveFile(doc)}
                                                     title="Удалить файл"
                                                 >
-                                                    <IconTrash className={style.removeIcon} />
+                                                    <IconTrash className={style.deleteIcon} />
                                                 </button>
                                             )}
                                         </div>
