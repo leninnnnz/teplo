@@ -1,4 +1,4 @@
-import MyApplications from '../../features/my-applications';
+import MyApplications from '../../features/user-applications';
 
 export function MyApplicationsPage() {
     return <MyApplications />;
