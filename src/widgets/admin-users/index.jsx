@@ -1,5 +1,5 @@
 import { AdminUsers } from '../../features/admin-users';
 
-export function AdminPane() {
+export function AdminUsersList() {
     return <AdminUsers />;
 }

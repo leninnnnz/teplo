@@ -1,5 +1,5 @@
-import { AdminPane } from '../../widgets/admin-users';
+import { AdminUsersList } from '../../widgets/admin-users';
 
-export function AdminPage() {
-    return <AdminPane />;
+export function AdminUsersPage() {
+    return <AdminUsersList />;
 }

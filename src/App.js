@@ -19,7 +19,7 @@ import { AuthorizationPage } from './pages/authorization';
 import style from './widgets/contacts/index.module.scss';
 import { ProfileSettingsPage } from './pages/profile-settings';
 import { MyApplicationsPage } from './pages/user-applications';
-import { AdminPage } from './pages/admin-users';
+import { AdminUsersPage } from './pages/admin-users';
 import { SubmitApplicationPage } from './pages/submit-application';
 import { ApplicationDetailsPage } from './pages/user-application-details';
 import { EmployeeApplicationsPage } from './pages/employee-applications';
@@ -53,7 +53,7 @@ function Layout() {
                     <Route path="/authorization" element={<AuthorizationPage />} />
                     <Route path="/profile-settings" element={<ProfileSettingsPage />} />
                     <Route path="/my-applications" element={<MyApplicationsPage />} />
-                    <Route path="/admin/users" element={<AdminPage />} />
+                    <Route path="/admin/users" element={<AdminUsersPage />} />
                     <Route path="/submit-application" element={<SubmitApplicationPage />} />
                     <Route path="/employee/applications" element={<EmployeeApplicationsPage />} />
                     <Route path="/employee/applications/:id" element={<EmployeeApplicationDetailsPage />} />
